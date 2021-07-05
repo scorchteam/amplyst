@@ -1,0 +1,69 @@
+@import '../Colors';
+
+/* footer background styles */
+.bg-footer {
+    width: 100%;
+    background-color: var(--header-color);
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+/* Footer styles */
+footer {
+    background: var(--header-color);
+    color: var(--header-text-color);
+
+    flex-shrink: 0;
+    
+    .col {
+        flex: 1;
+        padding: 0.5rem;
+        text-align: center;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+
+            li {
+                padding: 0 0.5rem;
+
+                a {
+                    transition: all 100ms ease-in-out;
+                }
+                
+                a:link {
+                    color: var(--text-accent-color-bright);
+                    text-decoration: none;
+                }
+                a:visited {
+                    color: var(--text-accent-color);
+                }
+                a:hover {
+                    color: var(--text-accent-color-super-bright);
+                    text-decoration: underline;
+                }
+                a:active {
+                    color: var(--text-accent-color-super-bright);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+/* Wrap cols for small widths */
+@media (max-width: 600px) {
+    footer {
+        .row {
+            display: block;
+
+            ul {
+                display: block;
+            }
+        }
+    }
+}

@@ -1,0 +1,120 @@
+@import '../../general/Colors';
+
+.register-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--header-color-light);
+}
+
+.register-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.register-form-container {
+    width: 100%;
+    height: fit-content;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    background-color: var(--header-color);
+    border-radius: 20px;
+    color: var(--header-text-color);
+
+    h1 {
+        padding: 2rem 0 0 2rem;
+    }
+}
+
+form {
+    display: block;
+    padding: 2rem;
+    width: 100%;
+
+    label {
+        padding: 0.5rem 0 0 0;
+        display: block;
+    }
+
+    .form-control {
+        border-radius: 0.75rem;
+    }
+
+    h4 {
+        text-align: center;
+        padding: 2rem 0 0 0;
+        margin: 0;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0 0 0;
+    }
+}
+
+.login-redirect {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    place-items: center;
+    width: 100%;
+    padding: 0 0 1rem 0;
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        transition: all 100ms ease-in-out;
+    }
+    
+    a:link {
+        color: var(--text-accent-color-bright);
+        text-decoration: none;
+    }
+    a:visited {
+        color: var(--text-accent-color);
+    }
+    a:hover {
+        color: var(--text-accent-color-super-bright);
+        text-decoration: underline;
+    }
+    a:active {
+        color: var(--text-accent-color-super-bright);
+        text-decoration: underline;
+    }
+}
+
+@media (min-width: 576px) {
+    .login-redirect {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left-text {
+        padding-right: 0.5rem;
+    }
+
+    .register-form-container {
+        width: 600px; 
+    }
+
+    .pass-cols, .name-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 1rem;
+    }
+
+    .address-location-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0 1rem;
+    }
+
+}

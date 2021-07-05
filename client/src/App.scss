@@ -1,0 +1,12 @@
+/* Basic body styles */
+html, body {
+    height: 100vh;
+    background-color: var(--header-color-light);
+}
+
+/* Setup grid layout for body */
+#body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
