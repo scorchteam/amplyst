@@ -49,4 +49,5 @@ Follow these steps to download and start the development environment:
 <img src="https://imgur.com/I5pLoVM.jpg" width="100%" alt="oIIw5G.md.png" border="0">
 
 ## TODO
+- Finish README table of contents
 - Create production docker-compose for production deployment
