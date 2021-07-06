@@ -46,20 +46,7 @@ Follow these steps to download and start the development environment:
     ```
 6. Open the deployed site at http://localhost:3000
 ## Team
-<div style="display: flex; flex-direction: column;">
-<span style="padding: 1rem; display: flex; margin-bottom: 1rem; justify-content: space-around; align-items: center; background-color:lightgrey; border-radius: 1rem">
-<img style="background-color: grey; border-radius: 1rem;" width="150" height="150" src="https://media-exp1.licdn.com/dms/image/C4E03AQHqryn6bkfHmQ/profile-displayphoto-shrink_200_200/0/1594973594958?e=1631145600&v=beta&t=WA19YyZmwa_V95BjCQGbt7QD-dqG06AkoiQjNx3wQqo">
-<p style="font-size: 4rem; padding-top: 6rem; font-family: Helvetica">
-Nicholas Prussen
-</p>
-</span>
-<span style="padding: 1rem; display: flex; justify-content: space-around; align-items: center; background-color:lightgrey; border-radius: 1rem">
-<p style="font-size: 4rem; padding-top: 6rem; font-family: Helvetica">
-Timothy Poehlman
-</p>
-<img style="background-color: grey; border-radius: 1rem;" width="150" height="150" src="https://media-exp3.licdn.com/dms/image/C4E03AQHq3z6ioUGYig/profile-displayphoto-shrink_200_200/0/1573427788501?e=1631145600&v=beta&t=sS2gISn-updQr_jM-rHBHufPtYvgZJVC4nci96oFwXE">
-</span>
-</div>
+<img src="https://imgur.com/I5pLoVM.jpg" width="100%" alt="oIIw5G.md.png" border="0">
 
 ## TODO
 - Create production docker-compose for production deployment
