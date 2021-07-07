@@ -27,6 +27,7 @@ class List(db.Document):
     meta = {'collection': 'lists'}
     list_name = db.StringField(required=True)
     list_description = db.StringField()
+    list_type = db.StringField(required=True)
     list_items = db.ListField('ListType', reverse_delete_rule=db.PULL)
     added_by = db.ReferenceField('User')
     date_created = db.Date()
@@ -34,7 +35,7 @@ class List(db.Document):
 class ListType(db.Document):
     item_name=db.StringField()
     item_description=db.StringField()
-class giftList(ListType):
+class GiftList(ListType):
     item_link=db.StringField()
     item_isBought=db.BooleanField(default=False)
     item_boughtBy=db.StringField(default="anonymous")

@@ -15,7 +15,30 @@ class ListApi(Resource):
             user_id = get_jwt_identity()
             _list = List.objects.get(id=id, added_by=user_id)
             body = request.get_json()
-            List.objects.get(id=id).update(**body)
+            list_type = body["listType"]
+
+            list_items = None
+
+            # Set the list elements
+            if (list_type == "gift")
+                list_items = GiftList(body["listElements"])
+            else if(list_type == "todo")
+                list_items = ToDoList(body["listElements"])
+            else if(list_type == "shopping")
+                list_items = ShoppingList(body["listElements"])
+
+            # Create the list
+            _list = List(
+                        list_name = body["list_name"],
+                        list_description = body["list_description"],
+                        list_type = list_type,
+                        list_items = list_items,
+                        added_by = body["added_by"],
+                        date_created = body["date_created"],
+                        added_by=user
+                        )
+
+            List.objects.get(id=id).update(_list)
             return {"success": "list updated successfully"}, 200
         except InvalidQueryError:
             raise SchemaValidationError
@@ -56,7 +79,29 @@ class ListsApi(Resource):
             user_id = get_jwt_identity()
             body = request.get_json()
             user = User.objects.get(id=user_id)
-            _list = List(**body, added_by=user)
+            list_type = body["listType"]
+
+            list_items = None
+
+            # Set the list elements
+            if (list_type == "gift")
+                list_items = GiftList(body["listElements"])
+            else if(list_type == "todo")
+                list_items = ToDoList(body["listElements"])
+            else if(list_type == "shopping")
+                list_items = ShoppingList(body["listElements"])
+
+            # Create the list
+            _list = List(
+                        list_name = body["list_name"],
+                        list_description = body["list_description"],
+                        list_type = list_type,
+                        list_items = list_items,
+                        added_by = body["added_by"],
+                        date_created = body["date_created"],
+                        added_by=user
+                        )
+
             _list.save()
             user.update(push__lists=_list)
             user.save()
