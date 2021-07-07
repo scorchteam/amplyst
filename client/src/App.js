@@ -59,7 +59,7 @@ class App extends Component {
             <Route path="/logout" exact component={() => <Logout logout={this.logout}/>} />
             <UnProtectedRoute path="/login" loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn} exact={true} component={Login} />
             <UnProtectedRoute path="/register" loggedIn={this.state.loggedIn} exact={true} component={Register} />
-            <ProtectedRoute path="/welcome" loggedIn={this.state.loggedIn} logout={this.logout} exact={true} component={Welcome}/>
+            <ProtectedRoute path="/welcome" loggedIn={this.state.loggedIn} token={this.state.token} logout={this.logout} exact={true} component={Welcome}/>
             <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} exact={true} component={Lists}/>
             <ProtectedRoute path="/profile" loggedIn={this.state.loggedIn} exact={true} component={Profile}/>
             <ProtectedRoute path="/friends" loggedIn={this.state.loggedIn} exact={true} component={Friends}/>

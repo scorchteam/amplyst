@@ -6,7 +6,7 @@ class ProtectedRoute extends Component {
     render() {
         return (
             this.props.loggedIn ?
-            <Route path={this.props.path} component={() => <this.props.component logout={this.props.logout} />} exact={this.props.exact}/> :
+            <Route path={this.props.path} component={() => <this.props.component logout={this.props.logout} token={this.props.token} />} exact={this.props.exact}/> :
             <Redirect to={{ pathname: "/login", state: {from: this.props.location} }} />
         );
     }

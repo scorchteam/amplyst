@@ -1,31 +1,70 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
-import { CustomButtonLink } from "../../general";
 import "./Welcome.scss";
+
+import { flask_url } from "../../../App";
 
 class Welcome extends Component {
 
   constructor(props) {
       super(props);
+      this.state = {
+        dataRecieved: false,
+        userInfo: {}
+      }
+
+      this.isMountedVal = 0;
 
       console.log(this.props);
   }
 
+  async componentDidMount(){
+    this.isMountedVal = 1;
+
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.props.token,
+                'Origin': flask_url },
+    };
+
+    console.log(requestOptions);
+
+    const response = await fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions);
+    const responseJSON = await response.json();
+
+    if(this.isMountedVal === 1){
+      this.setState({
+        dataRecieved: false,
+        userInfo: responseJSON
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.isMountedVal = 0;
+  }
+
+  renderUserInfo(userInfo) {
+    return (<div><pre>{JSON.stringify(userInfo, null, 2)}</pre></div>);
+  }
+
   render() {
     return (
-      <Container className="welcome-container" fluid="md">
-        <div className="col column-1">
-          <CustomButtonLink buttonAddress="/lists" buttonText="My Lists" />
-          <CustomButtonLink buttonAddress="/profile" buttonText="My Profile" />
-          <CustomButtonLink buttonAddress="/friends" buttonText="My Friends" />
-          <CustomButtonLink buttonAddress="/calendar" buttonText="My Calendar" />
-          <CustomButtonLink buttonAddress="/settings" buttonText="Settings" />
-        </div>
-        <div className="col column-2">
-
-        </div>
-      </Container>
+      <>
+        <Container className="welcome-container" fluid="md">
+          <div className="column column-1">
+            Navigation
+          </div>
+          <div className="column column-2">
+            Body
+          </div>
+          <div className="column column-3">
+            Right Column
+          </div>
+        </Container>
+      </>
     );
   }
 }

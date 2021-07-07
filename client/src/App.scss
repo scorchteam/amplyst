@@ -1,7 +1,13 @@
 /* Basic body styles */
 html, body {
     height: 100vh;
-    background-color: var(--header-color-light);
+    background-color: var(--header-color);
+}
+
+@font-face {
+    font-family: "Lobster";
+    src: local("Lobster"),
+    url("./fonts/Lobster/Lobster-Regular.ttf") format("truetype");
 }
 
 /* Setup grid layout for body */
