@@ -8,13 +8,6 @@ class Address(db.EmbeddedDocument):
     state = db.StringField(required=True)
     zipcode = db.IntField(required=True)
 
-class List(db.Document):
-    meta = {'collection': 'lists'}
-    list_name = db.StringField(required=True)
-    list_description = db.StringField()
-    list_items = db.DictField(default={})
-    added_by = db.ReferenceField('User')
-
 class User(db.Document):
     meta = {'collection': 'user_info'}
     first_name = db.StringField(requried=True)
@@ -29,5 +22,30 @@ class User(db.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+class List(db.Document):
+    meta = {'collection': 'lists'}
+    list_name = db.StringField(required=True)
+    list_description = db.StringField()
+    list_items = db.ListField('ListType', reverse_delete_rule=db.PULL)
+    added_by = db.ReferenceField('User')
+    date_created = db.Date()
+    
+class ListType(db.Document):
+    item_name=db.StringField()
+    item_description=db.StringField()
+class giftList(ListType):
+    item_link=db.StringField()
+    item_isBought=db.BooleanField(default=False)
+    item_boughtBy=db.StringField(default="anonymous")
+    # We should decide on how to show the birthday, do we want to have it an extension of the List object, or just allow the user to put it in the description of the List object
+class ToDoList(ListType):
+    item_isChecked=db.BooleanField(default=False)
+    item_isTimeSensitive=db.BooleanField(default=False)
+    item_timeDue=db.Date()
+
+class ShoppingList(ListType):
+    item_link=db.StringField()
+    # item_image=db.??? - figure out how to add images
 
 User.register_delete_rule(List, 'added_by', db.CASCADE)
