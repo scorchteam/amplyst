@@ -5,7 +5,7 @@ function FirstSection() {
   return (
     <section className="home-first-section">
       <Container>
-        <h1>GiftLists.org</h1>
+        <h1 className="brand-font">Amplyst.com</h1>
         <h4>Picking personal gifts is hard, lets simplify that.</h4>
         <div className="create-account-button-container">
             <Button className="custom-button btn-lg">Create Your First List Now</Button>

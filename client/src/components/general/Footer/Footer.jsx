@@ -11,7 +11,7 @@ function Footer() {
           <div className="row">
             <div className="col">
               <ul>
-                <li>&copy; 2021 GiftLists.org</li>
+                <li>&copy; 2021 Amplyst.com</li>
                 <li>
                   <Link to="/">
                     Home
