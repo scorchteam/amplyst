@@ -1,5 +1,5 @@
 from flask import Response, request, jsonify
-from database.models import List, User
+from database.models import List, User, ListType, GiftList, ToDoList, ShoppingList
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 import json
@@ -85,11 +85,11 @@ class ListsApi(Resource):
 
             # Set the list elements
             if (list_type == "gift")
-                list_items = GiftList(body["listElements"])
+                list_items = GiftList(body["list_elements"])
             else if(list_type == "todo")
-                list_items = ToDoList(body["listElements"])
+                list_items = ToDoList(body["list_elements"])
             else if(list_type == "shopping")
-                list_items = ShoppingList(body["listElements"])
+                list_items = ShoppingList(body["list_elements"])
 
             # Create the list
             _list = List(
