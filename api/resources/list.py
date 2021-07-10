@@ -20,11 +20,11 @@ class ListApi(Resource):
             list_items = None
 
             # Set the list elements
-            if (list_type == "gift")
+            if (list_type == "gift"):
                 list_items = GiftList(body["listElements"])
-            else if(list_type == "todo")
+            elif(list_type == "todo"):
                 list_items = ToDoList(body["listElements"])
-            else if(list_type == "shopping")
+            elif(list_type == "shopping"):
                 list_items = ShoppingList(body["listElements"])
 
             # Create the list
@@ -33,7 +33,6 @@ class ListApi(Resource):
                         list_description = body["list_description"],
                         list_type = list_type,
                         list_items = list_items,
-                        added_by = body["added_by"],
                         date_created = body["date_created"],
                         added_by=user
                         )
@@ -84,11 +83,11 @@ class ListsApi(Resource):
             list_items = None
 
             # Set the list elements
-            if (list_type == "gift")
+            if (list_type == "gift"):
                 list_items = GiftList(body["list_elements"])
-            else if(list_type == "todo")
+            elif(list_type == "todo"):
                 list_items = ToDoList(body["list_elements"])
-            else if(list_type == "shopping")
+            elif(list_type == "shopping"):
                 list_items = ShoppingList(body["list_elements"])
 
             # Create the list
@@ -97,7 +96,6 @@ class ListsApi(Resource):
                         list_description = body["list_description"],
                         list_type = list_type,
                         list_items = list_items,
-                        added_by = body["added_by"],
                         date_created = body["date_created"],
                         added_by=user
                         )
