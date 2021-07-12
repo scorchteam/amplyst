@@ -15,7 +15,7 @@ class ListApi(Resource):
             user_id = get_jwt_identity()
             _list = List.objects.get(id=id, added_by=user_id)
             body = request.get_json()
-            list_type = body["listType"]
+            list_type = body["list_type"]
 
             list_items = None
 
@@ -76,19 +76,39 @@ class ListsApi(Resource):
     def post(self):
         try:
             user_id = get_jwt_identity()
-            body = request.get_json()
+            body = request.get_json(force=True)
             user = User.objects.get(id=user_id)
-            list_type = body["listType"]
+            list_type = body["list_type"]
 
-            list_items = None
+            list_items = []
 
             # Set the list elements
-            if (list_type == "gift"):
-                list_items = GiftList(body["list_elements"])
-            elif(list_type == "todo"):
-                list_items = ToDoList(body["list_elements"])
-            elif(list_type == "shopping"):
-                list_items = ShoppingList(body["list_elements"])
+            for item in body["list_elements"]:
+                if (list_type == "gift"):
+                    list_items.append( GiftList(
+                                        item_name = item["item_name"],
+                                        item_description = item["item_description"],
+                                        item_link = item["item_link"],
+                                        item_isBought = item["item_isBought"],
+                                        item_boughtBy = item["item_boughtBy"]
+                                        )   
+                                    )
+                elif(list_type == "todo"):
+                    list_items.append( ToDoList(
+                                        item_name = item["item_name"],
+                                        item_description = item["item_description"],
+                                        item_isChecked = item["item_isChecked"],
+                                        item_isTimeSensitive = item["item_isTimeSensitive"],
+                                        item_timeDue = item["item_timeDue"]
+                                        )   
+                                    )
+                elif(list_type == "shopping"):
+                    list_items.append( ShoppingList(
+                                        item_name = item["item_name"],
+                                        item_description = item["item_description"],
+                                        item_link = item["item_link"]
+                                        )   
+                                    )
 
             # Create the list
             _list = List(
