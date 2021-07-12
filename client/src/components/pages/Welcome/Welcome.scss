@@ -7,27 +7,26 @@
     padding: 0!important;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 100px 1fr 100px;
+    grid-template-rows: 1fr;
     height: 100%;
     color: white;
 
-    .column-3 {
+    .column-1 {
         display: none;
-        background-color: blue;
     }
 
     @media (min-width: 992px) {
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 250px 1fr;
         grid-template-rows: 1fr;
-    }
 
-    @media (min-width: 1400px) {
-        .column-3 {
+        .column-2 {
             display: block;
+            grid-column: 2;
         }
 
-        grid-template-columns: 250px 1fr 250px;
-        grid-template-rows: 1fr;
+        .column-1 {
+            display: block;
+        }
     }
 
     .column {
