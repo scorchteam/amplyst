@@ -16,7 +16,7 @@ class Welcome extends Component {
 
       this.isMountedVal = 0;
 
-      console.log(this.props);
+      //console.log(this.props);
   }
 
   async componentDidMount(){
@@ -29,7 +29,7 @@ class Welcome extends Component {
                 'Origin': flask_url },
     };
 
-    console.log(requestOptions);
+    //console.log(requestOptions);
 
     const response = await fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions);
     const responseJSON = await response.json();
@@ -55,13 +55,10 @@ class Welcome extends Component {
       <>
         <Container className="welcome-container" fluid="md">
           <div className="column column-1">
-            Navigation
+            Left Column
           </div>
           <div className="column column-2">
             Body
-          </div>
-          <div className="column column-3">
-            Right Column
           </div>
         </Container>
       </>

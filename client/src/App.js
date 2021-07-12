@@ -22,7 +22,7 @@ class App extends Component {
 
     this.state = {
       loggedIn: (token !== null),
-      token: token
+      token: token,
     }
 
     this.logout = this.logout.bind(this);
