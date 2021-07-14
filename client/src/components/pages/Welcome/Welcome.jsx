@@ -55,10 +55,10 @@ class Welcome extends Component {
       <>
         <Container className="welcome-container" fluid="md">
           <div className="column column-1">
-            Left Column
+            Body
           </div>
           <div className="column column-2">
-            Body
+            Right Column
           </div>
         </Container>
       </>
