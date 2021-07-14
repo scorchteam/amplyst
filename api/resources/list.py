@@ -2,7 +2,8 @@ from flask import Response, request, jsonify
 from database.models import List, User, ListType, GiftList, ToDoList, ShoppingList
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
-import json
+import json, sys
+from datetime import datetime
 
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
 from resources.errors import SchemaValidationError, InternalServerError, UpdatingListError, DeletingListError, ListNotExistsError
@@ -111,12 +112,13 @@ class ListsApi(Resource):
                                     )
 
             # Create the list
+            dateCreatedDateTime = datetime.strptime(body["date_created"], "%m/%d/%Y")
             _list = List(
                         list_name = body["list_name"],
                         list_description = body["list_description"],
                         list_type = list_type,
                         list_items = list_items,
-                        date_created = body["date_created"],
+                        date_created = dateCreatedDateTime,
                         added_by=user
                         )
 

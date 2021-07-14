@@ -8,12 +8,17 @@ class Address(db.EmbeddedDocument):
     state = db.StringField(required=True)
     zipcode = db.IntField(required=True)
 
+class ListType(db.EmbeddedDocument):
+    meta = {'allow_inheritance': True}
+    item_name=db.StringField()
+    item_description=db.StringField()
+
 class List(db.Document):
     meta = {'collection': 'lists'}
     list_name = db.StringField(required=True)
     list_description = db.StringField()
     list_type = db.StringField(required=True)
-    list_items = db.ListField(db.ReferenceField('ListType'))
+    list_items = db.ListField(db.EmbeddedDocumentField('ListType'))
     added_by = db.ReferenceField('User')
     date_created = db.DateTimeField()
 
@@ -31,11 +36,6 @@ class User(db.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-    
-class ListType(db.Document):
-    meta = {'allow_inheritance': True}
-    item_name=db.StringField()
-    item_description=db.StringField()
 
 class GiftList(ListType):
     item_link=db.StringField()
