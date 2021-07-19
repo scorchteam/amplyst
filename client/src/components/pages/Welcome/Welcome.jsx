@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
+import {
+  MessageInbox,
+  ProfileSummary,
+  RecentActivity,
+  RecentList,
+  RecentLists,
+  UpcomingEvents
+  } from "./components";
 import "./Welcome.scss";
 
 import { flask_url } from "../../../App";
@@ -55,10 +63,20 @@ class Welcome extends Component {
       <>
         <Container className="welcome-container" fluid="md">
           <div className="column column-1">
-            Body
+            <div className="column-1_section-1">
+              <ProfileSummary />
+              <RecentList />
+              <RecentActivity />
+            </div>
+            <div className="column-1_section-2">
+              <RecentActivity />
+              <RecentList />
+            </div>
           </div>
           <div className="column column-2">
-            Right Column
+            <MessageInbox />
+            <RecentLists />
+            <UpcomingEvents />
           </div>
         </Container>
       </>
