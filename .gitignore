@@ -27,3 +27,7 @@ yarn-error.log*
 
 #python cache
 __pycache__/
+
+#Cert files
+*.csr
+*.key
