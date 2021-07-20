@@ -9,9 +9,9 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
-// export const flask_url = "https://giftlists-api.herokuapp.com";
+export const flask_url = "https://giftlists-api.herokuapp.com";
 // export const flask_url = "http://172.26.99.3:5000";
-export const flask_url = "http://localhost:5000";
+// export const flask_url = "http://localhost:5000";
 
 class App extends Component {
 
