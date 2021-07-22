@@ -64,11 +64,11 @@ class Login extends Component {
       }
     }
 
-    console.log(errors);
-    console.log(finalUserInfo);
+    //console.log(errors);
+    //console.log(finalUserInfo);
 
     if(finalUserInfo.hasOwnProperty("email") && finalUserInfo.hasOwnProperty("password") && Object.keys(errors).length === 0){
-      console.log("Made it here");
+      //console.log("Made it here");
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -85,7 +85,7 @@ class Login extends Component {
         .then(
           (result) => {
             if(result.token !== undefined){
-              console.log(result.token);
+              //console.log(result.token);
               this.setState({
                 loggedIn: true,
                 token: result.token
@@ -154,7 +154,7 @@ class Login extends Component {
   }
 
   validatePassword(password, errors){
-    console.log("Validating password");
+    //console.log("Validating password");
     var errorCount = 0;
 
     //empty input box
