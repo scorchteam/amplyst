@@ -1,21 +1,64 @@
 from flask import Response, request, jsonify
-from database.models import List, User
+from database.models import List, User, ListType, GiftList, ToDoList, ShoppingList
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
-import json
+import json, sys
+from datetime import datetime
 
 from mongoengine.errors import FieldDoesNotExist, NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
 from resources.errors import SchemaValidationError, InternalServerError, UpdatingListError, DeletingListError, ListNotExistsError
+
+list_types = [
+    "gift",
+    "todo",
+    "shopping"
+]
 
 class ListApi(Resource):
 
     @jwt_required()
     def put(self, id):
         try:
+            #Grab user identity
             user_id = get_jwt_identity()
-            _list = List.objects.get(id=id, added_by=user_id)
+            #Grab user list matching id
+            listToBeUpdated = List.objects.get(id=id, added_by=user_id)
+            #Grab request data
             body = request.get_json()
-            List.objects.get(id=id).update(**body)
+            list_type = body["list_type"]
+            list_items = []
+
+            #validated listType variable
+            validated_list_type = None
+            
+            # Validate that listType is a known type
+            for type in list_types:
+                if (list_type == type):
+                    validated_list_type = type
+                    break
+
+            if validated_list_type is None:
+                return {"Error": "Invalid List Type '" + str(list_type) + "' in field list_type"}, 400
+
+            #Call appropriate helper def per list type
+            if (validated_list_type == "gift"):
+                list_items = createGiftListItems(list_items, body["list_elements"])
+            elif (validated_list_type == "todo"):
+                list_items = createTodoListItems(list_items, body["list_elements"])
+            elif (validated_list_type == "shopping"):
+                list_items = createShoppingListItems(list_items, body["list_elements"])
+            else:
+                return {"Error": "Invalid List Type '" + str(list_type) + "' in field list_type"}, 400
+
+            #Create dict for updating
+            listToBeUpdated = {
+                "list_name": body["list_name"],
+                "list_description": body["list_description"],
+                "list_type": validated_list_type,
+                "list_items": list_items
+            }
+            #Update list object
+            List.objects.get(id=id).update(**listToBeUpdated)
             return {"success": "list updated successfully"}, 200
         except InvalidQueryError:
             raise SchemaValidationError
@@ -48,19 +91,64 @@ class ListApi(Resource):
         except Exception:
             raise InternalServerError
 
+    
+
 class ListsApi(Resource):
 
     @jwt_required()
     def post(self):
         try:
+            #Grab userId from token
             user_id = get_jwt_identity()
-            body = request.get_json()
+            #Grab request body
+            body = request.get_json(force=True)
+            #Grab user document from MongoDB
             user = User.objects.get(id=user_id)
-            _list = List(**body, added_by=user)
-            _list.save()
-            user.update(push__lists=_list)
+
+            #Defined list type from request
+            list_type = body["list_type"]
+            #Set of list items to add to top level list obj
+            list_items = []
+
+            #validated listType variable
+            validated_list_type = None
+            
+            # Validate that listType is a known type
+            for type in list_types:
+                if (list_type == type):
+                    validated_list_type = type
+                    break
+
+            if validated_list_type is None:
+                return {"Error": "Invalid List Type '" + str(list_type) + "' in field list_type"}, 400
+
+            #Call appropriate helper def per list type
+            if (validated_list_type == "gift"):
+                list_items = createGiftListItems(list_items, body["list_elements"])
+            elif (validated_list_type == "todo"):
+                list_items = createTodoListItems(list_items, body["list_elements"])
+            elif (validated_list_type == "shopping"):
+                list_items = createShoppingListItems(list_items, body["list_elements"])
+            else:
+                return {"Error": "Invalid List Type '" + str(list_type) + "' in field list_type"}, 400
+
+            ## Create the list
+            #Get time in datetime obj
+            dateCreatedDateTime = datetime.strptime(body["date_created"], "%m/%d/%Y")
+            newList = List (
+                list_name = body["list_name"],
+                list_description = body["list_description"],
+                list_type = list_type,
+                list_items = list_items,
+                date_created = dateCreatedDateTime,
+                added_by=user
+            )
+
+            #Save list and return valid request
+            newList.save()
+            user.update(push__lists=newList)
             user.save()
-            id = _list.id
+            id = newList.id
             return {'id': str(id)}, 200
         except (FieldDoesNotExist, ValidationError):
             raise SchemaValidationError
@@ -80,3 +168,41 @@ class ListsApi(Resource):
             raise ListNotExistsError
         except Exception:
             raise InternalServerError
+
+def createGiftListItems(list_items, list_elements):
+    for element in list_elements:
+        list_items.append(
+            GiftList(
+                item_name = element["item_name"],
+                item_description = element["item_description"],
+                item_link = element["item_link"],
+                item_isBought = element["item_isBought"],
+                item_boughtBy = element["item_boughtBy"]
+            )  
+        )
+    return list_items
+
+def createTodoListItems(list_items, list_elements):
+    for element in list_elements:
+        dateTimeDueDateTime = datetime.strptime(element["item_timeDue"], "%m/%d/%Y")
+        list_items.append( 
+            ToDoList (
+                item_name = element["item_name"],
+                item_description = element["item_description"],
+                item_isChecked = element["item_isChecked"],
+                item_isTimeSensitive = element["item_isTimeSensitive"],
+                item_timeDue = dateTimeDueDateTime
+            )   
+        )
+    return list_items
+
+def createShoppingListItems(list_items, list_elements):
+    for element in list_elements:
+        list_items.append(
+            ShoppingList(
+                item_name = element["item_name"],
+                item_description = element["item_description"],
+                item_link = element["item_link"]
+            )   
+        )
+    return list_items
