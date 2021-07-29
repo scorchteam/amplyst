@@ -5,7 +5,7 @@ Nicholas Prussen
 """
 
 #Import
-from flask import Flask
+from flask import Flask, jsonify
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail
@@ -34,6 +34,10 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config['MONGODB_SETTINGS'] = {
     'host': 'mongodb+srv://testuser:testuser@giftlists-restful.syfrq.mongodb.net/user?authSource=admin&replicaSet=atlas-7x73tj-shard-0&readPreference=primary'
 }
+
+@jwt.expired_token_loader
+def expired_token_callback(jwt_header, jwt_payload):
+    return jsonify(code="msg", err="Token has expired"), 200
 
 initialize_db(app)
 initialize_routes(api)
