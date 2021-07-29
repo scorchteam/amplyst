@@ -19,7 +19,7 @@ class RecentLists extends Component {
 
   countLists(userListData) {
     return userListData.map((item, index) => (
-      <Link to={"/lists?list=" + item._id.$oid}><li key={index}>{item.list_name}</li></Link>
+      <Link key={index} to={"/lists?list=" + item._id.$oid}><li>{item.list_name}</li></Link>
     ))
   }
 
