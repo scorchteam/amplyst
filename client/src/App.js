@@ -18,14 +18,75 @@ class App extends Component {
   constructor(props){
     super(props);
 
-    var token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     this.state = {
       loggedIn: (token !== null),
-      token: token
+      token: token,
+    }
+
+    if (token !== null) {
+      this.validateUserToken(token);
+      this.grabUserListData(token);
     }
 
     this.logout = this.logout.bind(this);
+  }
+
+  componentDidMount() {
+    this.isMountedVal = 1;
+  }
+
+  validateUserToken(token) {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+                'Origin': flask_url },
+    };
+
+    fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      if (data.err === "Token has expired"){
+        this.logout();
+      } else {
+        if(this.isMountedVal === 1){
+          this.setState({
+            userInfo: data
+          });
+        }
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  grabUserListData(token) {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+                'Origin': flask_url },
+    };
+
+    fetch(flask_url + "/api/user/lists", requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      if(this.isMountedVal === 1){
+        this.setState({
+          userListData: data
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  componentWillUnmount() {
+    this.isMountedVal = 0;
   }
 
   logout() {
@@ -34,7 +95,6 @@ class App extends Component {
       token: null
     });
     localStorage.removeItem('token');
-    console.log("Removed token");
   }
 
   setLoggedIn = (token) => {
@@ -43,7 +103,8 @@ class App extends Component {
       token: token
     });
     localStorage.setItem('token', token);
-    console.log('token set')
+    this.validateUserToken(token);
+    this.grabUserListData(token);
   }
 
   render() {
@@ -59,8 +120,8 @@ class App extends Component {
             <Route path="/logout" exact component={() => <Logout logout={this.logout}/>} />
             <UnProtectedRoute path="/login" loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn} exact={true} component={Login} />
             <UnProtectedRoute path="/register" loggedIn={this.state.loggedIn} exact={true} component={Register} />
-            <ProtectedRoute path="/welcome" loggedIn={this.state.loggedIn} token={this.state.token} logout={this.logout} exact={true} component={Welcome}/>
-            <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} exact={true} component={Lists}/>
+            <ProtectedRoute path="/welcome" loggedIn={this.state.loggedIn} token={this.state.token} logout={this.logout} userInfo={this.state.userInfo} userListData={this.state.userListData} exact={true} component={Welcome}/>
+            <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} userListData={this.state.userListData} exact={true} component={Lists}/>
             <ProtectedRoute path="/profile" loggedIn={this.state.loggedIn} exact={true} component={Profile}/>
             <ProtectedRoute path="/friends" loggedIn={this.state.loggedIn} exact={true} component={Friends}/>
             <ProtectedRoute path="/calendar" loggedIn={this.state.loggedIn} exact={true} component={Calendar}/>

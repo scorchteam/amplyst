@@ -1,7 +1,10 @@
+@import './components/general/Colors';
+
 /* Basic body styles */
 html, body {
     height: 100vh;
     background-color: var(--header-color);
+    overflow: overlay;
 }
 
 @font-face {
@@ -16,3 +19,37 @@ html, body {
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
+
+/* Scroll 3 */
+body::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.25rem;
+}
+body::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 0.25rem;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--text-accent-color-bright);
+    border-radius: 0.25rem;
+}
+
+
+/* Scroll 3 */
+div::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+div::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 1rem;
+}
+div::-webkit-scrollbar-thumb {
+    background-color: var(--text-accent-color-bright);
+    border-radius: 1rem;
+}
+
+
+
+
+

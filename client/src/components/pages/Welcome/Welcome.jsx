@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
+import {
+  MessageInbox,
+  ProfileSummary,
+  RecentActivity,
+  RecentList,
+  RecentLists,
+  UpcomingEvents
+  } from "./components";
 import "./Welcome.scss";
 
 import { flask_url } from "../../../App";
@@ -11,39 +19,11 @@ class Welcome extends Component {
       super(props);
       this.state = {
         dataRecieved: false,
-        userInfo: {}
       }
 
       this.isMountedVal = 0;
 
-      console.log(this.props);
-  }
-
-  async componentDidMount(){
-    this.isMountedVal = 1;
-
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.props.token,
-                'Origin': flask_url },
-    };
-
-    console.log(requestOptions);
-
-    const response = await fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions);
-    const responseJSON = await response.json();
-
-    if(this.isMountedVal === 1){
-      this.setState({
-        dataRecieved: false,
-        userInfo: responseJSON
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    this.isMountedVal = 0;
+      console.log(props.userInfo);
   }
 
   renderUserInfo(userInfo) {
@@ -55,13 +35,18 @@ class Welcome extends Component {
       <>
         <Container className="welcome-container" fluid="md">
           <div className="column column-1">
-            Navigation
+            <div className="column-1_section-1">
+              <ProfileSummary userInfo={this.props.userInfo} />
+              <RecentList />
+            </div>
+            <div className="column-1_section-2">
+              <RecentActivity />
+            </div>
           </div>
           <div className="column column-2">
-            Body
-          </div>
-          <div className="column column-3">
-            Right Column
+            <MessageInbox />
+            <RecentLists userListData={this.props.userListData} />
+            <UpcomingEvents />
           </div>
         </Container>
       </>
