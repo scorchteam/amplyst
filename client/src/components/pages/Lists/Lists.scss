@@ -1,8 +1,7 @@
 .lists-container {
-    color: white;
     display: grid;
     gap: 2rem;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 
     .lists-sub-container {
@@ -34,7 +33,22 @@
     }
 }
 
+@media (min-width: 992px) {
+    .lists-container {
+        color: white;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 350px 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+.modal-form {
+    padding: 0!important;
+}
+
 .list-sub-container-style {
+    color: white;
     padding: 1rem;
     background-color: var(--header-color-light);
     border-radius: 1rem;
@@ -44,11 +58,26 @@
 
     .my-lists-list {
         list-style-type: none;
+        text-decoration: underline;
+        text-decoration-color: var(--text-accent-color-bright);
         padding: 0;
         padding-top: 1rem;
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.25rem;
+
+        li {
+            color: var(--text-accent-color-bright);
+            padding: 0.25rem;
+        }
+
+        li:hover {
+            border-radius: 0.5rem;
+            background-color: var(--text-accent-color);
+            color: var(--header-text-color);
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+        }
         
 
         a {

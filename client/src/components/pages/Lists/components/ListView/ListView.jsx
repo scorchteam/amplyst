@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
 
 class ListView extends Component {
@@ -13,6 +12,14 @@ class ListView extends Component {
 
   renderUserInfo(userInfo) {
     return (<div><pre>{JSON.stringify(userInfo, null, 2)}</pre></div>);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({
+        listData: this.props.listData
+      });
+    }
   }
 
   render() {
