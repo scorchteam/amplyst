@@ -1,0 +1,92 @@
+@import "../../general/Colors";
+
+.body {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
+.worldContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.submit {
+  width: 50%;
+  margin: 5px;
+}
+
+.headerInnerContainer {
+  display: flex;
+  text-align: center;
+  width: 200px;
+  padding: 20px 20px 0 20px;
+}
+
+.label {
+  display: flex;
+  margin-bottom: 16px;
+  margin-right: 10px;
+}
+
+.input {
+  margin-left: 5px;
+}
+
+.boardContainer {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.headerButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+  padding: 0 20px 20px;
+}
+
+.cellContainerDead {
+  display: flex;
+  padding: 10px;
+//   border: 1px solid black;
+}
+
+.cellContainerLive {
+  display: flex;
+  padding: 10px;
+//   border: 1px solid black;
+  background-color: white;
+}
+
+.this-is-life {
+    color: var(--text-accent-color-bright);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.this-is-life-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--header-color);
+    padding: 2rem;
+
+    h3, h6 {
+        padding: 0;
+        margin: 0;
+    }
+}

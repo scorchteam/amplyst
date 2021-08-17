@@ -4,7 +4,7 @@ import { Header, Footer, ProtectedRoute, UnProtectedRoute } from "./components/g
 import {
   Home, About, Contact, Examples, Login, Logout, Register,
   PrivacyPolicy, TermsAndConditions, FourZeroFour, Welcome, Lists,
-  Profile, Friends, Calendar, Settings/*, Life*/
+  Profile, Friends, Calendar, Settings, Life
 } from "./components/pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
@@ -133,7 +133,7 @@ class App extends Component {
             <Route path="/privacy-policy" exact component={() => <PrivacyPolicy />} />
             <Route path="/terms-and-conditions" exact component={() => <TermsAndConditions />} />
 
-            {/* <Route path="/life" exact component={() => <Life />} /> */}
+            <Route path="/life" exact component={() => <Life />} />
 
             <Route exact component={() => <FourZeroFour />} />
           </Switch>

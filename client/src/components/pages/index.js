@@ -15,7 +15,7 @@ export { default as Settings } from "./Settings/Settings";
 export { default as Calendar } from "./Calendar/Calendar";
 export { default as PrivacyPolicy } from "./PrivacyPolicy/PrivacyPolicy";
 export { default as TermsAndConditions } from "./TermsAndConditions/TermsAndConditions";
-// export { default as Life } from "./Life/Life"
+export { default as Life } from "./Life/Life"
 
 //404 Page
 export { default as FourZeroFour } from "./FourZeroFour/FourZeroFour";
