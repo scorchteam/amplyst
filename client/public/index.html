@@ -16,7 +16,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <title>Amplyst.com</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Amplyst</title>
+    <script>
+      function easterEgg() {
+        var part1Answer = window.prompt("Do you want to play a game?", "yes")
+        var part2Answer = undefined
+        if (part1Answer === "yes") {
+          part2Answer = window.prompt("What is the answer to life, the universe, and everything?")
+        }
+
+        if (part2Answer === "42") {
+          window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/life"
+        }
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

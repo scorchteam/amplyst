@@ -9,7 +9,6 @@ class ProfileSummary extends Component {
     this.state = {
       userInfo: props.userInfo
     };
-    console.log(props);
   }
 
   render() {

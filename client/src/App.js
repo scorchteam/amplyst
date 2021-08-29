@@ -4,7 +4,7 @@ import { Header, Footer, ProtectedRoute, UnProtectedRoute } from "./components/g
 import {
   Home, About, Contact, Examples, Login, Logout, Register,
   PrivacyPolicy, TermsAndConditions, FourZeroFour, Welcome, Lists,
-  Profile, Friends, Calendar, Settings
+  Profile, Friends, Calendar, Settings/*, Life*/
 } from "./components/pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
@@ -31,6 +31,7 @@ class App extends Component {
     }
 
     this.logout = this.logout.bind(this);
+    this.grabUserListData = this.grabUserListData.bind(this);
   }
 
   componentDidMount() {
@@ -110,7 +111,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Header loggedIn={this.state.loggedIn} />
+        {
+          window.location.pathname !== "/life" &&
+          <Header loggedIn={this.state.loggedIn} />
+        }
         <div className="content">
           <Switch>
             <Route path="/" exact component={() => <Home />} />
@@ -121,7 +125,7 @@ class App extends Component {
             <UnProtectedRoute path="/login" loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn} exact={true} component={Login} />
             <UnProtectedRoute path="/register" loggedIn={this.state.loggedIn} exact={true} component={Register} />
             <ProtectedRoute path="/welcome" loggedIn={this.state.loggedIn} token={this.state.token} logout={this.logout} userInfo={this.state.userInfo} userListData={this.state.userListData} exact={true} component={Welcome}/>
-            <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} userListData={this.state.userListData} exact={true} component={Lists}/>
+            <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} userListData={this.state.userListData} grabUserListData={this.grabUserListData} exact={true} component={Lists}/>
             <ProtectedRoute path="/profile" loggedIn={this.state.loggedIn} exact={true} component={Profile}/>
             <ProtectedRoute path="/friends" loggedIn={this.state.loggedIn} exact={true} component={Friends}/>
             <ProtectedRoute path="/calendar" loggedIn={this.state.loggedIn} exact={true} component={Calendar}/>
@@ -129,10 +133,15 @@ class App extends Component {
             <Route path="/privacy-policy" exact component={() => <PrivacyPolicy />} />
             <Route path="/terms-and-conditions" exact component={() => <TermsAndConditions />} />
 
+            {/* <Route path="/life" exact component={() => <Life />} /> */}
+
             <Route exact component={() => <FourZeroFour />} />
           </Switch>
         </div>
-        <Footer />
+        {
+          window.location.pathname !== "/life" &&
+          <Footer />
+        }
       </Router>
     );
   }

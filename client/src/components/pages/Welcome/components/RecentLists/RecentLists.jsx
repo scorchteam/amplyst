@@ -10,7 +10,6 @@ class RecentLists extends Component {
     this.state = {
       userListData: props.userListData
     }
-    console.log(props);
   }
 
   renderUserInfo(userListData) {

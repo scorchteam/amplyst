@@ -1,20 +1,14 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
-
+import { Button } from "react-bootstrap";
 class ListsList extends Component {
 
-  constructor(props) {
-      super(props);
-      this.state = {
-        listNames: props.lists
-      }
-  }
-
   iterateOutListNames(listNames) {
+    if (listNames === null) {
+      return <></>;
+    }
     return listNames.map((item, index) => (
-      <Link key={index} to={"/lists?list=" + item.listId}><li>{item.listName}</li></Link>
+      <li onClick={() => this.props.changeActiveList(item.listId)} key={index}>{item.listName}</li>
     ))
   }
 
@@ -23,8 +17,11 @@ class ListsList extends Component {
       <div className="list-sub-container-style">
         <h2>My Lists</h2>
         <ul className="my-lists-list">
-          {this.iterateOutListNames(this.state.listNames)}
+          {this.iterateOutListNames(this.props.lists)}
         </ul>
+        <Button variant="primary" onClick={() => this.props.handleModalShow(true)}>
+            Add a new list
+        </Button>
       </div>
     );
   }

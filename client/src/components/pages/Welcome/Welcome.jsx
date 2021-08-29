@@ -11,8 +11,6 @@ import {
   } from "./components";
 import "./Welcome.scss";
 
-import { flask_url } from "../../../App";
-
 class Welcome extends Component {
 
   constructor(props) {
@@ -22,8 +20,6 @@ class Welcome extends Component {
       }
 
       this.isMountedVal = 0;
-
-      console.log(props.userInfo);
   }
 
   renderUserInfo(userInfo) {
