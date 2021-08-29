@@ -58,13 +58,13 @@
     .welcome-container {
         grid-template-columns: 1fr 250px;
         grid-template-rows: 1fr;
-    }
 
-    .column-1 {
-        display: grid!important;
-        gap: 1rem;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
+        .column-1 {
+            display: grid!important;
+            gap: 1rem;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+        }
     }
 }
 

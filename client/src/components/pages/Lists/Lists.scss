@@ -1,4 +1,103 @@
-.token-container {
-    overflow: hidden;
+.lists-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    .lists-sub-container {
+        .lists-list {
+            list-style-type: none;
+            padding: 0;
+            padding-top: 1rem;
+
+            li {
+                border-top: 3px solid purple;
+                font-size: 1.25rem;
+            }
+        }
+
+        .selected-list-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .list-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border-top: 3px solid purple;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .lists-container {
+        color: white;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 350px 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+.modal-form {
+    padding: 0!important;
+}
+
+.list-sub-container-style {
     color: white;
+    padding: 1rem;
+    background-color: var(--header-color-light);
+    border-radius: 1rem;
+    height: fit-content;
+    max-height: 1000px;
+    overflow: auto;
+
+    .my-lists-list {
+        list-style-type: none;
+        text-decoration: underline;
+        text-decoration-color: var(--text-accent-color-bright);
+        padding: 0;
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        li {
+            color: var(--text-accent-color-bright);
+            padding: 0.25rem;
+        }
+
+        li:hover {
+            border-radius: 0.5rem;
+            background-color: var(--text-accent-color);
+            color: var(--header-text-color);
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+        }
+        
+
+        a {
+            transition: all 100ms ease-in-out;
+        }
+        
+        a:link {
+            color: var(--text-accent-color-super-bright);
+            text-decoration: none;
+        }
+        a:visited {
+            color: var(--text-accent-color-bright);
+        }
+        a:hover {
+            color: var(--text-accent-color-super-bright);
+            text-decoration: underline;
+        }
+        a:active {
+            color: var(--text-accent-color-super-bright);
+            text-decoration: underline;
+        }
+    }
 }

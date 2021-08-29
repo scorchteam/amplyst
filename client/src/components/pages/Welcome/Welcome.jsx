@@ -11,47 +11,15 @@ import {
   } from "./components";
 import "./Welcome.scss";
 
-import { flask_url } from "../../../App";
-
 class Welcome extends Component {
 
   constructor(props) {
       super(props);
       this.state = {
         dataRecieved: false,
-        userInfo: {}
       }
 
       this.isMountedVal = 0;
-
-      //console.log(this.props);
-  }
-
-  async componentDidMount(){
-    this.isMountedVal = 1;
-
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.props.token,
-                'Origin': flask_url },
-    };
-
-    //console.log(requestOptions);
-
-    const response = await fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions);
-    const responseJSON = await response.json();
-
-    if(this.isMountedVal === 1){
-      this.setState({
-        dataRecieved: false,
-        userInfo: responseJSON
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    this.isMountedVal = 0;
   }
 
   renderUserInfo(userInfo) {
@@ -64,18 +32,16 @@ class Welcome extends Component {
         <Container className="welcome-container" fluid="md">
           <div className="column column-1">
             <div className="column-1_section-1">
-              <ProfileSummary />
+              <ProfileSummary userInfo={this.props.userInfo} />
               <RecentList />
-              <RecentActivity />
             </div>
             <div className="column-1_section-2">
               <RecentActivity />
-              <RecentList />
             </div>
           </div>
           <div className="column column-2">
             <MessageInbox />
-            <RecentLists />
+            <RecentLists userListData={this.props.userListData} />
             <UpcomingEvents />
           </div>
         </Container>

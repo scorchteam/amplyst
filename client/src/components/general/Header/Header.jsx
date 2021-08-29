@@ -41,7 +41,6 @@ class Navigation extends Component {
 
     renderNavLinks() {
         const pageDetails = this.getPageDetails()
-        console.log(pageDetails)
         if (pageDetails.user === true) {
             return this.renderNavLinksUser();
         } else {

@@ -4,11 +4,17 @@ import "./ProfileSummary.scss";
 
 class ProfileSummary extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: props.userInfo
+    };
+  }
+
   render() {
     return (
       <div className="welcome-page-sub-container text-breaking">
-        <h1>Profile Summary</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quidem praesentium commodi aut obcaecati, atque cumque voluptatibus voluptas temporibus repellendus mollitia ut, reiciendis odio expedita corrupti aperiam eligendi culpa impedit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quidem praesentium commodi aut obcaecati, atque cumque voluptatibus voluptas temporibus repellendus mollitia ut, reiciendis odio expedita corrupti aperiam eligendi culpa impedit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias quidem praesentium commodi aut obcaecati, atque cumque voluptatibus voluptas temporibus repellendus mollitia ut, reiciendis odio expedita corrupti aperiam eligendi culpa impedit. </p>
+        <h2>Hi {this.state.userInfo && this.state.userInfo.first_name},</h2>
       </div>
     );
   }
