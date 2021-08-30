@@ -8,6 +8,7 @@ import './Login.scss';
 import { flask_url } from "../../../App";
 import validator from "validator";
 
+/** Login component for user authentication */
 class Login extends Component {
 
   constructor(props) {
@@ -30,17 +31,19 @@ class Login extends Component {
     this.handInputChange = this.handleInputChange.bind(this);
   }
 
+  /**
+   * Handle submission of login form. Validates and then initiates request
+   * @param {event} event 
+   */
   handleSubmit(event) {
     event.preventDefault();
-    //console.log(this.state.userInfo);
 
     var tempUserInfo = this.state.tempUserInfo;
     var finalUserInfo = {}
-
     var errors = this.state.errors;
 
+    /** Loop through temp object and validate fields */
     for(var key in tempUserInfo){
-
       if(key === "email"){
         if(tempUserInfo[key] !== null && tempUserInfo[key] !== ""){
           finalUserInfo[key] = tempUserInfo[key];
@@ -64,11 +67,8 @@ class Login extends Component {
       }
     }
 
-    //console.log(errors);
-    //console.log(finalUserInfo);
-
+    /** Check to make sure required fields exist before request */
     if(finalUserInfo.hasOwnProperty("email") && finalUserInfo.hasOwnProperty("password") && Object.keys(errors).length === 0){
-      //console.log("Made it here");
       const requestOptions = {
         method: 'POST',
         headers: {
@@ -78,14 +78,15 @@ class Login extends Component {
         body: JSON.stringify(finalUserInfo)
       };
 
+      //Remove token just in case
       localStorage.removeItem('token');
 
+      //Request using form data
       fetch(flask_url + "/api/user/auth/login", requestOptions)
         .then(res => res.json())
         .then(
           (result) => {
             if(result.token !== undefined){
-              //console.log(result.token);
               this.setState({
                 loggedIn: true,
                 token: result.token
@@ -104,10 +105,12 @@ class Login extends Component {
           }
         );
     }
-
-    
   }
 
+  /**
+   * Handle input changes when user is inputing to form
+   * @param {event} event 
+   */
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -116,8 +119,10 @@ class Login extends Component {
     var tempUserInfo = this.state.tempUserInfo;
     var errors = this.state.errors;
 
+    //Grab html values
     tempUserInfo[[name]] = value;
 
+    /** Validate fields */
     if(name === "email"){
       this.validateEmail(value, errors);
     }
@@ -131,6 +136,7 @@ class Login extends Component {
     });
   }
 
+  /** Validate emails */
   validateEmail(email, errors){
     var errorCount = 0;
 
@@ -153,8 +159,8 @@ class Login extends Component {
     });
   }
 
+  /** Validate password field */
   validatePassword(password, errors){
-    //console.log("Validating password");
     var errorCount = 0;
 
     //empty input box
@@ -179,7 +185,6 @@ class Login extends Component {
   }
 
   render() {
-
     return (
       <div className="login-form">
         <Container className="login-container">

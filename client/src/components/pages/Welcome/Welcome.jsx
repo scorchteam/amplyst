@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
 import {
@@ -11,43 +11,29 @@ import {
   } from "./components";
 import "./Welcome.scss";
 
-class Welcome extends Component {
+/** Renders welcome component */
 
-  constructor(props) {
-      super(props);
-      this.state = {
-        dataRecieved: false,
-      }
-
-      this.isMountedVal = 0;
-  }
-
-  renderUserInfo(userInfo) {
-    return (<div><pre>{JSON.stringify(userInfo, null, 2)}</pre></div>);
-  }
-
-  render() {
-    return (
-      <>
-        <Container className="welcome-container" fluid="md">
-          <div className="column column-1">
-            <div className="column-1_section-1">
-              <ProfileSummary userInfo={this.props.userInfo} />
-              <RecentList />
-            </div>
-            <div className="column-1_section-2">
-              <RecentActivity />
-            </div>
+const Welcome = (props) => {
+  return (
+    <>
+      <Container className="welcome-container" fluid="md">
+        <div className="column column-1">
+          <div className="column-1_section-1">
+            <ProfileSummary userInfo={props.userInfo} />
+            <RecentList />
           </div>
-          <div className="column column-2">
-            <MessageInbox />
-            <RecentLists userListData={this.props.userListData} />
-            <UpcomingEvents />
+          <div className="column-1_section-2">
+            <RecentActivity />
           </div>
-        </Container>
-      </>
-    );
-  }
+        </div>
+        <div className="column column-2">
+          <MessageInbox />
+          <RecentLists userListData={props.userListData} />
+          <UpcomingEvents />
+        </div>
+      </Container>
+    </>
+  );
 }
 
 export default withRouter(Welcome);

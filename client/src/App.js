@@ -10,14 +10,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 // export const flask_url = "https://giftlists-api.herokuapp.com";
-// export const flask_url = "http://172.26.99.3:5000";
 export const flask_url = "http://localhost:5000";
 
+/** Renders the main view of the app */
 class App extends Component {
 
   constructor(props){
     super(props);
 
+    //Grab token from local storage
     const token = localStorage.getItem('token');
 
     this.state = {
@@ -25,6 +26,7 @@ class App extends Component {
       token: token,
     }
 
+    //Check if user has auth token defined
     if (token !== null) {
       this.validateUserToken(token);
       this.grabUserListData(token);
@@ -38,6 +40,10 @@ class App extends Component {
     this.isMountedVal = 1;
   }
 
+  /**
+   * Validates user token with a GET request
+   * @param {string} token 
+   */
   validateUserToken(token) {
     const requestOptions = {
       method: 'GET',
@@ -45,7 +51,7 @@ class App extends Component {
                 'Authorization': 'Bearer ' + token,
                 'Origin': flask_url },
     };
-
+    //Request userInfo
     fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions)
     .then(response => response.json())
     .then(data => {
@@ -64,6 +70,10 @@ class App extends Component {
     })
   }
 
+  /**
+   * Grabs user list data using auth token
+   * @param {string} token 
+   */
   grabUserListData(token) {
     const requestOptions = {
       method: 'GET',
@@ -71,7 +81,7 @@ class App extends Component {
                 'Authorization': 'Bearer ' + token,
                 'Origin': flask_url },
     };
-
+    //fetch with GET request
     fetch(flask_url + "/api/user/lists", requestOptions)
     .then(response => response.json())
     .then(data => {
@@ -90,6 +100,7 @@ class App extends Component {
     this.isMountedVal = 0;
   }
 
+  /** Function to log out user */
   logout() {
     this.setState({
       loggedIn: false,
@@ -98,6 +109,7 @@ class App extends Component {
     localStorage.removeItem('token');
   }
 
+  /** Sets logged in status for user */
   setLoggedIn = (token) => {
     this.setState({
       loggedIn: true,
@@ -145,7 +157,6 @@ class App extends Component {
       </Router>
     );
   }
-
 }
 
 export default App;
