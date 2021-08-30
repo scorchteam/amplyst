@@ -1,5 +1,7 @@
 @import '../../general/Colors';
 
+/** Login form styles */
+
 .login-form {
     height: 100%;
     width: 100%;
@@ -61,26 +63,6 @@ form {
 
     p {
         margin: 0;
-    }
-
-    a {
-        transition: all 100ms ease-in-out;
-    }
-    
-    a:link {
-        color: var(--text-accent-color-bright);
-        text-decoration: none;
-    }
-    a:visited {
-        color: var(--text-accent-color);
-    }
-    a:hover {
-        color: var(--text-accent-color-super-bright);
-        text-decoration: underline;
-    }
-    a:active {
-        color: var(--text-accent-color-super-bright);
-        text-decoration: underline;
     }
 }
 

@@ -1,23 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
 import "./Profile.scss";
 
-class Profile extends Component {
+const Profile = (props) => {
+  return (
+    <Container>
 
-  constructor(props) {
-      super(props);
-
-      console.log(this.props);
+    </Container>
+  );
   }
-
-  render() {
-    return (
-      <Container>
-        
-      </Container>
-    );
-  }
-}
 
 export default withRouter(Profile);

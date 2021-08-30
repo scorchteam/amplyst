@@ -6,3 +6,5 @@ export { default as UnProtectedRoute } from "./ProtectedRoute/UnProtectedRoute";
 
 export {default as CustomButton } from "./CustomButton/CustomButton";
 export {default as CustomButtonLink } from "./CustomButtonLink/CustomButtonLink";
+
+export {default as CustomHyperlink } from "./CustomHyperlink/CustomHyperlink";

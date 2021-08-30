@@ -1,23 +1,11 @@
-import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-import { withRouter } from "react-router";
-import "./Calendar.scss";
+import React from "react";
 
-class Calendar extends Component {
-
-  constructor(props) {
-      super(props);
-
-      console.log(this.props);
-  }
-
-  render() {
-    return (
-      <Container>
-        
-      </Container>
-    );
-  }
+function Calendar() {
+  return (
+    <div className="calendar">
+      Calendar
+    </div>
+  );
 }
 
-export default withRouter(Calendar);
+export default Calendar;

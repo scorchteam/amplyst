@@ -1,6 +1,11 @@
 import React from "react";
-import { Card, Button, Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
+import { CustomButtonLink } from "../../../general";
 
+/**
+ * Renders the first section of the home page
+ * @returns Rendered top section of the home page
+ */
 function FirstSection() {
   return (
     <section className="home-first-section">
@@ -8,7 +13,7 @@ function FirstSection() {
         <h1 className="brand-font">Amplyst.com</h1>
         <h4>Picking personal gifts is hard, lets simplify that.</h4>
         <div className="create-account-button-container">
-            <Button className="custom-button btn-lg">Create Your First List Now</Button>
+            <CustomButtonLink size="lg" buttonText="Create Your First List Now" buttonAddress="/login" />
         </div>
         <div className="card-container">
           <Card>
@@ -16,8 +21,8 @@ function FirstSection() {
               <Card.Title>Learn More About Us</Card.Title>
               <Card.Text>
                 With supporting text below as a natural lead-in to additional content.
-            </Card.Text>
-              <Button className="custom-button">Learn More...</Button>
+              </Card.Text>
+              <CustomButtonLink buttonText="Learn More..." buttonAddress="/about" />
             </Card.Body>
           </Card>
           <Card>
@@ -25,8 +30,8 @@ function FirstSection() {
               <Card.Title>Ask Us Anything</Card.Title>
               <Card.Text>
                 With supporting text below as a natural lead-in to additional content.
-            </Card.Text>
-              <Button className="custom-button">Contact Us...</Button>
+              </Card.Text>
+              <CustomButtonLink buttonText="Contact Us..." buttonAddress="/contact" />
             </Card.Body>
           </Card>
           <Card>
@@ -34,8 +39,8 @@ function FirstSection() {
               <Card.Title>Explore Curated Lists</Card.Title>
               <Card.Text>
                 With supporting text below as a natural lead-in to additional content.
-            </Card.Text>
-              <Button className="custom-button">See Sample Lists...</Button>
+              </Card.Text>
+              <CustomButtonLink buttonText="See Sample Lists..." buttonAddress="/examples" />
             </Card.Body>
           </Card>
         </div>

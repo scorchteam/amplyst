@@ -7,6 +7,7 @@ import './Register.scss';
 
 import { flask_url } from "../../../App";
 
+/** Register component that renders register view */
 class Register extends Component {
 
   constructor(props) {
@@ -42,14 +43,12 @@ class Register extends Component {
     this.handInputChange = this.handleInputChange.bind(this);
   }
 
-  componentDidUpdate(){
-    //console.log(this.state.errors);
-  }
-
+  /**
+   * Handles submission of register form
+   * @param {event} event 
+   */
   handleSubmit(event) {
     event.preventDefault();
-    //console.log(this.state.userInfo);
-    console.log(this.state.errors);
     var finalUserInfo = {};
 
     //check if form submitted blank
@@ -68,18 +67,16 @@ class Register extends Component {
     var tempErrors = this.state.errors;
     delete tempErrors.address;
 
+    //Check if form has no errors and form was started
     if(Object.keys(tempErrors).length === 0 && this.state.formStarted){
 
       var tempUserInfo = this.state.tempUserInfo;
-
-      console.log(tempUserInfo);
-
       var finalInfoErrors = {};
-
       var errors = this.state.errors;
 
+      /** Loop through form data and validate fields */
       for(var key in tempUserInfo){
-
+        //validate first name
         if(key === "first_name"){
           if(tempUserInfo[key] !== null){
             finalUserInfo[key] = tempUserInfo[key];
@@ -91,13 +88,13 @@ class Register extends Component {
             });
           }
         }
-
+        //validate last name
         if(key === "last_name"){
           if(tempUserInfo[key] !== null){
             finalUserInfo[key] = tempUserInfo[key];
           }
         }
-
+        //validate email
         if(key === "email"){
           if(tempUserInfo[key] !== null){
             finalUserInfo[key] = tempUserInfo[key];
@@ -109,7 +106,7 @@ class Register extends Component {
             });
           }
         }
-
+        //validate password
         if(key === "password"){
           if(tempUserInfo[key] !== null){
             if(tempUserInfo[key] === tempUserInfo["passwordConfirm"]){
@@ -133,6 +130,7 @@ class Register extends Component {
         var address = this.state.address;
         var addressComplete = false;
 
+        //validate address
         if(this.state.addressProvided) {
           if(key === "address1"){
             if(tempUserInfo[key] !== null && tempUserInfo[key] !== ""){
@@ -204,8 +202,6 @@ class Register extends Component {
 
         var updatedAddress = this.state.address;
 
-        console.log(updatedAddress);
-
         if(updatedAddress.hasOwnProperty("address1") && updatedAddress.hasOwnProperty("city") && updatedAddress.hasOwnProperty("state") && updatedAddress.hasOwnProperty("zipcode")){
           addressComplete = true;
         }
@@ -219,18 +215,7 @@ class Register extends Component {
         if(addressComplete){
           finalUserInfo["address"] = address;
         }
-
-        // if(Object.keys(updatedAddress).length !== 0 && !addressComplete){
-        //   errors["address"] = "Address is not complete";
-        // } else {
-        //   delete errors.address;
-        //   if(Object.keys(updatedAddress).length > 0){
-        //     finalUserInfo["address"] = address;
-        //   }
-        // }
       }
-
-      console.log(this.state.errors);
 
       //check that all required properties exist and no errors
       if(finalUserInfo.hasOwnProperty("first_name") && finalUserInfo.hasOwnProperty("email") && finalUserInfo.hasOwnProperty("password") && Object.keys(errors).length === 0){
@@ -239,7 +224,7 @@ class Register extends Component {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(finalUserInfo)
         };
-
+        //submit request
         fetch(flask_url + "/api/user/auth/register", requestOptions)
           .then(res => res.json())
           .then(data => {
@@ -248,13 +233,15 @@ class Register extends Component {
             });
           });
       }
-
-      console.log(finalUserInfo);
     }
 
     
   }
 
+  /**
+   * Handles input change on the registration form
+   * @param {event} event 
+   */
   handleInputChange(event) {
     //Grab input vars
     const target = event.target;
@@ -273,6 +260,7 @@ class Register extends Component {
     //update group in tempUserInfo
     tempUserInfo[[name]] = value;
 
+    /** Validate user info fields */
     if (name === "first_name") {
       this.validateFirstName(value, errors);
     }
@@ -306,13 +294,12 @@ class Register extends Component {
       }
     }
 
+    //Check if is an address field
     if (name === "address1" || name === "address2" || name === "city" || name === "state" || name === "zipcode") {
 
       this.setState({
         addressProvided: true
       });
-
-      // var errors = this.state.errors;
 
       if (name === "address1") {
         var errorCountAddress = 0;
@@ -379,17 +366,13 @@ class Register extends Component {
           }
         }
 
-        // if(!Number.isInteger(value)){
-        //   errors["zipcode"] = "Not a valid zipcode";
-        //   errorCount++;
-        // }
-
         //reset errors if none found
         if (errorCountZipcode <= 0) {
           delete errors.zipcode;
         }
       }
 
+      //Check if address provided and delete fields if not
       if(!this.checkForAddressFields()){
         this.setState({
           addressProvided: false
@@ -541,6 +524,10 @@ class Register extends Component {
     return name.match(nameRegExp);
   }
 
+  /**
+   * Checks if address fields were filled out
+   * @returns boolean
+   */
   checkForAddressFields() {
     var tempUserInfo = this.state.tempUserInfo;
 
@@ -561,11 +548,8 @@ class Register extends Component {
         return true;
       }
     }
-
     return false;
   }
-
-
 
   render() {
     return (

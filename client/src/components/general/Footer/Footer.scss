@@ -1,5 +1,7 @@
 @import '../Colors';
 
+/** Custom footer styles */
+
 /* footer background styles */
 .bg-footer {
     width: 100%;
@@ -30,26 +32,6 @@ footer {
 
             li {
                 padding: 0 0.5rem;
-
-                a {
-                    transition: all 100ms ease-in-out;
-                }
-                
-                a:link {
-                    color: var(--text-accent-color-super-bright);
-                    text-decoration: none;
-                }
-                a:visited {
-                    color: var(--text-accent-color-bright);
-                }
-                a:hover {
-                    color: var(--text-accent-color-super-bright);
-                    text-decoration: underline;
-                }
-                a:active {
-                    color: var(--text-accent-color-super-bright);
-                    text-decoration: underline;
-                }
             }
         }
     }
