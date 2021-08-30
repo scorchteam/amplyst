@@ -1,6 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
+/**
+ * Renders the second section of the homepage
+ * @returns render of the second section of the homepage
+ */
 function SecondSection() {
   return (
       <section className="home-second-section">

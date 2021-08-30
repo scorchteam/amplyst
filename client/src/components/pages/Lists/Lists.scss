@@ -1,3 +1,4 @@
+/** Styles for ListSidePanel component */
 .lists-container {
     display: grid;
     gap: 2rem;
@@ -43,10 +44,12 @@
     }
 }
 
+/** Remove padding from modal */
 .modal-form {
     padding: 0!important;
 }
 
+/** Styles for sub-containers with rounded corners */
 .list-sub-container-style {
     color: white;
     padding: 1rem;
@@ -77,27 +80,6 @@
             color: var(--header-text-color);
             cursor: pointer;
             transition: ease-in-out 0.2s;
-        }
-        
-
-        a {
-            transition: all 100ms ease-in-out;
-        }
-        
-        a:link {
-            color: var(--text-accent-color-super-bright);
-            text-decoration: none;
-        }
-        a:visited {
-            color: var(--text-accent-color-bright);
-        }
-        a:hover {
-            color: var(--text-accent-color-super-bright);
-            text-decoration: underline;
-        }
-        a:active {
-            color: var(--text-accent-color-super-bright);
-            text-decoration: underline;
         }
     }
 }

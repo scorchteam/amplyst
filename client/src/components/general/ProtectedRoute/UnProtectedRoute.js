@@ -1,14 +1,28 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-class UnProtectedRoute extends Component {
-
-    render() {
-        return (
-            this.props.loggedIn ?
-            <Redirect to={{ pathname: "/welcome", state: {from: this.props.location} }} /> : <Route path={this.props.path} component={() => <this.props.component setLoggedIn={this.props.setLoggedIn} logout={this.props.logout} />} exact={this.props.exact}/>
-        );
-    }
+/**
+ * Redirects users away from pages they shouldn't see 
+ * when logged in
+ * @param {object} props 
+ * 
+ * Props:
+ * loggedIn:        Whether the user is logged in or not
+ * logout:          Callback function for logging out user
+ * userInfo:        UserInfo object
+ * userListData:    User lists that were first pulled
+ * token:           User authentication token
+ * exact:           Exact boolean for matching exact name
+ * location:        Address that we redirected from
+ * 
+ * @returns render of render of auth component
+ */
+function UnProtectedRoute(props) {
+    return (
+        props.loggedIn ?
+        <Redirect to={{ pathname: "/welcome", state: {from: props.location}}} /> :
+        <Route path={props.path} component={() => <props.component logout={props.logout} setLoggedIn={props.setLoggedIn} userInfo={props.userInfo} userListData={props.userListData} grabUserListData={props.grabUserListData} token={props.token} />} exact={props.exact}/>
+    );
 }
 
 export default UnProtectedRoute;
