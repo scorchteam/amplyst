@@ -28,6 +28,8 @@ const NewListModal = (props) => {
         props.handleModalShow(false);
         grabListData(flask_url).then((listData) => {
           props.updateListData(listData);
+        }).then(() => {
+          updateFormData({});
         })
       })
     }

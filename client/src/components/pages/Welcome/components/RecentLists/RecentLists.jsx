@@ -7,9 +7,11 @@ const RecentLists = (props) => {
   const [userListData] = useState(props.userListData);
 
   const countLists = (userListData) => {
-    return userListData.map((item, index) => (
-      <Link key={index} to={"/lists?list=" + item._id.$oid}><li>{item.list_name}</li></Link>
-    ))
+    if(userListData !== undefined) {
+      return userListData.map((item, index) => (
+        <Link key={index} to={"/lists?list=" + item._id.$oid}><li>{item.list_name}</li></Link>
+      ))
+    }
   }
 
   return (

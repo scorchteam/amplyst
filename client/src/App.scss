@@ -47,7 +47,11 @@ div::-webkit-scrollbar-track {
 }
 div::-webkit-scrollbar-thumb {
     background-color: var(--text-accent-color-bright);
-    border-radius: 1rem;
+    border-bottom-left-radius: 0rem;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    // border-radius: 1rem;
 }
 
 

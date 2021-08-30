@@ -13,7 +13,6 @@ import { CustomHyperlink } from "../../general";
  * @returns render of the /lists page
  */
 const Lists = (props) => {
-
   /**
    * Returns an array of objects that define the name and id of all
    * lists in listsObj
@@ -111,7 +110,7 @@ const Lists = (props) => {
           width >= 992 &&
           <>
             <div className="lists-container-col-1">
-              <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow}/>
+              <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow} updateListData={updateListData}/>
             </div>
             <div className="lists-container-col-2">
               <ListView listData={getListById(activeList)}/>

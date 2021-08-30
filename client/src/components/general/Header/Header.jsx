@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import { Navbar, Container, Nav} from "react-bootstrap";
 import { CustomButtonLink } from "../";
 import "./Header.scss";
-import companyLogoPurple from "../../../img/Amplyst-svg-header-purple.svg";
 
 /**
  * Creates the main Header component for Amplyst
