@@ -3,7 +3,6 @@ import { Container, Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { ListsSidePanel, ListView, NewListModal } from "./components";
 import queryString from 'query-string';
-import { Link } from "react-router-dom";
 import "./Lists.scss";
 import ListsListDropdown from "./components/ListHelpers/ListSelect";
 import { CustomHyperlink } from "../../general";

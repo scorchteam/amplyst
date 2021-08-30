@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { Button, Form, Modal } from "react-bootstrap";
 import { createNewList, validateListType, validateListName, validateListFormData, grabListData } from "./CreateNewList";

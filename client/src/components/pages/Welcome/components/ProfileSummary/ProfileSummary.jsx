@@ -1,9 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router";
 import "./ProfileSummary.scss";
 
 const ProfileSummary = (props) => {
-  const [userInfo, updateUserInfo] = useState(props.userInfo);
+  const [userInfo] = useState(props.userInfo);
 
   return (
     <div className="welcome-page-sub-container text-breaking">
