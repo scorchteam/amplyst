@@ -185,8 +185,11 @@ class Header extends Component {
             <>
                 <Navbar className="bg-header" variant="dark" expand="lg">
                     <Container fluid="md">
-                        <Link className="navbar-brand" to="/">
-                            <img className="brand-logo" alt="list-icon" src={companyLogoPurple}></img>
+                        <Link id="navbar-brand" className="navbar-brand" to="/">
+                            <div>
+                                <p className="header-logo">Amplyst</p>
+                            </div>
+                            {/* <img className="brand-logo" alt="list-icon" src={companyLogoPurple}></img> */}
                         </Link>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse className="justify-content-end">
