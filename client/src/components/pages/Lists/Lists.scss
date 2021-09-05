@@ -108,7 +108,6 @@
 }
 
 /** list-view styles */
-
 .list-view-container {
     .list-view-meta {
         display: flex;
@@ -139,6 +138,10 @@
                     font-size: 1.25rem;
                     color: var(--text-accent-color-bright);
                 }
+                i:hover {
+                    color: var(--text-accent-color);
+                    cursor: pointer;
+                }
             }
         }
 
@@ -165,6 +168,10 @@
             gap: 1rem;
             list-style-type: none;
 
+            h4 {
+                text-align: center;
+            }
+
             li {
                 background-color: var(--header-color-dark);
                 padding: 1rem;
@@ -189,6 +196,21 @@
                     justify-content: space-between;
                 }
             }
+        }
+
+        #list-view-first-element {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            gap: 0.5rem;
+            background-color: var(--text-accent-color);
+        }
+
+        #list-view-first-element:hover {
+            background-color: var(--text-accent-color-darkish);
+            transition: ease-in-out 0.25s;
+            cursor: pointer;
         }
     }
 }
