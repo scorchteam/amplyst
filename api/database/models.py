@@ -12,6 +12,8 @@ class ListType(db.EmbeddedDocument):
     meta = {'allow_inheritance': True}
     item_name=db.StringField()
     item_description=db.StringField()
+    item_price=db.DecimalField(min_value=0.00, max_value=100000.00, precision=2)
+    item_link=db.StringField()
 
 class List(db.Document):
     meta = {'collection': 'lists'}
@@ -38,17 +40,16 @@ class User(db.Document):
         return check_password_hash(self.password, password)
 
 class GiftList(ListType):
-    item_link=db.StringField()
-    item_isBought=db.BooleanField(default=False)
-    item_boughtBy=db.StringField(default="anonymous")
+    item_is_bought=db.BooleanField(default=False)
+    item_bought_by=db.StringField(default="anonymous")
     # We should decide on how to show the birthday, do we want to have it an extension of the List object, or just allow the user to put it in the description of the List object
 class ToDoList(ListType):
-    item_isChecked=db.BooleanField(default=False)
-    item_isTimeSensitive=db.BooleanField(default=False)
-    item_timeDue=db.DateTimeField()
+    item_is_checked=db.BooleanField(default=False)
+    item_is_time_sensitive=db.BooleanField(default=False)
+    item_time_due=db.DateTimeField()
 
 class ShoppingList(ListType):
-    item_link=db.StringField()
+    item_store=db.StringField()
     # item_image=db.??? - figure out how to add images
 
 User.register_delete_rule(List, 'added_by', db.CASCADE)

@@ -175,23 +175,23 @@ def createGiftListItems(list_items, list_elements):
             GiftList(
                 item_name = element["item_name"],
                 item_description = element["item_description"],
+                item_price = element["item_price"],
                 item_link = element["item_link"],
-                item_isBought = element["item_isBought"],
-                item_boughtBy = element["item_boughtBy"]
+                item_is_bought = element["item_is_bought"],
+                item_bought_by = element["item_bought_by"]
             )  
         )
     return list_items
 
 def createTodoListItems(list_items, list_elements):
     for element in list_elements:
-        dateTimeDueDateTime = datetime.strptime(element["item_timeDue"], "%m/%d/%Y")
+        dateTimeDueDateTime = datetime.strptime(element["item_time_due"], "%m/%d/%Y")
         list_items.append( 
             ToDoList (
                 item_name = element["item_name"],
                 item_description = element["item_description"],
-                item_isChecked = element["item_isChecked"],
-                item_isTimeSensitive = element["item_isTimeSensitive"],
-                item_timeDue = dateTimeDueDateTime
+                item_is_checked = element["item_is_checked"],
+                item_time_due = dateTimeDueDateTime
             )   
         )
     return list_items
@@ -202,6 +202,7 @@ def createShoppingListItems(list_items, list_elements):
             ShoppingList(
                 item_name = element["item_name"],
                 item_description = element["item_description"],
+                item_price = element["item_price"],
                 item_link = element["item_link"]
             )   
         )
