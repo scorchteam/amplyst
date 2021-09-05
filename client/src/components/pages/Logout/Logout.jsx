@@ -6,7 +6,6 @@ class Logout extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   //Logout when component mounts

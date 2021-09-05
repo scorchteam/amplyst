@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import "./Lists.scss";
 import ListsListDropdown from "./components/ListHelpers/ListSelect";
 import { CustomHyperlink } from "../../general";
+import ListArray from "../../../lists/ListArray";
 
 /**
  * Computes and renders the /lists page
@@ -37,8 +38,10 @@ const Lists = (props) => {
 
   /** State objects */
   const urlVal = queryString.parse(props.location.search);
-  const [userListData, updateUserListData] = useState(props.userListData);
-  const [listNameList, updateListNameList] = useState(getListOfLists(props.userListData));
+  const [userListArray, updateUserListArray] = useState(new ListArray(props.userListData));
+  const [userListData] = useState(props.userListData);
+  const [listNameList, updateListNameList] = useState(userListArray.getMinimalListData());
+  // const [listNameList, updateListNameList] = useState(getListOfLists(props.userListData));
   const [urlVals] = useState(urlVal);
   const [renderListFromUrl, updateRenderListFromUrl] = useState(false);
   const [show, updateShow] = useState(false);
@@ -97,23 +100,31 @@ const Lists = (props) => {
    * @param {object} listData 
    */
   const updateListData = (listData) => {
-    updateUserListData([...listData]);
-    updateListNameList([...getListOfLists(listData)]);
+    updateUserListArray(new ListArray(listData));
+    // updateUserListData([...listData]);
+    // updateListNameList([...getListOfLists(listData)]);
   }
+
+  useEffect(() => {
+    updateListNameList(userListArray.getMinimalListData());
+  }, [userListArray])
 
   return (
     <Container fluid="md">
-        <NewListModal handleModalShow={handleModalShow} show={show} updateListData={updateListData}/>
+        <NewListModal handleModalShow={handleModalShow} show={show} updateListData={updateUserListArray}/>
+        {/* <NewListModal handleModalShow={handleModalShow} show={show} updateListData={updateListData}/> */}
         <div className="lists-container">
         {
           //Check for window being wider than 992px to render widescreen view
           width >= 992 &&
           <>
             <div className="lists-container-col-1">
-              <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow} updateListData={updateListData}/>
+              <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow} updateListData={updateUserListArray}/>
+              {/* <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow} updateListData={updateListData}/> */}
             </div>
             <div className="lists-container-col-2">
-              <ListView listData={getListById(activeList)}/>
+              <ListView listData={userListArray.getListById(activeList)}/>
+              {/* <ListView listData={getListById(activeList)}/> */}
             </div>
           </>
         }
@@ -128,7 +139,8 @@ const Lists = (props) => {
                 <CustomHyperlink linkAddress="/lists" hyperlinkText="Go Back" />
                 {/* <Link to={"/lists"}>Go Back</Link> */}
                 <div className="lists-container-col-2">
-                  <ListView listData={getListById(activeList)}/>
+                  <ListView listData={userListArray.getListById(activeList)}/>
+                  {/* <ListView listData={getListById(activeList)}/> */}
                 </div>
               </>
             }
@@ -139,7 +151,8 @@ const Lists = (props) => {
                     Add a new list
                 </Button>
                 <ListsListDropdown lists={listNameList} changeActiveList={changeActiveList} />
-                <ListView listData={getListById(activeList)}/>
+                <ListView listData={userListArray.getListById(activeList)}/>
+                {/* <ListView listData={getListById(activeList)}/> */}
               </>
             }
           </>

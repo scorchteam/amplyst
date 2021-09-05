@@ -1,4 +1,5 @@
 import { flask_url } from "../../../../../App";
+import ListArray from "../../../../../lists/ListArray";
 import { grabListData } from "./CreateNewList";
 
 export const deleteList = async (listId) => {
@@ -18,6 +19,6 @@ export const deleteList = async (listId) => {
 
 export const updateLists = (updateListData) => {
     grabListData(flask_url).then((listData) => {
-        updateListData(listData);
+        updateListData(new ListArray(listData));
     })
 }

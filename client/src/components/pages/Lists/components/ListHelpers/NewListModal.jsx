@@ -4,6 +4,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { createNewList, validateListType, validateListName, validateListFormData, grabListData } from "./CreateNewList";
 
 import { flask_url } from "../../../../../App";
+import ListArray from "../../../../../lists/ListArray";
 
 /**
  * Renders List modal for creating new lists
@@ -27,7 +28,7 @@ const NewListModal = (props) => {
       createNewList(localFormData, localStorage.getItem("token"), flask_url, () => props.addNewListToData).then(() => {
         props.handleModalShow(false);
         grabListData(flask_url).then((listData) => {
-          props.updateListData(listData);
+          props.updateListData(new ListArray(listData));
         }).then(() => {
           updateFormData({});
         })
