@@ -36,6 +36,7 @@ jobs:
     - uses: scorchteam/scorch-ci/flask-build@v1
       if: always()
       with:
+        repository_url: https://github.com/scorchteam/scorch-ci
         token: ${{ secrets.SCORCH_CI }}
         ref: main
     - name: Actions Status Discord
