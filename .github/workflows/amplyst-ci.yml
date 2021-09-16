@@ -34,6 +34,11 @@ jobs:
     - uses: scorch-ci/flask-build@v1.1
       with:
         token: ${{ secrets.scorch_ci }}
+    - name: Actions Status Discord
+      uses: sarisia/actions-status-discord@v1.8.6
+      if: always()
+      with:
+        webhook: ${{secrets.DISCORD_WEBHOOK }}
 
 
   react-build:
