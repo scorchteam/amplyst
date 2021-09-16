@@ -32,6 +32,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: scorch-ci/flask-build@v1.1
+      if: always()
       with:
         token: ${{ secrets.scorch_ci }}
     - name: Actions Status Discord
