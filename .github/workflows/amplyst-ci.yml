@@ -51,12 +51,6 @@ jobs:
       with:
         title: "amplyst-ci - flask-build"
         webhook: ${{secrets.DISCORD_WEBHOOK }}
-    - name: Clean
-      run: |
-        pkill -f "nohup.*-D"
-      working-directory: api
-
-
 
 
   react-build:
