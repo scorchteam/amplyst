@@ -33,7 +33,7 @@ jobs:
     - uses: actions/checkout@v2
       if: always()
       with:
-        repository: scorchteam/scorch-ci/flask-build@v1.1
+        repository: scorchteam/scorch-ci@v1
         token: ${{ secrets.SCORCH_CI }}
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
