@@ -44,7 +44,6 @@ jobs:
       run: |
         nohup python3 app.py &
         sleep 5
-        pkill -f "nohup.*-D"
       working-directory: api
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
@@ -52,6 +51,12 @@ jobs:
       with:
         title: "amplyst-ci - flask-build"
         webhook: ${{secrets.DISCORD_WEBHOOK }}
+    - name: Clean
+      run: |
+        pkill -f "nohup.*-D"
+      working-directory: api
+
+
 
 
   react-build:
