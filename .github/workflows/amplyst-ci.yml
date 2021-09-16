@@ -31,9 +31,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: scorchteam/scorch-ci/flask-build@v1.1
       if: always()
       with:
+        repository: scorchteam/scorch-ci/flask-build@v1.1
         token: ${{ secrets.SCORCH_CI }}
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
@@ -59,6 +59,7 @@ jobs:
       working-directory: client
     - name: Lint with eslint
       run: |
+        ls -a
         ./node_modules/.bin/eslint .
     - name: Run React
       run: npm start
