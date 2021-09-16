@@ -31,12 +31,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: scorchteam/scorch-ci
-      if: always()
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
       with:
-        repository: scorchteam/scorch-ci
-        token: ${{ github.token }}
-        ref: main
+        python-version: 3.9
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      working-directory: api
+    - name: Run Flask
+      run: |
+        nohup python3 app.py &
+        sleep 5
+      working-directory: api
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
