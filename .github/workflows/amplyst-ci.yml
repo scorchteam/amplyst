@@ -60,7 +60,7 @@ jobs:
     - name: Lint with eslint
       run: |
         ls -a
-        ./node_modules/.bin/eslint .
+        ./client/node_modules/.bin/eslint .
     - name: Run React
       run: npm start
 
