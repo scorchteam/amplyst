@@ -34,7 +34,7 @@ jobs:
     - uses: scorchteam/scorch-ci@v1
       if: always()
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.SCORCH_CI }}
         ref: main
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
