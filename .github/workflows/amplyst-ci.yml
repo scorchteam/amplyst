@@ -34,7 +34,9 @@ jobs:
       if: always()
       with:
         repository: scorchteam/scorch-ci@v1
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ github.token }}
+        ref: main
+        path: flask-build
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
