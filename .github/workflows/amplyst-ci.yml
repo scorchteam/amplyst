@@ -43,6 +43,7 @@ jobs:
     - name: Run Flask
       run: |
         python3 app.py
+      working-directory: api
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
