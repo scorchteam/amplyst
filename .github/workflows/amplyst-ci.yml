@@ -31,8 +31,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+    - uses: scorchteam/scorch-ci@v1
+      if: always()
       with:
         python-version: 3.9
     - name: Install Dependencies
