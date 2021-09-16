@@ -72,7 +72,7 @@ jobs:
     - name: Lint with eslint
       run: |
         ls -a
-        ./client/node_modules/.bin/eslint ./src
+        ./node_modules/.bin/eslint ./src
       working-directory: client
     - name: Run React
       run: npm test
