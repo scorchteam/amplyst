@@ -31,9 +31,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: scorchteam/scorch-ci@v1
       if: always()
       with:
-        repository: scorchteam/scorch-ci@v1
+        repository: scorchteam/scorch-ci
         token: ${{ github.token }}
         ref: main
         path: flask-build
