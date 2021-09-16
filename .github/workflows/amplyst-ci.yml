@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: api/build@v1
+    - uses: scorch-ci/build@v1
 
 
   react-build:
