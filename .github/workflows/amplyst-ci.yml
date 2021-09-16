@@ -42,7 +42,9 @@ jobs:
       working-directory: api
     - name: Run Flask
       run: |
-        python3 app.py
+        nohup python3 app.py &
+        sleep 5
+        kill 'pgrep -f "nohup"'
       working-directory: api
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
