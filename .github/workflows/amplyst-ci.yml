@@ -31,10 +31,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: scorch-ci/flask-build@v1.1
+    - uses: scorchteam/scorch-ci/flask-build@v1.1
       if: always()
       with:
-        token: ${{ secrets.scorch_ci }}
+        token: ${{ secrets.SCORCH_CI }}
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
@@ -59,7 +59,7 @@ jobs:
       working-directory: client
     - name: Lint with eslint
       run: |
-        eslint .
+        ./node_modules/.bin/eslint .
     - name: Run React
       run: npm start
 
