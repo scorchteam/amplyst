@@ -34,7 +34,6 @@ jobs:
     - uses: scorchteam/scorch-ci@v1
       if: always()
       with:
-        repository: scorchteam/scorch-ci@v1
         token: ${{ secret.SCORCH_CI }}
         ref: main
     - name: Actions Status Discord
