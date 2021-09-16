@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: scorchteam/scorch-ci@v1
+    - uses: scorchteam/scorch-ci/flask-build@v1
       if: always()
       with:
         token: ${{ secrets.SCORCH_CI }}
