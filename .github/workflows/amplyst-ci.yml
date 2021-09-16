@@ -50,12 +50,6 @@ jobs:
       if: always()
       with:
         webhook: ${{secrets.DISCORD_WEBHOOK }}
-    - name: Clean
-      run: |
-        pkill -f "nohup.*-D"
-      working-directory: api
-
-
 
 
   react-build:
