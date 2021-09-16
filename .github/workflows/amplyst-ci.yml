@@ -64,7 +64,8 @@ jobs:
         python-version: ${{ matrix.node-version }}
     - name: Install Dependencies
       run: |
-        npm install
+        npm ci
+        npm run build --if-present
         npm install eslint --save-dev
       working-directory: client
     - name: Lint with eslint
@@ -72,5 +73,5 @@ jobs:
         ls -a
         ./client/node_modules/.bin/eslint .
     - name: Run React
-      run: npm start
+      run: npm test
 
