@@ -32,6 +32,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: scorch-ci/flask-build@v1
+      with:
+        token: ${{ secrets.scorch_ci }}
 
 
   react-build:
