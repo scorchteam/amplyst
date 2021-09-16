@@ -31,13 +31,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: scorchteam/scorch-ci@v1
+    - uses: scorchteam/scorch-ci
       if: always()
       with:
         repository: scorchteam/scorch-ci
         token: ${{ github.token }}
         ref: main
-        path: flask-build
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
