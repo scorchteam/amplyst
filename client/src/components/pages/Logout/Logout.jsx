@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 
+/** Logout component for removing user validation */
 class Logout extends Component {
 
   constructor(props) {
@@ -8,6 +9,7 @@ class Logout extends Component {
     console.log(props);
   }
 
+  //Logout when component mounts
   componentDidMount() {
     this.props.logout();
     this.props.history.push('/login');

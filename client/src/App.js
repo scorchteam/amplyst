@@ -4,20 +4,21 @@ import { Header, Footer, ProtectedRoute, UnProtectedRoute } from "./components/g
 import {
   Home, About, Contact, Examples, Login, Logout, Register,
   PrivacyPolicy, TermsAndConditions, FourZeroFour, Welcome, Lists,
-  Profile, Friends, Calendar, Settings
+  Profile, Friends, Calendar, Settings/*, Life*/
 } from "./components/pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 // export const flask_url = "https://giftlists-api.herokuapp.com";
-// export const flask_url = "http://172.26.99.3:5000";
 export const flask_url = "http://localhost:5000";
 
+/** Renders the main view of the app */
 class App extends Component {
 
   constructor(props){
     super(props);
 
+    //Grab token from local storage
     const token = localStorage.getItem('token');
 
     this.state = {
@@ -25,18 +26,24 @@ class App extends Component {
       token: token,
     }
 
+    //Check if user has auth token defined
     if (token !== null) {
       this.validateUserToken(token);
       this.grabUserListData(token);
     }
 
     this.logout = this.logout.bind(this);
+    this.grabUserListData = this.grabUserListData.bind(this);
   }
 
   componentDidMount() {
     this.isMountedVal = 1;
   }
 
+  /**
+   * Validates user token with a GET request
+   * @param {string} token 
+   */
   validateUserToken(token) {
     const requestOptions = {
       method: 'GET',
@@ -44,7 +51,7 @@ class App extends Component {
                 'Authorization': 'Bearer ' + token,
                 'Origin': flask_url },
     };
-
+    //Request userInfo
     fetch(flask_url + "/api/user/retrieveUserInfo", requestOptions)
     .then(response => response.json())
     .then(data => {
@@ -63,6 +70,10 @@ class App extends Component {
     })
   }
 
+  /**
+   * Grabs user list data using auth token
+   * @param {string} token 
+   */
   grabUserListData(token) {
     const requestOptions = {
       method: 'GET',
@@ -70,7 +81,7 @@ class App extends Component {
                 'Authorization': 'Bearer ' + token,
                 'Origin': flask_url },
     };
-
+    //fetch with GET request
     fetch(flask_url + "/api/user/lists", requestOptions)
     .then(response => response.json())
     .then(data => {
@@ -89,6 +100,7 @@ class App extends Component {
     this.isMountedVal = 0;
   }
 
+  /** Function to log out user */
   logout() {
     this.setState({
       loggedIn: false,
@@ -97,6 +109,7 @@ class App extends Component {
     localStorage.removeItem('token');
   }
 
+  /** Sets logged in status for user */
   setLoggedIn = (token) => {
     this.setState({
       loggedIn: true,
@@ -110,7 +123,10 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Header loggedIn={this.state.loggedIn} />
+        {
+          window.location.pathname !== "/life" &&
+          <Header loggedIn={this.state.loggedIn} />
+        }
         <div className="content">
           <Switch>
             <Route path="/" exact component={() => <Home />} />
@@ -121,7 +137,7 @@ class App extends Component {
             <UnProtectedRoute path="/login" loggedIn={this.state.loggedIn} setLoggedIn={this.setLoggedIn} exact={true} component={Login} />
             <UnProtectedRoute path="/register" loggedIn={this.state.loggedIn} exact={true} component={Register} />
             <ProtectedRoute path="/welcome" loggedIn={this.state.loggedIn} token={this.state.token} logout={this.logout} userInfo={this.state.userInfo} userListData={this.state.userListData} exact={true} component={Welcome}/>
-            <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} userListData={this.state.userListData} exact={true} component={Lists}/>
+            <ProtectedRoute path="/lists" loggedIn={this.state.loggedIn} userListData={this.state.userListData} grabUserListData={this.grabUserListData} exact={true} component={Lists}/>
             <ProtectedRoute path="/profile" loggedIn={this.state.loggedIn} exact={true} component={Profile}/>
             <ProtectedRoute path="/friends" loggedIn={this.state.loggedIn} exact={true} component={Friends}/>
             <ProtectedRoute path="/calendar" loggedIn={this.state.loggedIn} exact={true} component={Calendar}/>
@@ -129,14 +145,18 @@ class App extends Component {
             <Route path="/privacy-policy" exact component={() => <PrivacyPolicy />} />
             <Route path="/terms-and-conditions" exact component={() => <TermsAndConditions />} />
 
+            {/* <Route path="/life" exact component={() => <Life />} /> */}
+
             <Route exact component={() => <FourZeroFour />} />
           </Switch>
         </div>
-        <Footer />
+        {
+          window.location.pathname !== "/life" &&
+          <Footer />
+        }
       </Router>
     );
   }
-
 }
 
 export default App;

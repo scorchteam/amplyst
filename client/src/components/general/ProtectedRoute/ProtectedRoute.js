@@ -1,15 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-class ProtectedRoute extends Component {
-
-    render() {
-        return (
-            this.props.loggedIn ?
-            <Route path={this.props.path} component={() => <this.props.component logout={this.props.logout} userInfo={this.props.userInfo} userListData={this.props.userListData} token={this.props.token} />} exact={this.props.exact}/> :
-            <Redirect to={{ pathname: "/login", state: {from: this.props.location} }} />
-        );
-    }
+/**
+ * Authenticates route based off of user login status
+ * @param {object} props 
+ * 
+ * Props:
+ * loggedIn:        Whether the user is logged in or not
+ * logout:          Callback function for logging out user
+ * userInfo:        UserInfo object
+ * userListData:    User lists that were first pulled
+ * token:           User authentication token
+ * exact:           Exact boolean for matching exact name
+ * location:        Address that we redirected from
+ * 
+ * @returns render of user component
+ */
+function ProtectedRoute(props) {
+    return (
+        props.loggedIn ?
+        <Route path={props.path} component={() => <props.component logout={props.logout} userInfo={props.userInfo} userListData={props.userListData} grabUserListData={props.grabUserListData} token={props.token} />} exact={props.exact}/> :
+        <Redirect to={{ pathname: "/login", state: {from: props.location}}} />
+    );
 }
 
 export default ProtectedRoute;
