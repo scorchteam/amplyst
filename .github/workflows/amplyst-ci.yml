@@ -49,6 +49,7 @@ jobs:
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
       with:
+        title: "amplyst-ci - flask-build"
         webhook: ${{secrets.DISCORD_WEBHOOK }}
 
 
@@ -71,7 +72,14 @@ jobs:
     - name: Lint with eslint
       run: |
         ls -a
-        ./client/node_modules/.bin/eslint .
+        ./client/node_modules/.bin/eslint ./src
+      working-directory: client
     - name: Run React
       run: npm test
+    - name: Actions Status Discord
+      uses: sarisia/actions-status-discord@v1.8.6
+      if: always()
+      with:
+        title: "amplyst-ci - react-build"
+        webhook: ${{secrets.DISCORD_WEBHOOK }}
 
