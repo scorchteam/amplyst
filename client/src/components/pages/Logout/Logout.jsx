@@ -4,10 +4,6 @@ import { withRouter } from "react-router";
 /** Logout component for removing user validation */
 class Logout extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   //Logout when component mounts
   componentDidMount() {
     this.props.logout();

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { withRouter } from "react-router";
-import GenericList from "../../../../../lists/GenericList";
 import GiftList from "../../../../../lists/GiftList";
+import TodoListItem from "../../../../../lists/ListItems/TodoListItem";
 import ShoppingList from "../../../../../lists/ShoppingList";
 import TodoList from "../../../../../lists/TodoList";
-import ListEditViewModal from "./ListEditViewModal";
 import GiftListView from "./ListSpecificViews/GiftListView";
 import ShoppingListView from "./ListSpecificViews/ShoppingListView";
+import TodoListEditView from "./ListSpecificViews/TodoListEditView";
 import TodoListView from "./ListSpecificViews/TodoListView";
+import ListViewEditTop from "./ListViewEditTop";
+import ListViewTop from "./ListViewTop";
 
 /**
  * Renders the main list view for viewing list data
@@ -16,7 +19,8 @@ import TodoListView from "./ListSpecificViews/TodoListView";
  */
 const ListView = (props) => {
   const [listData, updateListData] = useState(props.listData);
-  const [show, updateShow] = useState(false);
+  const [showEditView, updateShowEditView] = useState(false);
+  // const [show, updateShow] = useState(false);
 
   /** Updates state held list data when props updates */
   useEffect(() => {
@@ -31,89 +35,54 @@ const ListView = (props) => {
         case "TODO":
           updateListData(Object.assign(new TodoList(), props.listData));
           break;
+        default:
+          break;
       }
     }
   }, [props.listData]);
 
-  const convertTimeString = (timeString) => {
-    const date = new Date(timeString)
-    return date.toLocaleDateString();
-  }
-
-  const getListType = (listType) => {
-    if (listType === "shopping") {
-      return "Shopping List";
+  const addNewListItem = (listType) => {
+    console.log(listData);
+    if (listType === "TODO") {
+      var newListData = Object.assign(new TodoList(), listData);
+      var newListItemsArray = newListData.getListItemsArray();
+      console.log(newListItemsArray);
+      newListItemsArray.push(new TodoListItem("", ""));
+      newListData.setListItemsArray(newListItemsArray);
+      updateListData(newListData);
     }
-    if (listType === "todo") {
-      return "Todo List";
-    }
-    if (listType === "gift") {
-      return "Gift List";
-    }
-  }
-
-  const convertNumberToPrice = (price) => {
-    if (price !== undefined && price !== 0) {
-      return ("$" + price); 
-    }
-  }
-
-  const iterateOutListItems = (listItems) => {
-    if (listItems === undefined || listItems.length === 0) {
-      return (
-        <ul>
-          <li id="list-view-first-element" onClick={() => {handleModalShow(true)}}>
-            <i className="fas fa-plus"></i>
-            <p>Add New Item</p>
-          </li>
-        </ul>
-      );
-    }
-    return listItems.map((item, index) => (
-      <li key={index}>
-        <div className="list-item-header">
-          <p className="list-item-title">{item.item_name}</p>
-          <p className="list-item-price">{convertNumberToPrice(item.item_price)}</p>
-        </div>
-        <i><p>{item.item_description}</p></i>
-        <a href={item.item_link}>{item.item_link}</a>
-      </li>
-    ));
+    // updateListData(newListData);
   }
 
   /** Function to handle modal showing */
-  const handleModalShow = (boolean) => updateShow(boolean);
+  const handleModalShow = (boolean) => updateShowEditView(boolean);
 
   return (
     <div className="list-sub-container-style">
-      <ListEditViewModal handleModalShow={handleModalShow} show={show} />
       {!listData && <h4>Select a list on the left hand side</h4>}
       {
         listData &&
         <div className="list-view-container">
-          <div className="list-view-meta">
-            <p>{listData.getType()}</p>
-            {/* <p>{getListType(listData.list_type)}</p> */}
-            <p>Created on: {convertTimeString(listData.getDateCreated())}</p>
-            {/* <p>Created on: {convertTimeString(listData.date_created.$date)}</p> */}
-          </div>
-          <div className="list-view-header">
-            <div className="list-name">
-              <h2>{listData.getName()}</h2>
-              {/* <h2>{listData.list_name}</h2> */}
-              <div className="list-edit">
-                <i className="fas fa-edit list-edit-icon" onClick={() => {handleModalShow(true)}}></i>
-              </div>
-            </div>
-            <div className="list-description">
-              <p><i>{listData.getDescription()}</i></p>
-              {/* <p><i>{listData.list_description}</i></p> */}
-            </div>
+          <div className="list-view-top">
+            {
+              showEditView &&
+              <ListViewEditTop listData={listData} handleModalShow={updateShowEditView} />
+            }
+            {
+              !showEditView &&
+              <ListViewTop listData={listData} handleModalShow={updateShowEditView} />
+            }
           </div>
           <div className="list-view-items">
             {
               listData.getType() === "TODO" &&
-              <TodoListView listItems={listData} handleModalShow={handleModalShow} />
+              showEditView &&
+              <TodoListEditView listItems={listData} handleModalShow={addNewListItem} />
+            }
+            {
+              listData.getType() === "TODO" &&
+              !showEditView &&
+              <TodoListView listItems={listData} handleModalShow={updateShowEditView} />
             }
             {
               listData.getType() === "GIFT" &&
@@ -123,10 +92,20 @@ const ListView = (props) => {
               listData.getType() === "SHOPPING" &&
               <ShoppingListView listItems={listData} handleModalShow={handleModalShow} />
             }
-            
-            {/* <ul>
-              {iterateOutListItems(listData.list_items)}
-            </ul> */}
+          </div>
+          <div className="list-edit-button-container">
+            {
+              showEditView &&
+              <Button className="custom-button" onClick={() => handleModalShow(false)}>
+                Cancel
+              </Button>
+            }
+            {
+              showEditView &&
+              <Button className="custom-button" onClick={() => handleModalShow(false)}>
+                Apply
+              </Button>
+            }
           </div>
         </div>
       }

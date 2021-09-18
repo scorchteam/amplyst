@@ -14,32 +14,11 @@ import ListArray from "../../../lists/ListArray";
  * @returns render of the /lists page
  */
 const Lists = (props) => {
-  /**
-   * Returns an array of objects that define the name and id of all
-   * lists in listsObj
-   * @param {object} listsObj 
-   * @returns array of objects
-   */
-  const getListOfLists = (listsObj) => {
-    var nameList = []
-    for (var key in listsObj) {
-      if (listsObj[key] !== undefined && listsObj[key]["_id"] !== undefined) {
-        const listId = listsObj[key]["_id"]["$oid"]
-        const listName = listsObj[key]["list_name"]
-        const listObj = {
-          listName: listName,
-          listId: listId
-        }
-        nameList.push(listObj)
-      }
-    }
-    return nameList
-  }
 
   /** State objects */
   const urlVal = queryString.parse(props.location.search);
   const [userListArray, updateUserListArray] = useState(new ListArray(props.userListData));
-  const [userListData] = useState(props.userListData);
+  // const [userListData] = useState(props.userListData);
   const [listNameList, updateListNameList] = useState(userListArray.getMinimalListData());
   // const [listNameList, updateListNameList] = useState(getListOfLists(props.userListData));
   const [urlVals] = useState(urlVal);
@@ -75,34 +54,6 @@ const Lists = (props) => {
   /** Function to change the active listId in state */
   const changeActiveList = (listId) => {
     updateActiveList(listId);
-  }
-
-  /**
-   * Returns list object from userListData based off the key listId
-   * @param {string} listId 
-   * @returns object
-   */
-  const getListById = (listId) => {
-    var retList = undefined;
-    for (var list in userListData) {
-      if(userListData[list]["_id"] !== undefined){
-        if (userListData[list]["_id"]["$oid"] === listId) {
-          retList = userListData[list]
-        }
-      }
-    }
-    return retList;
-  }
-
-  /**
-   * Updates state with new instance of listData for re-render
-   * when new list is made
-   * @param {object} listData 
-   */
-  const updateListData = (listData) => {
-    updateUserListArray(new ListArray(listData));
-    // updateUserListData([...listData]);
-    // updateListNameList([...getListOfLists(listData)]);
   }
 
   useEffect(() => {

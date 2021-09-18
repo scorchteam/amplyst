@@ -59,7 +59,7 @@
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
     height: fit-content;
-    max-height: 850px;
+    max-height: 1200px;
     overflow: auto;
 
     .my-lists-list {
@@ -212,5 +212,38 @@
             transition: ease-in-out 0.25s;
             cursor: pointer;
         }
+    }
+}
+
+.list-edit-styles, .list-view-edit-top {
+    label {
+        padding: 0.5rem 0 0 0;
+        display: block;
+    }
+
+    .form-control {
+        border-radius: 0.75rem;
+    }
+
+    .list-name-edit {
+        display: flex;
+        flex-direction: column!important;
+    }
+
+    .list-view-header {
+        padding-bottom: 1rem;
+    }
+}
+
+.list-edit-button-container {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+
+    :first-child {
+        margin-left: auto;
+        margin-right: 1rem;
+        background-color: var(--header-text-color)!important;
+        color: var(--text-accent-color)!important;
     }
 }

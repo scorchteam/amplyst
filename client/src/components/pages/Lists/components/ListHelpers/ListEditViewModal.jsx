@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Button, Form, Modal } from "react-bootstrap";
 
 const ListEditViewModal = (props) => {
-    const [errors, updateErrors] = useState({});
+    const [errors] = useState({});
 
     return (
       <>
