@@ -9,6 +9,7 @@ import { deleteList, updateLists } from "./DeleteList";
  * @returns render of the list side panel
  */
 const ListsSidePanel = (props) => {
+  console.log(props);
   /**
    * Renders list elements of lists
    * @param {array} listNames 

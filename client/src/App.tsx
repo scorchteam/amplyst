@@ -9,7 +9,6 @@ import {
 } from "./components/pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import { User } from "./UserInterface";
 import ListArray from "./lists/ListArray";
 
 // export const flask_url = "https://giftlists-api.herokuapp.com";
@@ -30,7 +29,7 @@ const App = () => {
     if (loggedIn) {
       fetchUserInfo(userAuthToken, updateUserInfo)
     }
-  }, []);
+  }, [loggedIn, userAuthToken]);
 
   useEffect(() => {
     if (userInfo && userInfo.err === "Token has expired") {
@@ -38,7 +37,7 @@ const App = () => {
     } else if (userInfo && loggedIn) {
       fetchUserListData(userAuthToken, updateUserListData);
     }
-  }, [userInfo])
+  }, [userInfo, loggedIn, userAuthToken])
 
   useEffect(() => {
     console.log(userInfo, userListData)

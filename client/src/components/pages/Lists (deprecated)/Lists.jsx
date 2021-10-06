@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import "./Lists.scss";
 import ListsListDropdown from "./components/ListHelpers/ListSelect";
 import { CustomHyperlink } from "../../general";
-import ListArray from "../../../lists/ListArray";
+import { getListById, getMinimalListData, grabUserListData } from "../../../lists/ListInterfaces";
 
 /**
  * Computes and renders the /lists page
@@ -17,15 +17,17 @@ const Lists = (props) => {
 
   /** State objects */
   const urlVal = queryString.parse(props.location.search);
-  const [userListArray, updateUserListArray] = useState(new ListArray(props.userListData));
-  // const [userListData] = useState(props.userListData);
-  const [listNameList, updateListNameList] = useState(userListArray.getMinimalListData());
-  // const [listNameList, updateListNameList] = useState(getListOfLists(props.userListData));
+  const [userListArray, updateUserListArray] = useState(grabUserListData(props.userListData));
+  const [listNameList, updateListNameList] = useState(userListArray);
   const [urlVals] = useState(urlVal);
   const [renderListFromUrl, updateRenderListFromUrl] = useState(false);
   const [show, updateShow] = useState(false);
   const [activeList, updateActiveList] = useState(undefined);
   const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    updateListNameList(getMinimalListData(userListArray))
+  }, [userListArray]);
 
   /** Checks for existence of url query string to render list from url */
   if (urlVals && urlVals.list && urlVals.list !== "" && renderListFromUrl !== true) {
@@ -57,13 +59,12 @@ const Lists = (props) => {
   }
 
   useEffect(() => {
-    updateListNameList(userListArray.getMinimalListData());
+    updateListNameList(getMinimalListData(userListArray));
   }, [userListArray])
 
   return (
     <Container fluid="md">
         <NewListModal handleModalShow={handleModalShow} show={show} updateListData={updateUserListArray}/>
-        {/* <NewListModal handleModalShow={handleModalShow} show={show} updateListData={updateListData}/> */}
         <div className="lists-container">
         {
           //Check for window being wider than 992px to render widescreen view
@@ -71,11 +72,9 @@ const Lists = (props) => {
           <>
             <div className="lists-container-col-1">
               <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow} updateListData={updateUserListArray}/>
-              {/* <ListsSidePanel lists={listNameList} changeActiveList={changeActiveList} handleModalShow={handleModalShow} updateListData={updateListData}/> */}
             </div>
             <div className="lists-container-col-2">
-              <ListView listData={userListArray.getListById(activeList)}/>
-              {/* <ListView listData={getListById(activeList)}/> */}
+              <ListView listData={getListById(userListArray, activeList)}/>
             </div>
           </>
         }
@@ -88,10 +87,8 @@ const Lists = (props) => {
               renderListFromUrl &&
               <>
                 <CustomHyperlink linkAddress="/lists" hyperlinkText="Go Back" />
-                {/* <Link to={"/lists"}>Go Back</Link> */}
                 <div className="lists-container-col-2">
-                  <ListView listData={userListArray.getListById(activeList)}/>
-                  {/* <ListView listData={getListById(activeList)}/> */}
+                  <ListView listData={getListById(userListArray, activeList)}/>
                 </div>
               </>
             }
@@ -102,8 +99,7 @@ const Lists = (props) => {
                     Add a new list
                 </Button>
                 <ListsListDropdown lists={listNameList} changeActiveList={changeActiveList} />
-                <ListView listData={userListArray.getListById(activeList)}/>
-                {/* <ListView listData={getListById(activeList)}/> */}
+                <ListView listData={getListById(userListArray, activeList)}/>
               </>
             }
           </>
