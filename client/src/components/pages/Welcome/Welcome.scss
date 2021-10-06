@@ -1,9 +1,6 @@
 @import '../../general/Colors';
 
-.token-container {
-    overflow: hidden;
-    color: white;
-}
+/** Welcome component styles */
 
 .welcome-container {
     margin: 0;
@@ -71,7 +68,7 @@
 .welcome-page-sub-container {
     padding: 1rem;
     background-color: var(--header-color-light);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     height: fit-content;
     max-height: 1000px;
     overflow: auto;

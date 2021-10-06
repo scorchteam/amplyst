@@ -1,0 +1,249 @@
+/** Styles for ListSidePanel component */
+.lists-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    .lists-sub-container {
+        .lists-list {
+            list-style-type: none;
+            padding: 0;
+            padding-top: 1rem;
+
+            li {
+                border-top: 3px solid purple;
+                font-size: 1.25rem;
+            }
+        }
+
+        .selected-list-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .list-item {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border-top: 3px solid purple;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .lists-container {
+        color: white;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 350px 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+/** Remove padding from modal */
+.modal-form {
+    padding: 0!important;
+}
+
+/** Styles for sub-containers with rounded corners */
+.list-sub-container-style {
+    color: white;
+    padding: 1rem;
+    background-color: var(--header-color-light);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    height: fit-content;
+    max-height: 1200px;
+    overflow: auto;
+
+    .my-lists-list {
+        list-style-type: none;
+        // text-decoration: underline;
+        text-decoration-color: var(--text-accent-color-bright);
+        padding: 0;
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0.25rem;
+        margin: 0;
+        
+        .list-side-panel-entry {
+            justify-content: space-between;
+            display: flex;
+
+            .delete-container {
+                display: flex;
+                align-items: center;
+               i {
+                padding-left: 1rem;
+                color: var(--text-accent-color-bright)!important;
+               }
+            }
+        }
+
+        li {
+            color: var(--text-accent-color-bright);
+            padding: 0.25rem;
+            word-break: break-all;
+        }
+
+        li:hover {
+            border-radius: 0.3rem;
+            background-color: var(--text-accent-color);
+            color: var(--header-text-color);
+            cursor: pointer;
+            transition: ease-in-out 0.2s;
+        }
+    }
+}
+
+.list-side-panel-title {
+    margin-bottom: 1rem!important;
+}
+
+/** list-view styles */
+.list-view-container {
+    .list-view-meta {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            margin: 0;
+            padding: 0;
+            color: var(--text-accent-color-bright);
+            font-weight: bold;
+        }
+    }
+
+    .list-view-header {
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .list-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            word-break: break-all;
+
+            .list-edit {
+                i {
+                    font-size: 1.25rem;
+                    color: var(--text-accent-color-bright);
+                }
+                i:hover {
+                    color: var(--text-accent-color);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .list-description {
+            word-break: break-all;
+        }
+    }
+
+    .list-view-items {
+        max-height: 600px;
+        overflow: auto;
+        padding: 1rem;
+        background-color: var(--header-color);
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            list-style-type: none;
+
+            h4 {
+                text-align: center;
+            }
+
+            li {
+                background-color: var(--header-color-dark);
+                padding: 1rem;
+                border-radius: 1rem;
+                p {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .list-item-header {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .list-item-title, .list-item-price {
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                    }
+                }
+
+                .list-item-details {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+
+        #list-view-first-element {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            gap: 0.5rem;
+            background-color: var(--text-accent-color);
+        }
+
+        #list-view-first-element:hover {
+            background-color: var(--text-accent-color-darkish);
+            transition: ease-in-out 0.25s;
+            cursor: pointer;
+        }
+    }
+}
+
+.list-edit-styles, .list-view-edit-top {
+    label {
+        padding: 0.5rem 0 0 0;
+        display: block;
+    }
+
+    .form-control {
+        border-radius: 0.75rem;
+    }
+
+    .list-name-edit {
+        display: flex;
+        flex-direction: column!important;
+    }
+
+    .list-view-header {
+        padding-bottom: 1rem;
+    }
+}
+
+.list-edit-button-container {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+
+    :first-child {
+        margin-left: auto;
+        margin-right: 1rem;
+        background-color: var(--header-text-color)!important;
+        color: var(--text-accent-color)!important;
+    }
+}

@@ -3,6 +3,9 @@ import "./Home.scss";
 import { FirstSection, SecondSection, ThirdSection } from "./sections";
 import { Container } from "react-bootstrap";
 
+/**
+ * Renders the home component
+ */
 class Home extends Component {
 
   render() {

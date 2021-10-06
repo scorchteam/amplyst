@@ -3,9 +3,11 @@ import { Link, withRouter } from "react-router-dom";
 import { Navbar, Container, Nav} from "react-bootstrap";
 import { CustomButtonLink } from "../";
 import "./Header.scss";
-import companyLogoPurple from "../../../img/Amplyst-svg-header-purple.svg";
 
-class Navigation extends Component {
+/**
+ * Creates the main Header component for Amplyst
+ */
+class Header extends Component {
 
     constructor(props) {
         super(props);
@@ -17,15 +19,23 @@ class Navigation extends Component {
     }
 
 
+    /**
+     * 
+     * @returns Dictionary containing current pageDetails
+     */
     getPageDetails() {
+        //Local var defs
         var generic = false;
         var user = false;
+
+        //Loop through generic page list and check if generic page
         for (var genericPageListIndex in this.state.genericPageList) {
             if (this.props.location.pathname === this.state.genericPageList[genericPageListIndex]) {
                 generic = true;
                 break;
             }
         }
+        //Loop through user page list and check if user authenticated page
         for (var userPageListIndex in this.state.userPageList) {
                 if (this.props.location.pathname === this.state.userPageList[userPageListIndex]) {
                     user = true;
@@ -39,6 +49,10 @@ class Navigation extends Component {
         }
     }
 
+    /**
+     * Renders the nav links based on type of page
+     * @returns Nav links render based on page details
+     */
     renderNavLinks() {
         const pageDetails = this.getPageDetails()
         if (pageDetails.user === true) {
@@ -48,6 +62,10 @@ class Navigation extends Component {
         }
     }
 
+    /**
+     * Renders nav links for user authenticated page
+     * @returns JSX render of nav links for user authenticated page
+     */
     renderNavLinksUser() {
         return (
             <>
@@ -73,6 +91,10 @@ class Navigation extends Component {
         );
     }
 
+    /**
+     * Renders nav links for generic page
+     * @returns JSX render of nav links for generic page
+     */
     renderNavLinksGeneric() {
         return (
             <>
@@ -93,12 +115,19 @@ class Navigation extends Component {
     }
 
 
-
+    /**
+     * Returns Conditional render of nav buttons based on page details
+     * @returns Conditional render of nav buttons based
+     * on page details
+     */
     renderNavButtons() {
+        //Local vars
         const loggedIn = this.props.loggedIn;
         const pathname = this.props.location.pathname;
         const pageDetails = this.getPageDetails();
         
+        //Loop through pages where nav buttons shouldn't exist and check
+        //if one is the current page
         for (var location in this.state.noNavButtons) {
             if (pathname === this.state.noNavButtons[location]) {
                 return (
@@ -115,6 +144,11 @@ class Navigation extends Component {
         }
     }
 
+    /**
+     * Renders nav buttons for logged in users
+     * @param {object} pageDetails 
+     * @returns nav buttons for logged in users
+     */
     renderNavButtonsLoggedIn(pageDetails) {
         return (
             <div className="button-container">
@@ -130,6 +164,10 @@ class Navigation extends Component {
         );
     }
 
+    /**
+     * Returns render of nav buttons for non-logged in users
+     * @returns render of nav buttons for non-logged in users
+     */
     renderNavButtonsNotLoggedIn() {
         return (
             <div className="button-container">
@@ -146,8 +184,11 @@ class Navigation extends Component {
             <>
                 <Navbar className="bg-header" variant="dark" expand="lg">
                     <Container fluid="md">
-                        <Link className="navbar-brand" to="/">
-                            <img className="brand-logo" alt="list-icon" src={companyLogoPurple}></img>
+                        <Link id="navbar-brand" className="navbar-brand" to="/">
+                            <div>
+                                <p className="header-logo">Amplyst</p>
+                            </div>
+                            {/* <img className="brand-logo" alt="list-icon" src={companyLogoPurple}></img> */}
                         </Link>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse className="justify-content-end">
@@ -167,4 +208,4 @@ class Navigation extends Component {
     }
 }
 
-export default withRouter(Navigation);
+export default withRouter(Header);

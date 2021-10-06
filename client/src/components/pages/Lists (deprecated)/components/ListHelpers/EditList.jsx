@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 
-class ListEdit extends Component {
+class EditList extends Component {
 
   constructor(props) {
       super(props);
@@ -17,4 +17,4 @@ class ListEdit extends Component {
   }
 }
 
-export default withRouter(ListEdit);
+export default withRouter(EditList);

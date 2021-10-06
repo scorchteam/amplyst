@@ -1,8 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { CustomHyperlink } from "..";
 import './Footer.scss';
 import { Container } from "react-bootstrap";
 
+/**
+ * Returns a render of the footer component
+ * @returns Render of the footer component
+ */
 function Footer() {
   return (
     <div className="bg-footer">
@@ -13,19 +17,13 @@ function Footer() {
               <ul>
                 <li>&copy; 2021 Amplyst.com</li>
                 <li>
-                  <Link to="/">
-                    Home
-                  </Link>
+                  <CustomHyperlink linkAddress="/" hyperlinkText="Home" />
                 </li>
                 <li>
-                  <Link to="/privacy-policy">
-                    Privacy Policy
-                  </Link>
+                  <CustomHyperlink linkAddress="privacy-policy" hyperlinkText="Privacy Policy" />
                 </li>
                 <li>
-                  <Link to="/terms-and-conditions">
-                    Terms and Conditions
-                  </Link>
+                  <CustomHyperlink linkAddress="/term-and-conditions" hyperlinkText="Terms and Conditions" />
                 </li>
               </ul>
             </div>
