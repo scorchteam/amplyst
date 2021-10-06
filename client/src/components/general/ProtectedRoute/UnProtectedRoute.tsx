@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 /**
@@ -17,12 +16,10 @@ import { Route, Redirect } from "react-router-dom";
  * 
  * @returns render of render of auth component
  */
-function UnProtectedRoute(props) {
-    return (
-        props.loggedIn ?
-        <Redirect to={{ pathname: "/welcome", state: {from: props.location}}} /> :
-        <Route path={props.path} component={() => <props.component logout={props.logout} setLoggedIn={props.setLoggedIn} userInfo={props.userInfo} userListData={props.userListData} grabUserListData={props.grabUserListData} token={props.token} />} exact={props.exact}/>
-    );
+export default function UnProtectedRoute(props : any) {
+    if (props.loggedIn) {
+        return <Redirect to={{ pathname: "/welcome", state: {from: props.location}}} />
+    } else {
+        return <Route path={props.path} component={() => <props.component logout={props.logout} setLoggedIn={props.setLoggedIn} userInfo={props.userInfo} userListData={props.userListData} grabUserListData={props.grabUserListData} token={props.token} />} exact={props.exact}/>
+    }
 }
-
-export default UnProtectedRoute;

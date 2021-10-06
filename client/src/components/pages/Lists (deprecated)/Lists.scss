@@ -1,9 +1,8 @@
 /** Styles for ListSidePanel component */
 .lists-container {
-    color: white;
     display: grid;
     gap: 2rem;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr;
 
     .lists-sub-container {
@@ -33,6 +32,21 @@
             }
         }
     }
+}
+
+@media (min-width: 992px) {
+    .lists-container {
+        color: white;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 350px 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+
+/** Remove padding from modal */
+.modal-form {
+    padding: 0!important;
 }
 
 /** Styles for sub-containers with rounded corners */

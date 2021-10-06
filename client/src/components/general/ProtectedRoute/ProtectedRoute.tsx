@@ -16,7 +16,7 @@ import { Route, Redirect } from "react-router-dom";
  * 
  * @returns render of user component
  */
-function ProtectedRoute(props) {
+function ProtectedRoute(props : any) {
     return (
         props.loggedIn ?
         <Route path={props.path} component={() => <props.component logout={props.logout} userInfo={props.userInfo} userListData={props.userListData} grabUserListData={props.grabUserListData} token={props.token} />} exact={props.exact}/> :

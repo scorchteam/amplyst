@@ -1,0 +1,117 @@
+@import '../../general/Colors';
+
+.about-us {
+    // background-color: var(--header-color-light);
+    .what-is-amplyst {
+        background-color: var(--header-color-light);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        color: var(--header-text-color);
+        .what-is-amplyst-h1 {
+            font-size: 4rem;
+            padding: 1rem;
+            font-weight: bold;
+        }
+
+        .what-is-amplyst-description {
+            font-size: 1.25rem;
+            text-align: center;
+            max-width: 900px;
+        }
+    }
+
+    .amplyst-technical-specs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 3rem 0;
+
+        .technical-specs {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--header-text-color);
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+            li {
+                font-weight: bold;
+                font-size: 1.25rem;
+                color: var(--text-accent-color-bright);
+            }
+        }
+    }
+}
+
+.about-users {
+    color: var(--header-text-color);
+
+    .about-users-header {
+        padding: 3rem;
+        background-color: var(--header-color-light);
+
+        .about-users-header-title {
+            font-size: 4.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.teammember-about {
+    // background-color: var(--header-color-light);
+    padding: 2rem;
+    .teammember-headshot {
+        // width: 16rem;
+        height: 16rem;
+        border-radius: 3rem;
+    }
+}
+
+.teammember-about {
+    .teammember-about-container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 2rem;
+
+        h1, h3 {
+            margin: 0;
+        }
+
+        .teammember1-col-2 {
+            // text-align: right;
+        }
+    }
+}
+
+.teammember-description {
+    font-style: italic;
+    font-size: 1.15rem;
+}
+
+.teammember-about {
+    .teammember-about-container-2 {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2rem;
+        text-align: right;
+
+        h1, h3 {
+            margin: 0;
+        }
+    }
+}
+
+.about-us-padding {
+    height: 10rem;
+    width: 100%;
+}
