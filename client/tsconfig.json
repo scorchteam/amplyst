@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "target": "es6",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
     "lib": [
       "dom",
       "dom.iterable",
