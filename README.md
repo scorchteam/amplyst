@@ -46,7 +46,7 @@ Follow these steps to download and start the development environment:
     ```
 6. Open the deployed site at http://localhost:3000
 ## Team
-<img src="https://imgur.com/I5pLoVM.jpg" width="100%" alt="oIIw5G.md.png" border="0">
+Read about our team on [Amplyst](https://www.amplyst.com/about)
 
 ## TODO
 - Finish README table of contents
