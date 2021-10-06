@@ -11,8 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import { ListArray } from "./lists/ListInterfaces";
 
-// export const flask_url = "https://giftlists-api.herokuapp.com";
-export const flask_url = "http://localhost:5000";
+export const flask_url = "https://giftlists-api.herokuapp.com";
+// export const flask_url = "http://localhost:5000";
 
 const App = () => {
 
