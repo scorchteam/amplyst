@@ -17,10 +17,11 @@ export interface GiftListItem extends GenericListItem {
     is_bought?: boolean;
     bought_by_name?: string;
     bought_by_id?: string;
+    link?: string;
 }
 
 export interface ShoppingListItem extends GenericListItem {
-    is_bought?: string;
+    is_bought?: boolean;
     price?: number;
     location?: string;
     link?: string;
@@ -99,7 +100,8 @@ export function createListArray (listData : any[]) {
             description: list.list_description,
             date_created: list.date_created.$date,
             date_last_modified: list.date_last_modified.$date,
-            list_items: getListItemsArray(list.list_items, list_type)
+            list_items: getListItemsArray(list.list_items, list_type),
+            type: list.list_type,
         };
         if (list_type === "todo") {
             let newTodoList : TodoList = list_details;
@@ -114,6 +116,12 @@ export function createListArray (listData : any[]) {
             list_array.push(newTodoList);
         }
     });
+    //sort list by date created
+    list_array.sort(function (a, b) : any {
+        var c : any = new Date(a.date_created);
+        var d : any = new Date(b.date_created);
+        return c-d;
+    })
     return list_array;
 }
 
@@ -152,7 +160,8 @@ export function createGiftListItem (item: any) {
         intended_for_id: item.item_intended_for_id.$oid,
         is_bought: item.item_is_bought,
         bought_by_name: item.item_bought_by_name,
-        bought_by_id: item.item_bought_by_id.$oid
+        bought_by_id: item.item_bought_by_id.$oid,
+        link: item.item_link
     }
     return newGiftListItem
 }
@@ -186,15 +195,82 @@ export function getMinimalListData (list_array : ListArray) {
     return minimal_list_array;
 }
 
-export function getListById (list_array : any[], id : string) {
-    console.log(list_array)
+export function getListById (list_array : ListArray, id : string) : ListType | undefined {
     if (!Array.isArray(list_array)) {
         return;
     }
-    list_array.forEach(list => {
-        if (list.id === id) {
-            return list;
+    var retList : ListType | undefined;
+    list_array.every(function (list, index) {
+        var currentId = list.id;
+        if (currentId === id) {
+            retList = list;
+            return false;
         }
+        return true;
+    })
+    return retList;
+}
+
+export const deleteList = async (flask_url : string, token : string, listId : string) => {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + token,
+                  'Origin': flask_url },
+    };
+
+    return await fetch(flask_url + "/api/user/list/" + listId, requestOptions)
+    .then(response => response.json())
+    .catch(error => {
+        console.log(error);
     });
-    return;
+}
+
+export function getListType (list : ListType) : string {
+    if (!list) {
+        return "";
+    }
+    if (list.type) {
+        return list.type.toUpperCase();
+    }
+    return "";
+}
+
+export function convertTimeString(date : number) : string {
+    if (!date) {
+        const newDate = new Date(1);
+        return newDate.toLocaleDateString();
+    }
+    const newDate = new Date(date);
+    return newDate.toLocaleDateString();
+}
+
+export function getListName(list : ListType) : string {
+    if (!list) {
+        return "";
+    }
+    if (list.name) {
+        return list.name;
+    }
+    return "";
+}
+
+export function getListDescription(list : ListType) : string {
+    if (!list) {
+        return "";
+    }
+    if (list.description) {
+        return list.description;
+    }
+    return "";
+}
+
+export function isEmpty(list : ListType) : boolean {
+    if (!list) {
+        return false;
+    }
+    if (list.list_items) {
+        return list.list_items.length === 0;
+    }
+    return false;
 }
