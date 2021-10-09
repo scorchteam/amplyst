@@ -45,12 +45,14 @@ class ListsApi(Resource):
             #Final dictionary for list data
             finalListData = {}
 
+
             #Grab generic data
             if "list_name" in body:
                 finalListData["list_name"] = body["list_name"]
             if "list_description" in body:
                 finalListData["list_description"] = body["list_description"]
-            finalListData["list_items"] = list_items
+            if len(list_items) is not 0:
+                finalListData["list_items"] = list_items
             currentDatetime = datetime.utcnow()
             finalListData["date_created"] = currentDatetime
             finalListData["date_last_modified"] = currentDatetime
