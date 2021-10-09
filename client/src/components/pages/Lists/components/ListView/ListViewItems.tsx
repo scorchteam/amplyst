@@ -73,7 +73,7 @@ const ListView = (props: ListProps) => {
                         </div>
                     </div>
                     <i><p>{item.description && item.description}</p></i>
-                    <a href={(item as ShoppingListItem).link && (item as ShoppingListItem).link} />
+                    <a href={(item as ShoppingListItem).link && (item as ShoppingListItem).link} >{(item as ShoppingListItem).link && (item as ShoppingListItem).link}</a>
                     <p>{(item as ShoppingListItem).location && (item as ShoppingListItem).location}</p>
                 </li>
             ))

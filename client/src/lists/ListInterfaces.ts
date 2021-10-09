@@ -274,3 +274,213 @@ export function isEmpty(list : ListType) : boolean {
     }
     return false;
 }
+
+export const addExampleList = async (flask_url : string, token : string, updateUserListData : any) => {
+    const requestBody = getRequestBody();
+    /** Create POST request options */
+    const requestOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'crossorigin': 'true',
+        'Authorization': 'Bearer ' + token,
+        'Origin': flask_url
+    },
+    body: JSON.stringify(requestBody)
+    };
+    /** Execute POST request */
+    await fetch(flask_url + "/api/user/lists", requestOptions)
+    .then(res => res.json())
+    .then(data => grabUserListData(flask_url, token))
+    .then(userListData => updateUserListData(userListData));
+}
+
+const getRequestBody = () => {
+    const rndInt = Math.floor(Math.random() * 3) + 1;
+    if (rndInt === 1) {
+        return {
+            "list_name": "This is a TodoList",
+            "list_type": "todo",
+            "list_description": "This is the description of my Todo list",
+            "list_elements": [
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_is_checked": "true",
+                    "item_due_date": "2021-09-20 06:35:28.246189"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_is_checked": "false",
+                    "item_due_date": "2021-09-20 06:35:28.246189"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_is_checked": "true",
+                    "item_due_date": "2021-09-20 06:35:28.246189"
+                }
+            ]
+        }
+    }
+    if (rndInt === 2) {
+        return {
+            "list_name": "This is a GiftList",
+            "list_type": "gift",
+            "list_description": "This is the description of my Gift list",
+            "list_elements": [
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                },
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_intended_for_name": "John Smith",
+                    "item_intended_for_id": "",
+                    "item_is_bought": "true",
+                    "item_bought_by_name": "John Smith",
+                    "item_bought_by_id": "",
+                    "item_link": "https://www.google.com"
+                }
+            ]
+        }
+    }
+    if (rndInt === 3) {
+        return {
+            "list_name": "This is a ShoppingList",
+            "list_type": "shopping",
+            "list_description": "This is the description of my Shopping list",
+            "list_elements": [
+                {
+                    "item_name": "Gum",
+                    "item_description": "This is Gum",
+                    "item_price": "129.00",
+                    "item_is_bought": "true",
+                    "item_location": "Walmart",
+                    "item_link": "https://www.walmart.com"
+                }
+            ]
+        }
+    }
+    return {}
+}

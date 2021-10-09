@@ -70,7 +70,9 @@ const Lists = (props: ListProps) => {
     <Container fluid="md">
       <div className="lists-container">
         <div className="lists-container-col-1">
-          <ListsSidePanel userListData={userListData} deleteUserList={deleteUserList} updateActiveListId={updateActiveListId} />
+          <ListsSidePanel userListData={userListData} deleteUserList={deleteUserList} updateActiveListId={updateActiveListId} 
+          token={props.token}
+          grabUserListData={props.grabUserListData} />
         </div>
         <div className="lists-container-col2">
           <ListView activeListData={activeListData} />
