@@ -167,6 +167,13 @@
                     padding: 0;
                 }
 
+                .bought-by-selection {
+                    display: flex;
+                    justify-content: baseline;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
                 .list-item-header {
                     display: flex;
                     justify-content: space-between;
@@ -174,6 +181,13 @@
                     .list-item-title, .list-item-price {
                         font-weight: bold;
                         font-size: 1.1rem;
+                    }
+
+                    .list-item-header-right {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 1rem;
                     }
                 }
 
@@ -232,4 +246,8 @@
         background-color: var(--header-text-color)!important;
         color: var(--text-accent-color)!important;
     }
+}
+
+.hover-pointer {
+    cursor: pointer;
 }

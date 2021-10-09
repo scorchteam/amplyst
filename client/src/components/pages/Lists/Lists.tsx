@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
-import { ListArray } from "../../../lists/ListInterfaces";
+import { flask_url } from "../../../App";
+import { deleteList, getListById, ListArray, ListType } from "../../../lists/ListInterfaces";
+import { fetchUserListData } from "../../../UserAuth";
 import { User } from "../../../UserInterface";
 import ListsSidePanel from "./components/ListsSidePanel";
+import ListView from "./components/ListView";
 import "./Lists.scss";
 
 /**
@@ -22,11 +25,13 @@ interface ListProps {
   userInfo: User,
   userListData: ListArray
 }
-const Lists = (props : ListProps) => {
+const Lists = (props: ListProps) => {
 
-  const [userAuthToken, updateUserAuthToken] = useState<String>();
+  const [userAuthToken, updateUserAuthToken] = useState<string>();
   const [userInfo, updateUserInfo] = useState<User>();
   const [userListData, updateUserListData] = useState<ListArray>();
+  const [activeListId, updateActiveListId] = useState<string>();
+  const [activeListData, updateActiveListData] = useState<ListType>();
 
   useEffect(() => {
     updateUserInfo(props.userInfo);
@@ -40,13 +45,35 @@ const Lists = (props : ListProps) => {
     updateUserAuthToken(props.token);
   }, [props.token]);
 
+  useEffect(() => {
+    if (activeListId && userListData) {
+      updateActiveListData(getListById(userListData, activeListId));
+    }
+  }, [activeListId, userListData]);
+
+  const deleteUserList = async (id: string) => {
+    if (userAuthToken) {
+      deleteList(flask_url, userAuthToken, id)
+        .then(data => {
+          if ("success" in data) {
+            fetchUserListData(userAuthToken, updateUserListData);
+            if(activeListId === id) {
+              updateActiveListId(undefined);
+              updateActiveListData(undefined);
+            }
+          }
+        })
+    }
+  }
+
   return (
     <Container fluid="md">
       <div className="lists-container">
         <div className="lists-container-col-1">
-          <ListsSidePanel userListData={userListData}/>
+          <ListsSidePanel userListData={userListData} deleteUserList={deleteUserList} updateActiveListId={updateActiveListId} />
         </div>
-        <div className="lists-container-vol2">
+        <div className="lists-container-col2">
+          <ListView activeListData={activeListData} />
         </div>
       </div>
     </Container>

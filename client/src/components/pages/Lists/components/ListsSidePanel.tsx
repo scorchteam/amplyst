@@ -26,12 +26,11 @@ import { getMinimalListData } from "../../../../lists/ListInterfaces";
         return <></>;
       }
       if (listNames.constructor === Array) {
-        console.log(listNames)
         const listMap = listNames.map((item, index) => (
           <div className="list-side-panel-entry" key={index}>
-            <li onClick={() => props.changeActiveList(item.id)}>{item.name}</li>
+            <li onClick={() => props.updateActiveListId(item.id)}>{item.name}</li>
             <div className="delete-container">
-              {/* <i className="far fa-times-circle" onClick={() => deleteList(item.listId).then(() => {updateLists(props.updateListData)})}></i> */}
+              <i className="fas fa-trash hover-pointer" onClick={() => {props.deleteUserList(item.id)}}></i>
             </div>
           </div>
         ))
