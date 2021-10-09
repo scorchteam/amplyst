@@ -12,7 +12,7 @@ class ListTypes(Enum):
 
 class GenericListItem(db.EmbeddedDocument):
     meta = {'allow_inheritance': True}
-    item_id=db.ObjectIdField(required=True, unique=True)
+    item_id=db.ObjectIdField(required=True)
     item_name=db.StringField(max_length=64, required=True)
     item_description=db.StringField(max_length=512)
 
@@ -23,6 +23,7 @@ class GiftListItem(GenericListItem):
     item_is_bought=db.BooleanField(default=False)
     item_bought_by_name=db.StringField(default="")
     item_bought_by_id=db.ObjectIdField()
+    item_link=db.URLField(default="")
 
 class TodoListItem(GenericListItem):
     item_is_checked=db.BooleanField(required=True, default=False)
@@ -35,10 +36,14 @@ class ShoppingListItem(GenericListItem):
     item_link=db.URLField(default="")
 
 class GenericList(db.Document):
-    meta = {'collection': 'lists', 'allow_inheritance': True}
+    meta = {
+        'collection': 'lists',
+        'allow_inheritance': True
+    }
     list_name = db.StringField(required=True)
     list_description = db.StringField(default="")
-    list_items = db.ListField(db.EmbeddedDocumentField('GenericListItem'))
+    list_items = db.EmbeddedDocumentListField("GenericListItem")
+    # list_items = db.ListField(db.EmbeddedDocumentField('GenericListItem'), sparse=True)
     added_by = db.ReferenceField('User')
     date_created = db.DateTimeField()
     date_last_modified = db.DateTimeField()
