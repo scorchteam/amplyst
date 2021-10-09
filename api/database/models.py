@@ -19,10 +19,12 @@ class GenericListItem(db.EmbeddedDocument):
 class GiftListItem(GenericListItem):
     item_price=db.DecimalField(default=0.00, min_value=0.00, precision=2, max_value=100000.00)
     item_intended_for_name=db.StringField(default="")
-    item_intended_for_id=db.ObjectIdField()
+    # item_intended_for_id=db.ObjectIdField()
+    item_intended_for_id=db.StringField()
     item_is_bought=db.BooleanField(default=False)
     item_bought_by_name=db.StringField(default="")
-    item_bought_by_id=db.ObjectIdField()
+    # item_bought_by_id=db.ObjectIdField()
+    item_bought_by_id=db.StringField()
     item_link=db.URLField(default="")
 
 class TodoListItem(GenericListItem):
