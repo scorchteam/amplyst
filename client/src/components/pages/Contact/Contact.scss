@@ -1,0 +1,90 @@
+@import "../../general/Colors";
+
+.contact-us {
+    color: var(--header-text-color);
+    background-color: var(--header-color-light);
+    height: 100%;
+    width: 100%;
+    .contact-us-header {
+        font-size: 4rem;
+        font-weight: bold;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.contact-us-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--header-color-light);
+}
+
+.contact-us-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-us-form-container {
+    width: 100%;
+    height: fit-content;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    background-color: var(--header-color);
+    border-radius: 20px;
+    color: var(--header-text-color);
+
+    h1 {
+        padding: 2rem 0 0 2rem;
+    }
+}
+
+form {
+    display: block;
+    padding: 2rem;
+    width: 100%;
+
+    label {
+        padding: 0.5rem 0 0 0;
+        display: block;
+    }
+
+    .form-control {
+        border-radius: 0.75rem;
+    }
+}
+
+.contact-us-form-name-fields {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0rem;
+
+    .first-name-field, .last-name-field {
+        width: 100%!important;
+    }
+}
+
+@media (min-width: 576px) {
+    .left-text {
+        padding-right: 0.5rem;
+    }
+
+    .contact-us-form-container {
+        width: 600px; 
+    }
+
+    .contact-us-form-name-fields {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 1rem;
+
+        .first-name-field, .last-name-field {
+            width: calc(50% - 0.5rem);
+        }
+    }
+}
