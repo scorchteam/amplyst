@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
-import { ListArray, ListType } from "../../../../lists/ListInterfaces";
-import { User } from "../../../../UserInterface";
+import { ListType } from "../../../../lists/ListInterfaces";
 import ListViewItems from "./ListView/ListViewItems";
 import ListViewTop from "./ListView/ListViewTop";
 
