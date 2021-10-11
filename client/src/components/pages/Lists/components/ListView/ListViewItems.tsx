@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
-import { getListType, GiftList, GiftListItem, isEmpty, ListItemsType, ListType, ShoppingListItem, TodoListItem } from "../../../../../lists/ListInterfaces";
+import { getListType, GiftListItem, isEmpty, ListItemsType, ListType, ShoppingListItem, TodoListItem } from "../../../../../lists/ListInterfaces";
 
 interface ListProps {
     history: any,

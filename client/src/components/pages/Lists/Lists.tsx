@@ -51,6 +51,10 @@ const Lists = (props: ListProps) => {
     }
   }, [activeListId, userListData]);
 
+  useEffect(() => {
+    console.log(userInfo);
+  })
+
   const deleteUserList = async (id: string) => {
     if (userAuthToken) {
       deleteList(flask_url, userAuthToken, id)
