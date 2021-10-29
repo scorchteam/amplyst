@@ -14,6 +14,7 @@ from database.db import initialize_db
 from flask_restful import Api
 from resources.routes import initialize_routes
 from resources.errors import errors
+from services.extensions import mail
 
 from flask_cors import CORS
 
@@ -23,11 +24,17 @@ import os
 app = Flask(__name__)
 # app.config.from_envvar('ENV_LOCATION')
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
 api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-mail = Mail(app)
+mail.init_app(app)
 
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
