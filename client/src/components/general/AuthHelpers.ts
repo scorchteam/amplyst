@@ -1,3 +1,4 @@
+// @ts-ignore
 import validator from "validator";
 
 /** Validate emails */
