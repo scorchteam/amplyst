@@ -12,9 +12,8 @@ from flask_mail import Mail
 
 from database.db import initialize_db
 from flask_restful import Api
-from resources.routes import initialize_routes
 from resources.errors import errors
-from services.extensions import mail
+# from services.extensions import mail
 
 from flask_cors import CORS
 
@@ -30,11 +29,15 @@ app.config['MAIL_USERNAME'] = os.environ.get("MAIL_USERNAME")
 app.config['MAIL_PASSWORD'] = os.environ.get("MAIL_PASSWORD")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
+# mail.init_app(app)
+mail = Mail(app)
+
+from resources.routes import initialize_routes
 
 api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-mail.init_app(app)
+
 
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -56,5 +59,5 @@ def root():
 
 
 #Run the flask app
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+# if __name__ == '__main__':
+    # app.run(host='0.0.0.0', debug=True)
