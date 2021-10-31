@@ -5,7 +5,7 @@ import { Header, Footer, ProtectedRoute, UnProtectedRoute } from "./components/g
 import {
   Home, About, Contact, Examples, Login, Logout, Register,
   PrivacyPolicy, TermsAndConditions, FourZeroFour, Welcome, Lists,
-  Profile, Friends, Calendar, Settings
+  Profile, Friends, Calendar, Settings, Forgot, Reset
 } from "./components/pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
@@ -69,6 +69,8 @@ const App = () => {
           <Route path="/contact" exact component={() => <Contact />} />
           <UnProtectedRoute path="/login" loggedIn={loggedIn} setLoggedIn={login} exact={true} component={Login} />
           <UnProtectedRoute path="/register" loggedIn={loggedIn} exact={true} component={Register} />
+          <UnProtectedRoute path="/forgot" loggedIn={loggedIn} exact={true} component={Forgot} />
+          <UnProtectedRoute path="/reset" loggedIn={loggedIn} exact={true} component={Reset} />
           <ProtectedRoute path="/welcome" loggedIn={loggedIn} token={userAuthToken} logout={logout} userInfo={userInfo} userListData={userListData} exact={true} component={Welcome}/>
           <ProtectedRoute path="/lists" loggedIn={loggedIn} userListData={userListData} token={userAuthToken} grabUserListData={updateUserListData} userInfo={userInfo} exact={true} component={Lists}/>
           <ProtectedRoute path="/profile" loggedIn={loggedIn} exact={true} component={Profile}/>

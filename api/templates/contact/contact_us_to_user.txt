@@ -1,0 +1,10 @@
+Dear {{first_name}},
+Thank you for contacting Amplyst support. A copy of your submission has been included below. Please watch out for any correspondance from us regarding this submission.
+
+First Name: {{first_name}}
+Last Name: {{last_name}}
+Subject: {{subject}}
+More Information: {{more_information}}
+
+Sincerely,
+Amplyst Support Team

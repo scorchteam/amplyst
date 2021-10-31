@@ -7,6 +7,8 @@ export { default as Examples } from "./Examples/Examples";
 export { default as Login } from "./Login/Login";
 export { default as Logout } from "./Logout/Logout";
 export { default as Register } from "./Register/Register";
+export { default as Forgot } from "./Forgot/Forgot";
+export { default as Reset } from "./Reset/Reset";
 export { default as Welcome } from "./Welcome/Welcome";
 export { default as Lists } from "./Lists/Lists";
 export { default as Profile } from "./Profile/Profile";

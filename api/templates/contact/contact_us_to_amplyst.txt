@@ -1,0 +1,4 @@
+User Submission: {{first_name}} {{last_name}}
+Email: {{email}}
+Subject: {{subject}}
+More Information: {{more_information}}
