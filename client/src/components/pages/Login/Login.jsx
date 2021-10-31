@@ -222,6 +222,9 @@ class Login extends Component {
               <p className="left-text">New Here?</p>
               <p><Link to="/register">Create Your Account Now</Link></p>
             </div>
+            <div className="forgot-password">
+              <p><Link to="/forgot">Forgot Password?</Link></p>
+            </div>
           </div>
         </Container>
 
