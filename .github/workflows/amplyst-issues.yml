@@ -18,7 +18,7 @@ jobs:
       with:
         webhook: ${{ secrets.DISCORD_ISSUE_TRACKER }}
         nodetail: true
-        title: "[${{GITHUB_REF}}] Git Issue was Edited:"
+        title: "[${{github.event.repository.name}}] Git Issue was Edited:"
         description: |
           STATE: [${{github.event.issues}}]
           Description: ${{github.event.issues.description}}
