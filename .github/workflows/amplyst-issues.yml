@@ -16,7 +16,7 @@ jobs:
       uses: sarisia/actions-status-discord@v1.8.6
       if: always()
       with:
-        webhook: ${{ DISCORD_ISSUE_TRACKER }}
+        webhook: ${{ secrets.DISCORD_ISSUE_TRACKER }}
         nodetail: true
         title: "[$GITHUB_REF] Git Issue Updated:"
         description: |
