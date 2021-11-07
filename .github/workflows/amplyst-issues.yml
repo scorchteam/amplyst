@@ -4,7 +4,7 @@ name: amplyst-issues
 
 on:
   issues:
-    types: [edited, opened, deleted, assigned, unassigned, transferred]
+    types: [edited, opened, closed, deleted, assigned, unassigned, transferred]
 
 jobs:
   trigger-discord:
@@ -22,5 +22,5 @@ jobs:
         description: |
           Title: ${{github.event.issue.title}}
           Description: ${{github.event.issue.body}}
-          Asignee: ${{github.event.issue.assignee}}
-          Asignees: ${{github.event.issue.assignees}}
+          Asignee: ${{github.event.issue.assignee.login}}
+          Asignees: ${{github.event.issue.assignees.login}}
