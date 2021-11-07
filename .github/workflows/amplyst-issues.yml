@@ -20,6 +20,5 @@ jobs:
         nodetail: true
         title: "[${{github.event.repository.name}}] Git Issue was Edited:"
         description: |
-          STATE: [${{github.event.issues}}]
-          Description: ${{github.event.issues.description}}
-          test: ${{github.event}}
+          Title: [${{github.event.issue.title}}]
+          Description: ${{github.event.issues.body}}
