@@ -4,7 +4,7 @@ name: amplyst-issues
 
 on:
   issues:
-    types: [edited, milestoned]
+    types: [edited]
 
 jobs:
   trigger-discord:
@@ -18,7 +18,8 @@ jobs:
       with:
         webhook: ${{ secrets.DISCORD_ISSUE_TRACKER }}
         nodetail: true
-        title: "[$GITHUB_REF] Git Issue Updated:"
+        title: "[${{GITHUB_REF}}] Git Issue was Edited:"
         description: |
-          STATE: [${{github.event.issues.state}}]
-          Description: ${{github.event.issues.state}}
+          STATE: [${{github.event.issues}}]
+          Description: ${{github.event.issues.description}}
+          test: ${{github.event}}
