@@ -26,7 +26,7 @@ class ListApi(Resource):
             #Grab request data
             body = request.get_json()
             list_type = body["list_type"]
-            list_elements = body["list_elements"]
+            list_elements = body["list_items"]
             list_items = []
             
             # Validate that listType is a known type

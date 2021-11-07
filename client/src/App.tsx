@@ -9,10 +9,10 @@ import {
 } from "./components/pages";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import { ListArray } from "./lists/ListInterfaces";
+import { getListById, ListArray, ListType } from "./lists/ListInterfaces";
 
-export const flask_url = "https://giftlists-api.herokuapp.com";
-// export const flask_url = "http://localhost:5000";
+// export const flask_url = "https://giftlists-api.herokuapp.com";
+export const flask_url = "http://localhost:5000";
 
 const App = () => {
 
@@ -24,6 +24,8 @@ const App = () => {
   const [userAuthToken, updateUserAuthToken] = useState(authToken);
   const [userInfo, updateUserInfo] = useState<any>();
   const [userListData, updateUserListData] = useState<ListArray>();
+  const [activeListId, updateActiveListId] = useState<string>();
+  const [activeListData, updateActiveListData] = useState<ListType>();
 
   useEffect(() => {
     if (loggedIn) {
@@ -40,8 +42,14 @@ const App = () => {
   }, [userInfo, loggedIn, userAuthToken])
 
   useEffect(() => {
-    console.log(userInfo, userListData)
+    // console.log(userInfo, userListData)
   }, [userInfo, userListData])
+
+  useEffect(() => {
+    if (activeListId && userListData) {
+      updateActiveListData(getListById(userListData, activeListId));
+    }
+  }, [userListData, activeListId]);
 
   const login = (token : string) => {
     updateLoggedIn(true);
@@ -72,7 +80,7 @@ const App = () => {
           <UnProtectedRoute path="/forgot" loggedIn={loggedIn} exact={true} component={Forgot} />
           <UnProtectedRoute path="/reset" loggedIn={loggedIn} exact={true} component={Reset} />
           <ProtectedRoute path="/welcome" loggedIn={loggedIn} token={userAuthToken} logout={logout} userInfo={userInfo} userListData={userListData} exact={true} component={Welcome}/>
-          <ProtectedRoute path="/lists" loggedIn={loggedIn} userListData={userListData} token={userAuthToken} grabUserListData={updateUserListData} userInfo={userInfo} exact={true} component={Lists}/>
+          <ProtectedRoute path="/lists" loggedIn={loggedIn} userListData={userListData} token={userAuthToken} updateUserListData={updateUserListData} userInfo={userInfo} activeListId={activeListId} updateActiveListId={updateActiveListId} activeListData={activeListData} updateActiveListData={updateActiveListData} exact={true} component={Lists}/>
           <ProtectedRoute path="/profile" loggedIn={loggedIn} exact={true} component={Profile}/>
           <ProtectedRoute path="/friends" loggedIn={loggedIn} exact={true} component={Friends}/>
           <ProtectedRoute path="/calendar" loggedIn={loggedIn} exact={true} component={Calendar}/>

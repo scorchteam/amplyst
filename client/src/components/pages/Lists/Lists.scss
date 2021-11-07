@@ -251,3 +251,21 @@
 .hover-pointer {
     cursor: pointer;
 }
+
+.custom-dropdown-menu {
+    background-color: var(--header-color)!important;
+    color: var(--text-accent-color-bright)!important;
+    padding: 0.5rem!important;
+    border-radius: 0.5rem!important;
+}
+
+.dropdown-item {
+    color: var(--text-accent-color-bright)!important;
+    border-radius: 0.5rem;
+    font-weight: bold!important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--header-color-light)!important;
+    text-decoration: none;
+}

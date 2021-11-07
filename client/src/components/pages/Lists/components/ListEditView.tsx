@@ -12,7 +12,7 @@ interface ListProps {
     activeListData: ListType | undefined,
     updateEditView: any
 }
-const ListView = (props: ListProps) => {
+const ListEditView = (props: ListProps) => {
 
     return (
         <div className="list-sub-container-style">
@@ -20,6 +20,7 @@ const ListView = (props: ListProps) => {
             {
                 props.activeListData &&
                 <div className="list-view-container">
+                    Fuck me harder
                     <div className="list-view-top">
                         <ListViewTop listData={props.activeListData} updateEditView={props.updateEditView} />
                     </div>
@@ -35,4 +36,4 @@ const ListView = (props: ListProps) => {
     );
 }
 
-export default withRouter(ListView);
+export default withRouter(ListEditView);

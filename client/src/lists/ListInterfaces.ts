@@ -36,25 +36,25 @@ export type ListItemsType = GiftListItem | TodoListItem | ShoppingListItem;
 
 //List interfaces
 export interface GenericList {
-    readonly id: string;
-    name: string;
-    description: string;
-    date_created: number;
-    date_last_modified: number;
+    readonly id?: string;
+    list_name: string;
+    list_description?: string;
+    date_created?: number;
+    date_last_modified?: number;
 }
 
 export interface GiftList extends GenericList {
-    type?: "gift";
+    list_type?: "gift";
     list_items: GiftListItem[];
 }
 
 export interface ShoppingList extends GenericList {
-    type?: "shopping";
+    list_type?: "shopping";
     list_items: ShoppingListItem[];
 }
 
 export interface TodoList extends GenericList {
-    type?: "todo";
+    list_type?: "todo";
     list_items: TodoListItem[];
 }
 
@@ -78,15 +78,9 @@ export const grabUserListData = async (flask_url: string, token: string) => {
                   'Authorization': 'Bearer ' + token,
                   'Origin': flask_url }
     };
-    return await fetch(flask_url + "/api/user/lists", requestOptions)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        return createListArray(data);
-    })
-    .catch(error => {
-        //console.log(error);
-    })
+    const requestData = await fetch(flask_url + "/api/user/lists", requestOptions);
+    const listArray = createListArray(await requestData.json());
+    return listArray;
 }
 
 export function createListArray (listData : any[]) {
@@ -96,12 +90,12 @@ export function createListArray (listData : any[]) {
         const list_type = list.list_type.toLowerCase();
         let list_details = {
             id: list._id.$oid,
-            name: list.list_name,
-            description: list.list_description,
+            list_name: list.list_name,
+            list_description: list.list_description,
             date_created: list.date_created.$date,
             date_last_modified: list.date_last_modified.$date,
             list_items: getListItemsArray(list.list_items, list_type),
-            type: list.list_type,
+            list_type: list.list_type,
         };
         if (list_type === "todo") {
             let newTodoList : TodoList = list_details;
@@ -187,7 +181,7 @@ export function getMinimalListData (list_array : ListArray) {
     list_array.forEach(list => {
         // console.log(list)
         let newMinimalList : MinimalList = {
-            name: list.name,
+            name: list.list_name,
             id: list.id
         }
         minimal_list_array.push(newMinimalList);
@@ -230,8 +224,8 @@ export function getListType (list : ListType) : string {
     if (!list) {
         return "";
     }
-    if (list.type) {
-        return list.type.toUpperCase();
+    if (list.list_type) {
+        return list.list_type.toUpperCase();
     }
     return "";
 }
@@ -249,8 +243,8 @@ export function getListName(list : ListType) : string {
     if (!list) {
         return "";
     }
-    if (list.name) {
-        return list.name;
+    if (list.list_name) {
+        return list.list_name;
     }
     return "";
 }
@@ -259,8 +253,8 @@ export function getListDescription(list : ListType) : string {
     if (!list) {
         return "";
     }
-    if (list.description) {
-        return list.description;
+    if (list.list_description) {
+        return list.list_description;
     }
     return "";
 }

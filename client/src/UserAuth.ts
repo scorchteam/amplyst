@@ -32,7 +32,7 @@ export const fetchUserListData = async (userAuthToken : any, updateUserListData 
     fetch(flask_url + "/api/user/lists", requestOptions)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        // console.log(data);
         updateUserListData(createListArray(data));
     })
     .catch(error => {

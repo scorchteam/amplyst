@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { flask_url } from "../../../App";
 import { deleteList, getListById, ListArray, ListType } from "../../../lists/ListInterfaces";
 import { fetchUserListData } from "../../../UserAuth";
 import { User } from "../../../UserInterface";
+import ListEditView from "./components/ListEditView";
 import ListsSidePanel from "./components/ListsSidePanel";
 import ListView from "./components/ListView";
 import "./Lists.scss";
@@ -15,7 +16,7 @@ import "./Lists.scss";
  * @returns render of the /lists page
  */
 interface ListProps {
-  grabUserListData: any,
+  updateUserListData: any,
   history: any,
   location: any,
   logout: any,
@@ -23,47 +24,25 @@ interface ListProps {
   staticContext: any,
   token: string,
   userInfo: User,
-  userListData: ListArray
+  userListData: ListArray,
+  activeListId: string,
+  updateActiveListId: any,
+  activeListData: ListType,
+  updateActiveListData: any
 }
 const Lists = (props: ListProps) => {
 
-  const [userAuthToken, updateUserAuthToken] = useState<string>();
-  const [userInfo, updateUserInfo] = useState<User>();
-  const [userListData, updateUserListData] = useState<ListArray>();
-  const [activeListId, updateActiveListId] = useState<string>();
-  const [activeListData, updateActiveListData] = useState<ListType>();
-
-  useEffect(() => {
-    updateUserInfo(props.userInfo);
-  }, [props.userInfo]);
-
-  useEffect(() => {
-    updateUserListData(props.userListData);
-  }, [props.userListData]);
-
-  useEffect(() => {
-    updateUserAuthToken(props.token);
-  }, [props.token]);
-
-  useEffect(() => {
-    if (activeListId && userListData) {
-      updateActiveListData(getListById(userListData, activeListId));
-    }
-  }, [activeListId, userListData]);
-
-  useEffect(() => {
-    console.log(userInfo);
-  })
+  const [editView, updateEditView] = useState<Boolean>(false);
 
   const deleteUserList = async (id: string) => {
-    if (userAuthToken) {
-      deleteList(flask_url, userAuthToken, id)
+    if (props.token) {
+      deleteList(flask_url, props.token, id)
         .then(data => {
           if ("success" in data) {
-            fetchUserListData(userAuthToken, updateUserListData);
-            if(activeListId === id) {
-              updateActiveListId(undefined);
-              updateActiveListData(undefined);
+            fetchUserListData(props.token, props.updateUserListData);
+            if(props.activeListId === id) {
+              props.updateActiveListId(undefined);
+              props.updateActiveListData(undefined);
             }
           }
         })
@@ -74,12 +53,19 @@ const Lists = (props: ListProps) => {
     <Container fluid="md">
       <div className="lists-container">
         <div className="lists-container-col-1">
-          <ListsSidePanel userListData={userListData} deleteUserList={deleteUserList} updateActiveListId={updateActiveListId} 
+          <ListsSidePanel userListData={props.userListData} deleteUserList={deleteUserList} updateActiveListId={props.updateActiveListId} 
           token={props.token}
-          grabUserListData={props.grabUserListData} />
+          updateUserListData={props.updateUserListData} />
         </div>
         <div className="lists-container-col2">
-          <ListView activeListData={activeListData} />
+          {
+            editView &&
+            <ListEditView activeListData={props.activeListData} updateEditView={updateEditView} />
+          }
+          {
+            !editView &&
+            <ListView activeListData={props.activeListData} updateEditView={updateEditView} />
+          }
         </div>
       </div>
     </Container>
