@@ -22,5 +22,3 @@ jobs:
         description: |
           Title: ${{github.event.issue.title}}
           Description: ${{github.event.issue.body}}
-          Asignee: ${{github.event.issue.assignee.login}}
-          Asignees: ${{github.event.issue.assignees.login}}
