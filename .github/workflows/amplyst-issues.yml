@@ -21,4 +21,4 @@ jobs:
         title: "[${{github.event.repository.name}}] Git Issue was Edited:"
         description: |
           Title: [${{github.event.issue.title}}]
-          Description: ${{github.event.issues.body}}
+          Description: ${{github.event.issue.body}}
