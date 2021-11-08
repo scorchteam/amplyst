@@ -10,7 +10,7 @@ interface ListProps {
     listData: ListType | undefined,
     updateEditView: any
 }
-const ListView = (props: ListProps) => {
+const ListViewTop = (props: ListProps) => {
 
     const [listData, updateListData] = useState<ListType>();
 
@@ -43,4 +43,4 @@ const ListView = (props: ListProps) => {
     );
 }
 
-export default withRouter(ListView);
+export default withRouter(ListViewTop);

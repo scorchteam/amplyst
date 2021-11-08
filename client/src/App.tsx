@@ -42,7 +42,7 @@ const App = () => {
   }, [userInfo, loggedIn, userAuthToken])
 
   useEffect(() => {
-    // console.log(userInfo, userListData)
+    console.log(userInfo, userListData)
   }, [userInfo, userListData])
 
   useEffect(() => {

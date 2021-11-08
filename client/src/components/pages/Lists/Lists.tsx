@@ -33,6 +33,15 @@ interface ListProps {
 const Lists = (props: ListProps) => {
 
   const [editView, updateEditView] = useState<Boolean>(false);
+  const [activeListEdit, updateActiveListEdit] = useState<ListType>();
+
+  useEffect(() => {
+    updateActiveListEdit({...props.activeListData});
+  }, [props.activeListData]);
+
+  useEffect(() => {
+    console.log("Active list data to be edited: ", activeListEdit);
+  }, [activeListEdit])
 
   const deleteUserList = async (id: string) => {
     if (props.token) {

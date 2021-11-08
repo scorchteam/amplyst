@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { ListType } from "../../../../lists/ListInterfaces";
 import ListViewItems from "./ListView/ListViewItems";
@@ -24,10 +25,10 @@ const ListView = (props: ListProps) => {
                         <ListViewTop listData={props.activeListData} updateEditView={props.updateEditView} />
                     </div>
                     <div className="list-view-items">
-                        <ListViewItems listData={props.activeListData} />
+                        <ListViewItems listData={props.activeListData} updateEditView={props.updateEditView} />
                     </div>
-                    <div className="list-edit-button-container">
-                        Button
+                    <div className="list-view-button-container">
+                        <Button className="custom-button" variant="primary" onClick={() => props.updateEditView(true)}><div className="custom-edit-button">Edit <i className="fas fa-edit list-edit-icon-small"/></div></Button>
                     </div>
                 </div>
             }

@@ -8,9 +8,8 @@ interface ListProps {
     match: any,
     staticContext: any,
     listData: ListType | undefined,
-    updateEditView: any
 }
-const ListViewItems = (props: ListProps) => {
+const ListEditViewItems = (props: ListProps) => {
 
     const [listData, updateListData] = useState<ListType>();
     const [listItems, updateListItems] = useState<ListItemsType[]>();
@@ -109,7 +108,7 @@ const ListViewItems = (props: ListProps) => {
 
     return (
         <ul>
-            <li id="list-view-first-element" onClick={() => props.updateEditView(true)}>
+            <li id="list-view-first-element">
                 <i className="fas fa-plus"></i>
                 <p>Add New Item</p>
             </li>
@@ -118,4 +117,4 @@ const ListViewItems = (props: ListProps) => {
     );
 }
 
-export default withRouter(ListViewItems);
+export default withRouter(ListEditViewItems);
