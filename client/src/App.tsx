@@ -10,6 +10,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import { getListById, ListArray, ListType } from "./lists/ListInterfaces";
+import { asyncSubmitEditedList } from "./lists/ListHelpers";
 
 // export const flask_url = "https://giftlists-api.herokuapp.com";
 export const flask_url = "http://localhost:5000";
@@ -42,8 +43,8 @@ const App = () => {
   }, [userInfo, loggedIn, userAuthToken])
 
   useEffect(() => {
-    console.log(userInfo, userListData)
-  }, [userInfo, userListData])
+    console.log(userAuthToken);
+  }, [userAuthToken]);
 
   useEffect(() => {
     if (activeListId && userListData) {
@@ -51,7 +52,7 @@ const App = () => {
     }
   }, [userListData, activeListId]);
 
-  const login = (token : string) => {
+  const login = (token: string) => {
     updateLoggedIn(true);
     updateUserAuthToken(token);
     localStorage.setItem('token', token);
@@ -62,6 +63,17 @@ const App = () => {
     updateLoggedIn(false);
     updateUserAuthToken(null);
     localStorage.removeItem('token');
+  }
+
+  const submitEditedList = (editedList: ListType, authToken: string) => {
+    console.log("here")
+    if (editedList && userAuthToken) {
+      console.log(userAuthToken);
+      asyncSubmitEditedList(editedList, userAuthToken)
+        .then(() => {
+          fetchUserListData(userAuthToken, updateUserListData);
+        })
+    }
   }
 
   return (
@@ -79,12 +91,12 @@ const App = () => {
           <UnProtectedRoute path="/register" loggedIn={loggedIn} exact={true} component={Register} />
           <UnProtectedRoute path="/forgot" loggedIn={loggedIn} exact={true} component={Forgot} />
           <UnProtectedRoute path="/reset" loggedIn={loggedIn} exact={true} component={Reset} />
-          <ProtectedRoute path="/welcome" loggedIn={loggedIn} token={userAuthToken} logout={logout} userInfo={userInfo} userListData={userListData} exact={true} component={Welcome}/>
-          <ProtectedRoute path="/lists" loggedIn={loggedIn} userListData={userListData} token={userAuthToken} updateUserListData={updateUserListData} userInfo={userInfo} activeListId={activeListId} updateActiveListId={updateActiveListId} activeListData={activeListData} updateActiveListData={updateActiveListData} exact={true} component={Lists}/>
-          <ProtectedRoute path="/profile" loggedIn={loggedIn} exact={true} component={Profile}/>
-          <ProtectedRoute path="/friends" loggedIn={loggedIn} exact={true} component={Friends}/>
-          <ProtectedRoute path="/calendar" loggedIn={loggedIn} exact={true} component={Calendar}/>
-          <ProtectedRoute path="/settings" loggedIn={loggedIn} exact={true} component={Settings}/>
+          <ProtectedRoute path="/welcome" loggedIn={loggedIn} token={userAuthToken} logout={logout} userInfo={userInfo} userListData={userListData} exact={true} component={Welcome} />
+          <ProtectedRoute path="/lists" loggedIn={loggedIn} userListData={userListData} token={userAuthToken} updateUserListData={updateUserListData} userInfo={userInfo} activeListId={activeListId} updateActiveListId={updateActiveListId} activeListData={activeListData} updateActiveListData={updateActiveListData} submitEditedList={submitEditedList} exact={true} component={Lists} />
+          <ProtectedRoute path="/profile" loggedIn={loggedIn} exact={true} component={Profile} />
+          <ProtectedRoute path="/friends" loggedIn={loggedIn} exact={true} component={Friends} />
+          <ProtectedRoute path="/calendar" loggedIn={loggedIn} exact={true} component={Calendar} />
+          <ProtectedRoute path="/settings" loggedIn={loggedIn} exact={true} component={Settings} />
           <Route path="/privacy-policy" exact component={() => <PrivacyPolicy />} />
           <Route path="/terms-and-conditions" exact component={() => <TermsAndConditions />} />
 

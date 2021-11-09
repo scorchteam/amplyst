@@ -54,3 +54,26 @@ export const submitNewEmptyList = async ( newEmptyList : ListType, authToken : s
             console.log(error);
         })
 }
+
+export const asyncSubmitEditedList = async (editedList : ListType, authToken : string) => {
+    console.log(editedList);
+    /** Create POST request options */
+    const requestOptions = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'crossorigin': 'true',
+            'Authorization': 'Bearer ' + authToken,
+            'Origin': flask_url
+        },
+        body: JSON.stringify(editedList)
+    };
+    console.log(requestOptions);
+    // console.log(requestOptions.body);
+    if(editedList && editedList.id) {
+        const requestData = await fetch(flask_url + "/api/user/list/" + editedList.id, requestOptions);
+        return requestData;
+    }
+    
+    return undefined;
+}

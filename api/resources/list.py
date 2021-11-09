@@ -30,15 +30,15 @@ class ListApi(Resource):
             list_items = []
             
             # Validate that listType is a known type
-            if list_type not in list_types:
+            if list_type.lower() not in list_types:
                 return {"Error": "Invalid List Type '" + str(list_type) + "' in field list_type"}, 400
 
             #Create list items list
-            if (list_type == "gift"):
+            if (list_type.lower() == "gift"):
                 list_items = createGiftListItems(list_items, list_elements)
-            elif (list_type == "todo"):
+            elif (list_type.lower() == "todo"):
                 list_items = createTodoListItems(list_items, list_elements)
-            elif (list_type == "shopping"):
+            elif (list_type.lower() == "shopping"):
                 list_items = createShoppingListItems(list_items, list_elements)
             else:
                 return {"Error": "Invalid List Type '" + str(list_type) + "' in field list_type"}, 400
@@ -109,7 +109,7 @@ def createTodoListItems(list_items, list_elements):
         element = parseGenericBodyDates(element)
         element = getItemId(element)
         if "item_due_date" in element:
-            element["item_due_date"] = datetime.strptime(element["item_due_date"], '%Y-%m-%d %H:%M:%S.%f')
+            element["item_due_date"] = datetime.fromtimestamp(element["item_due_date"] / 1e3)
         element = convertStringBoolean(element, "item_is_checked")
         list_items.append( 
             TodoListItem(**element)   
@@ -128,9 +128,9 @@ def createShoppingListItems(list_items, list_elements):
 
 def parseGenericBodyDates(element):
     if "item_creation_date" in element:
-        element["item_creation_date"] = datetime.strptime(element["item_creation_date"], '%Y-%m-%d %H:%M:%S.%f')
+        element["item_creation_date"] = datetime.fromtimestamp(element["item_creation_date"] / 1e3)
     if "item_last_modified_date" in element:
-        element["item_last_modified_date"] = datetime.strptime(element["item_last_modified_date"], '%Y-%m-%d %H:%M:%S.%f')
+        element["item_last_modified_date"] = datetime.fromtimestamp(element["item_last_modified_date"] / 1e3)
     return element
 
 def getItemId(element):

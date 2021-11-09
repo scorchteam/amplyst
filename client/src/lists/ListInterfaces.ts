@@ -6,30 +6,30 @@
 //List items interfaces
 export interface GenericListItem {
     readonly id: string;
-    name: string;
-    description?: string;
+    item_name: string;
+    item_description?: string;
 }
 
 export interface GiftListItem extends GenericListItem {
-    price?: number | 0.00;
-    intended_for_name?: string;
-    intended_for_id?: string;
-    is_bought?: boolean;
-    bought_by_name?: string;
-    bought_by_id?: string;
-    link?: string;
+    item_price?: number | 0.00;
+    item_intended_for_name?: string;
+    item_intended_for_id?: string;
+    item_is_bought?: boolean;
+    item_bought_by_name?: string;
+    item_bought_by_id?: string;
+    item_link?: string;
 }
 
 export interface ShoppingListItem extends GenericListItem {
-    is_bought?: boolean;
-    price?: number;
-    location?: string;
-    link?: string;
+    item_is_bought?: boolean;
+    item_price?: number;
+    item_location?: string;
+    item_link?: string;
 }
 
 export interface TodoListItem extends GenericListItem {
-    is_checked?: boolean;
-    due_date?: number;
+    item_is_checked?: boolean;
+    item_due_date?: number;
 }
 
 export type ListItemsType = GiftListItem | TodoListItem | ShoppingListItem;
@@ -136,10 +136,10 @@ export function getListItemsArray (list_items: any[], list_type: string) {
 export function createTodoListItem (item: any) {
     let newTodoListItem : TodoListItem = {
         id: item.item_id.$oid,
-        name: item.item_name,
-        description: item.item_description,
-        is_checked: item.item_is_checked,
-        due_date: item.item_due_date.$date
+        item_name: item.item_name,
+        item_description: item.item_description,
+        item_is_checked: item.item_is_checked,
+        item_due_date: item.item_due_date.$date
     }
     return newTodoListItem
 }
@@ -147,15 +147,15 @@ export function createTodoListItem (item: any) {
 export function createGiftListItem (item: any) {
     let newGiftListItem : GiftListItem = {
         id: item.item_id.$oid,
-        name: item.item_name,
-        description: item.item_description,
-        price: item.item_price,
-        intended_for_name: item.item_intended_for_name,
-        intended_for_id: item.item_intended_for_id.$oid,
-        is_bought: item.item_is_bought,
-        bought_by_name: item.item_bought_by_name,
-        bought_by_id: item.item_bought_by_id.$oid,
-        link: item.item_link
+        item_name: item.item_name,
+        item_description: item.item_description,
+        item_price: item.item_price,
+        item_intended_for_name: item.item_intended_for_name,
+        item_intended_for_id: item.item_intended_for_id.$oid,
+        item_is_bought: item.item_is_bought,
+        item_bought_by_name: item.item_bought_by_name,
+        item_bought_by_id: item.item_bought_by_id.$oid,
+        item_link: item.item_link
     }
     return newGiftListItem
 }
@@ -163,12 +163,12 @@ export function createGiftListItem (item: any) {
 export function createShoppingListItem (item: any) {
     let newShoppingListItem : ShoppingListItem = {
         id: item.item_id.$oid,
-        name: item.item_name,
-        description: item.item_description,
-        is_bought: item.item_is_bought,
-        price: item.item_price,
-        location: item.item_location,
-        link: item.item_link
+        item_name: item.item_name,
+        item_description: item.item_description,
+        item_is_bought: item.item_is_bought,
+        item_price: item.item_price,
+        item_location: item.item_location,
+        item_link: item.item_link
     }
     return newShoppingListItem
 }

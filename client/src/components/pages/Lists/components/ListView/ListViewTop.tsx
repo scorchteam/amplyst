@@ -14,7 +14,7 @@ const ListViewTop = (props: ListProps) => {
 
     const [listData, updateListData] = useState<ListType>();
 
-    console.log(props);
+    // console.log(props);
 
     useEffect(() => {
         if(props.listData) {

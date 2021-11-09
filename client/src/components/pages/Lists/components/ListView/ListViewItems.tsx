@@ -32,10 +32,10 @@ const ListViewItems = (props: ListProps) => {
             return listItems.map((item, index) => (
                 <li key={index}>
                     <div className="list-item-header">
-                        <p className="list-item-title">{item.name && item.name}</p>
-                        <input type="checkbox" defaultChecked={(item as TodoListItem).is_checked}></input>
+                        <p className="list-item-title">{item.item_name && item.item_name}</p>
+                        <input type="checkbox" defaultChecked={(item as TodoListItem).item_is_checked}></input>
                     </div>
-                    <i><p>{item.description && item.description}</p></i>
+                    <i><p>{item.item_description && item.item_description}</p></i>
                 </li>
             ));
         }
@@ -47,14 +47,14 @@ const ListViewItems = (props: ListProps) => {
             return listItems.map((item, index) => (
                 <li key={index}>
                     <div className="list-item-header">
-                        <p className="list-item-title">{item.name && item.name}</p>
+                        <p className="list-item-title">{item.item_name && item.item_name}</p>
                         <div className="list-item-header-right">
-                            <p className="list-item-price">${(item as GiftListItem).price && (item as GiftListItem).price?.toFixed(2)}</p>
-                            <input type="checkbox" defaultChecked={(item as GiftListItem).is_bought}></input>
+                            <p className="list-item-price">${(item as GiftListItem).item_price && (item as GiftListItem).item_price?.toFixed(2)}</p>
+                            <input type="checkbox" defaultChecked={(item as GiftListItem).item_is_bought}></input>
                         </div>
                     </div>
-                    <i><p>{item.description && item.description}</p></i>
-                    <a href={(item as GiftListItem).link && (item as GiftListItem).link}>{(item as GiftListItem).link && (item as GiftListItem).link}</a>
+                    <i><p>{item.item_description && item.item_description}</p></i>
+                    <a href={(item as GiftListItem).item_link && (item as GiftListItem).item_link}>{(item as GiftListItem).item_link && (item as GiftListItem).item_link}</a>
                     {/* <p>boughtBy: {(item as GiftListItem).bought_by_name && (item as GiftListItem).bought_by_name}</p> */}
                 </li>
             ))
@@ -67,15 +67,15 @@ const ListViewItems = (props: ListProps) => {
             return listItems.map((item, index) => (
                 <li key={index}>
                     <div className="list-item-header">
-                        <p className="list-item-title">{item.name && item.name}</p>
+                        <p className="list-item-title">{item.item_name && item.item_name}</p>
                         <div className="list-item-header-right">
-                            <p className="list-item-price">${(item as ShoppingListItem).price && (item as ShoppingListItem).price?.toFixed(2)}</p>
-                            <input type="checkbox" defaultChecked={(item as ShoppingListItem).is_bought}></input>
+                            <p className="list-item-price">${(item as ShoppingListItem).item_price && (item as ShoppingListItem).item_price?.toFixed(2)}</p>
+                            <input type="checkbox" defaultChecked={(item as ShoppingListItem).item_is_bought}></input>
                         </div>
                     </div>
-                    <i><p>{item.description && item.description}</p></i>
-                    <a href={(item as ShoppingListItem).link && (item as ShoppingListItem).link} >{(item as ShoppingListItem).link && (item as ShoppingListItem).link}</a>
-                    <p>{(item as ShoppingListItem).location && (item as ShoppingListItem).location}</p>
+                    <i><p>{item.item_description && item.item_description}</p></i>
+                    <a href={(item as ShoppingListItem).item_link && (item as ShoppingListItem).item_link} >{(item as ShoppingListItem).item_link && (item as ShoppingListItem).item_link}</a>
+                    <p>{(item as ShoppingListItem).item_location && (item as ShoppingListItem).item_location}</p>
                 </li>
             ))
         }

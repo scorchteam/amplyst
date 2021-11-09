@@ -323,14 +323,20 @@
         }
 
         .edit-list-delete-item {
+            height: fit-content;
             background-color: var(--text-accent-color);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 1rem;
-            padding: 0.5rem 0 0.5rem 0;
-            border-bottom-left-radius: 1rem;
-            border-bottom-right-radius: 1rem;
+            padding: 0.5rem;
+            border-radius: 1rem;
+        }
+
+        .edit-list-delete-item:hover {
+            background-color: var(--header-color);
+            transition: all ease-in-out 0.2s;
+            color: var(--text-accent-color-bright);
         }
     }
 }
@@ -362,6 +368,8 @@
 }
 
 .edit-list-todo-checkbox {
+    padding: 0 0 1rem 1rem;
+    display: flex;
 
     .form-check {
         display: flex;
