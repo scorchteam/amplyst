@@ -25,7 +25,7 @@ class GiftListItem(GenericListItem):
     item_bought_by_name=db.StringField(default="")
     # item_bought_by_id=db.ObjectIdField()
     item_bought_by_id=db.StringField()
-    item_link=db.URLField(default="")
+    item_link=db.URLField()
 
 class TodoListItem(GenericListItem):
     item_is_checked=db.BooleanField(required=True, default=False)
@@ -33,9 +33,9 @@ class TodoListItem(GenericListItem):
 
 class ShoppingListItem(GenericListItem):
     item_is_bought=db.BooleanField(default=False)
-    item_price=db.DecimalField(default=0.00, min_value=0.00, precision=2, max_value=100000.00)
+    item_price=db.DecimalField(default=0.00, min_value=0.00, precision=2)
     item_location=db.StringField(default="")
-    item_link=db.URLField(default="")
+    item_link=db.URLField()
 
 class GenericList(db.Document):
     meta = {

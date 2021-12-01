@@ -5,7 +5,7 @@
 
 //List items interfaces
 export interface GenericListItem {
-    readonly id: string;
+    readonly item_id?: string;
     item_name: string;
     item_description?: string;
 }
@@ -135,40 +135,27 @@ export function getListItemsArray (list_items: any[], list_type: string) {
 
 export function createTodoListItem (item: any) {
     let newTodoListItem : TodoListItem = {
-        id: item.item_id.$oid,
-        item_name: item.item_name,
-        item_description: item.item_description,
-        item_is_checked: item.item_is_checked,
-        item_due_date: item.item_due_date.$date
+        ...item,
+        id: item.item_id?.$oid,
+        item_due_date: item.item_due_date?.$date
     }
     return newTodoListItem
 }
 
 export function createGiftListItem (item: any) {
     let newGiftListItem : GiftListItem = {
-        id: item.item_id.$oid,
-        item_name: item.item_name,
-        item_description: item.item_description,
-        item_price: item.item_price,
-        item_intended_for_name: item.item_intended_for_name,
-        item_intended_for_id: item.item_intended_for_id.$oid,
-        item_is_bought: item.item_is_bought,
-        item_bought_by_name: item.item_bought_by_name,
-        item_bought_by_id: item.item_bought_by_id.$oid,
-        item_link: item.item_link
+        ...item,
+        id: item.item_id?.$oid,
+        item_intended_for_id: item.item_intended_for_id?.$oid,
+        item_bought_by_id: item.item_bought_by_id?.$oid,
     }
     return newGiftListItem
 }
 
 export function createShoppingListItem (item: any) {
     let newShoppingListItem : ShoppingListItem = {
-        id: item.item_id.$oid,
-        item_name: item.item_name,
-        item_description: item.item_description,
-        item_is_bought: item.item_is_bought,
-        item_price: item.item_price,
-        item_location: item.item_location,
-        item_link: item.item_link
+        ...item,
+        id: item.item_id?.$oid,
     }
     return newShoppingListItem
 }

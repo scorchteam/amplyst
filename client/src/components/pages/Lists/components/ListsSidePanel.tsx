@@ -95,9 +95,9 @@ const ListsSidePanel = (props: any) => {
         </Dropdown.Menu>
       </Dropdown>
       <p></p>
-      <Button className="custom-button" variant="primary" onClick={() => addExampleList(flask_url, props.token, props.updateUserListData)}>
+      {/* <Button className="custom-button" variant="primary" onClick={() => addExampleList(flask_url, props.token, props.updateUserListData)}>
         Add an example list
-      </Button>
+      </Button> */}
       <ul className="my-lists-list">
         {iterateOutListNames(minimalListData)}
       </ul>

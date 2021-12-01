@@ -134,7 +134,10 @@ def parseGenericBodyDates(element):
     return element
 
 def getItemId(element):
-    element["item_id"] = objectid.ObjectId()
+    if("item_id" in element and element["item_id"] is not ""):
+        element["item_id"] = objectid.ObjectId(element["item_id"]["$oid"])
+    else:
+        element["item_id"] = objectid.ObjectId()
     return element
 
 def convertStringBoolean(element, key):

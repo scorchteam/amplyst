@@ -12,24 +12,13 @@ interface ListProps {
 }
 const ListViewItems = (props: ListProps) => {
 
-    const [listData, updateListData] = useState<ListType>();
-    const [listItems, updateListItems] = useState<ListItemsType[]>();
-
     useEffect(() => {
-        if(props.listData) {
-            updateListData(props.listData);
-        }
-    }, [props.listData]);
-
-    useEffect(() => {
-        if (listData && listData.list_items) {
-            updateListItems(listData.list_items);
-        }
-    }, [listData]);
+        console.log("New list data", props.listData);
+    }, [props.listData])
 
     const iterateTodoListItems = () => {
-        if (listItems) {
-            return listItems.map((item, index) => (
+        if (props.listData?.list_items) {
+            return props.listData?.list_items.map((item, index) => (
                 <li key={index}>
                     <div className="list-item-header">
                         <p className="list-item-title">{item.item_name && item.item_name}</p>
@@ -43,8 +32,8 @@ const ListViewItems = (props: ListProps) => {
     }
 
     const iterateGiftListItems = () => {
-        if (listItems) {
-            return listItems.map((item, index) => (
+        if (props.listData?.list_items) {
+            return props.listData?.list_items.map((item, index) => (
                 <li key={index}>
                     <div className="list-item-header">
                         <p className="list-item-title">{item.item_name && item.item_name}</p>
@@ -63,8 +52,8 @@ const ListViewItems = (props: ListProps) => {
     }
 
     const iterateShoppingListItems = () => {
-        if (listItems) {
-            return listItems.map((item, index) => (
+        if (props.listData?.list_items) {
+            return props.listData?.list_items.map((item, index) => (
                 <li key={index}>
                     <div className="list-item-header">
                         <p className="list-item-title">{item.item_name && item.item_name}</p>
@@ -83,14 +72,14 @@ const ListViewItems = (props: ListProps) => {
     }
 
     const iterateListItems = () => {
-        if (listData && isEmpty(listData)) {
+        if (props.listData && isEmpty(props.listData)) {
             return (
                 <></>
             );
         }
         var listType : string | undefined = undefined;
-        if (listData) {
-            listType = getListType(listData);
+        if (props.listData) {
+            listType = getListType(props.listData);
         }
         if (listType) {
             switch(listType) {
@@ -110,8 +99,8 @@ const ListViewItems = (props: ListProps) => {
     return (
         <ul>
             <li id="list-view-first-element" onClick={() => props.updateEditView(true)}>
-                <i className="fas fa-plus"></i>
-                <p>Add New Item</p>
+                <i className="fas fa-edit"></i>
+                <p>Edit List</p>
             </li>
             {iterateListItems()}
         </ul>

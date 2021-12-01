@@ -1,5 +1,5 @@
 import { flask_url } from "../App"
-import { GiftList, ListType, ShoppingList, TodoList } from "./ListInterfaces"
+import { getListType, GiftList, GiftListItem, ListItemsType, ListType, ShoppingList, ShoppingListItem, TodoList } from "./ListInterfaces"
 
 export const createEmptyTodoList = () => {
     let newEmptyTodoList : TodoList = {
@@ -76,4 +76,14 @@ export const asyncSubmitEditedList = async (editedList : ListType, authToken : s
     }
     
     return undefined;
+}
+
+export function addNewListItemAndPut(activeListEdit : ListType | undefined, token : string) {
+    if(!activeListEdit){return;};
+    var copyOfActiveListEdit = JSON.parse(JSON.stringify(activeListEdit));
+    let newItem : ListItemsType = {
+        item_name: ""
+    }
+    copyOfActiveListEdit.list_items?.push(newItem);
+    asyncSubmitEditedList(copyOfActiveListEdit, token);
 }
