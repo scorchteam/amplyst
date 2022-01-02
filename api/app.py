@@ -55,7 +55,7 @@ initialize_routes(api)
 #Base route
 @app.route('/')
 def root():
-    return {"Hello": "World!"}
+    return '<html style="margin: 0; padding: 0"><body style="margin: 0; padding: 0"><img id="gif" class="nlSABoG9CSaJpsufv8WW9 _3vYn8QjoEvrXxHyqdn9ddZ _2XBDTIVigBJDybhZvL-hU3" src="https://media2.giphy.com/media/Nx0rz3jtxtEre/200w.webp?cid=dda24d50b6865d08310745854cc23e585f3a7d434fe381ba&amp;rid=200w.webp&amp;ct=g" srcset="https://media2.giphy.com/media/Nx0rz3jtxtEre/200w.webp?cid=dda24d50b6865d08310745854cc23e585f3a7d434fe381ba&amp;rid=200w.webp&amp;ct=g 200w,https://media2.giphy.com/media/Nx0rz3jtxtEre/giphy.webp?cid=dda24d50b6865d08310745854cc23e585f3a7d434fe381ba&amp;rid=giphy.webp&amp;ct=g 480w," sizes="100vw" alt=""></body></html>'
 
 
 #Run the flask app

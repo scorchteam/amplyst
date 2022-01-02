@@ -20,7 +20,7 @@ class ListItemsApi(Resource):
             #Grab request data
             body = request.get_json(force=True)
             list_type = body["list_type"]
-            body_list_elements = body["list_elements"]
+            body_list_elements = body["list_items"]
             new_list_elements = []
 
             # Validate that listType is a known type

@@ -6,7 +6,8 @@ export interface User {
     first_name: string,
     last_name?: string,
     email: string,
-    address?: Address
+    address?: Address,
+    err?: string
 }
 
 export interface Address {
@@ -22,7 +23,8 @@ export function createUserObject (userData : any) {
         first_name: userData.first_name,
         last_name: userData.last_name,
         email: userData.email,
-        address: userData.address
+        address: userData.address,
+        err: userData.err
     }
     return newUser
 }
