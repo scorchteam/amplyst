@@ -1,5 +1,5 @@
 import { flask_url } from "../App"
-import { getListType, GiftList, GiftListItem, ListItemsType, ListType, ShoppingList, ShoppingListItem, TodoList } from "./ListInterfaces"
+import { GiftList, ListItemsType, ListType, ShoppingList, TodoList } from "./ListInterfaces"
 
 export const createEmptyTodoList = () => {
     let newEmptyTodoList : TodoList = {

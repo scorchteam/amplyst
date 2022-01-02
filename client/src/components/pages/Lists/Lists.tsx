@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { flask_url } from "../../../App";
-import { deleteList, getListById, ListArray, ListType } from "../../../lists/ListInterfaces";
+import { deleteList, ListArray, ListType } from "../../../lists/ListInterfaces";
 import { fetchUserListData } from "../../../UserAuth";
 import { User } from "../../../UserInterface";
 import ListEditView from "./components/ListEditView";

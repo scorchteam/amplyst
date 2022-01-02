@@ -210,72 +210,74 @@ export const handleInputChange = (event: any, activeListEdit: ListType, updateAc
 }
 
 function handleTodoItemInputChange(name: string, value: string, target: any, copyOfActiveListEdit: ListType): ListType {
+    var itemIndex = undefined;
     if (name.includes("todo_item_name_")) {
-        var itemIndex = parseInt(name.replace("todo_item_name_", ""));
+        itemIndex = parseInt(name.replace("todo_item_name_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_name = value;
     }
     else if (name.includes("todo_item_description_")) {
-        var itemIndex = parseInt(name.replace("todo_item_description_", ""));
+        itemIndex = parseInt(name.replace("todo_item_description_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_description = value;
         // console.log()
     }
     else if (name.includes("todo_item_checkbox_")) {
-        var itemIndex = parseInt(name.replace("todo_item_checkbox_", ""));
+        itemIndex = parseInt(name.replace("todo_item_checkbox_", ""));
         (copyOfActiveListEdit as TodoList).list_items[itemIndex].item_is_checked = target.checked;
     }
     return copyOfActiveListEdit;
 }
 
 function handleGiftItemInputChange(name: string, value: string, target: any, copyOfActiveListEdit: ListType): ListType {
+    var itemIndex = undefined;
     if (name.includes("gift_item_name_")) {
-        var itemIndex = parseInt(name.replace("gift_item_name_", ""));
+        itemIndex = parseInt(name.replace("gift_item_name_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_name = value;
     }
     else if (name.includes("gift_item_description_")) {
-        var itemIndex = parseInt(name.replace("gift_item_description_", ""));
+        itemIndex = parseInt(name.replace("gift_item_description_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_description = value;
         // console.log()
     }
     else if (name.includes("gift_item_checkbox_")) {
-        var itemIndex = parseInt(name.replace("gift_item_checkbox_", ""));
+        itemIndex = parseInt(name.replace("gift_item_checkbox_", ""));
         (copyOfActiveListEdit as GiftList).list_items[itemIndex].item_is_bought = target.checked;
     }
     else if (name.includes("gift_item_link_")) {
-        var itemIndex = parseInt(name.replace("gift_item_link_", ""));
+        itemIndex = parseInt(name.replace("gift_item_link_", ""));
         (copyOfActiveListEdit as GiftList).list_items[itemIndex].item_link = value;
     }
     else if (name.includes("gift_item_price_")) {
-        var itemIndex = parseInt(name.replace("gift_item_price_", ""));
+        itemIndex = parseInt(name.replace("gift_item_price_", ""));
         (copyOfActiveListEdit as GiftList).list_items[itemIndex].item_price = parseFloat(value);
     }
     return copyOfActiveListEdit;
 }
 
 function handleShoppingItemInputChange(name: string, value: string, target: any, copyOfActiveListEdit: ListType): ListType {
-
+    var itemIndex = undefined;
     if (name.includes("shopping_item_name_")) {
-        var itemIndex = parseInt(name.replace("shopping_item_name_", ""));
+        itemIndex = parseInt(name.replace("shopping_item_name_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_name = value;
     }
     else if (name.includes("shopping_item_description_")) {
-        var itemIndex = parseInt(name.replace("shopping_item_description_", ""));
+        itemIndex = parseInt(name.replace("shopping_item_description_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_description = value;
         // console.log()
     }
     else if (name.includes("shopping_item_checkbox_")) {
-        var itemIndex = parseInt(name.replace("shopping_item_checkbox_", ""));
+        itemIndex = parseInt(name.replace("shopping_item_checkbox_", ""));
         (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_is_bought = target.checked;
     }
     else if (name.includes("shopping_item_link_")) {
-        var itemIndex = parseInt(name.replace("shopping_item_link_", ""));
+        itemIndex = parseInt(name.replace("shopping_item_link_", ""));
         (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_link = value;
     }
     else if (name.includes("shopping_item_price_")) {
-        var itemIndex = parseInt(name.replace("shopping_item_price_", ""));
+        itemIndex = parseInt(name.replace("shopping_item_price_", ""));
         (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_price = parseFloat(value);
     }
     else if (name.includes("shopping_item_location_")) {
-        var itemIndex = parseInt(name.replace("shopping_item_location_", ""));
+        itemIndex = parseInt(name.replace("shopping_item_location_", ""));
         (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_location = value;
     }
     return copyOfActiveListEdit;

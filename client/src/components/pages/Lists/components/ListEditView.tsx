@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { convertTimeString, getListDescription, getListName, getListType, ListItemsType, ListType } from "../../../../lists/ListInterfaces";
-import { addNewListItemAndPut } from "../../../../lists/ListHelpers";
-import { fetchUserListData } from "../../../../UserAuth";
 import { handleInputChange, iterateListItems } from "./ListEditView/ListEditViewHelpers";
 
 interface ListProps {
@@ -35,10 +33,6 @@ const ListEditView = (props: ListProps) => {
     useEffect(() => {
         props.submitEditedList(finalizedListEdit);
     }, [finalizedListEdit, props]);
-
-    function applyChanges() {
-        props.updateEditView(false);
-    }
 
     const handleSubmit = (event: any) => {
         event.preventDefault();

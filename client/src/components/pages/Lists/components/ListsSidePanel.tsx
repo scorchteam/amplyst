@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
+import { ButtonGroup, Dropdown } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { flask_url } from "../../../../App";
 import { createEmptyGiftList, createEmptyShoppingList, createEmptyTodoList, submitNewEmptyList } from "../../../../lists/ListHelpers";
-import { addExampleList, getMinimalListData, grabUserListData } from "../../../../lists/ListInterfaces";
+import { getMinimalListData, grabUserListData } from "../../../../lists/ListInterfaces";
 
 /**
  * Renders the lists side panel on /lists
@@ -13,7 +13,7 @@ import { addExampleList, getMinimalListData, grabUserListData } from "../../../.
 const ListsSidePanel = (props: any) => {
 
   const [minimalListData, updateMinimalListData] = useState<any>();
-  const [newListId, updateNewListId] = useState<string>();
+  // const [newListId, updateNewListId] = useState<string>();
 
   useEffect(() => {
     updateMinimalListData(getMinimalListData(props.userListData));
