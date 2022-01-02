@@ -158,7 +158,6 @@ function Contact() {
                         <div className="contact-us-form-container">
                             <h1>Contact Us</h1>
                             <form onSubmit={handleSubmit}>
-                                <p className="text-warning">This is a WIP and not currently functional</p>
                                 <div className="contact-us-form-name-fields">
                                     <div className="first-name-field">
                                         <Form.Label htmlFor="first_name">First Name*</Form.Label>
