@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import { withRouter } from "react-router";
 import { ListType } from "../../../../lists/ListInterfaces";
 import ListViewItems from "./ListView/ListViewItems";
@@ -10,29 +10,24 @@ interface ListProps {
     match: any,
     staticContext: any,
     activeListData: ListType | undefined,
+    updateEditView: any
 }
 const ListView = (props: ListProps) => {
 
-    const [activeListData, updateActiveListData] = useState<ListType>();
-
-    useEffect(() => {
-        updateActiveListData(props.activeListData);
-    }, [props.activeListData]);
-
     return (
         <div className="list-sub-container-style">
-            {!activeListData && <h4>Select a list or create a new one</h4>}
+            {!props.activeListData && <h4>Select a list or create a new one</h4>}
             {
-                activeListData &&
+                props.activeListData &&
                 <div className="list-view-container">
                     <div className="list-view-top">
-                        <ListViewTop listData={activeListData} />
+                        <ListViewTop listData={props.activeListData} updateEditView={props.updateEditView} />
                     </div>
                     <div className="list-view-items">
-                        <ListViewItems listData={activeListData} />
+                        <ListViewItems listData={props.activeListData} updateEditView={props.updateEditView} />
                     </div>
-                    <div className="list-edit-button-container">
-                        Button
+                    <div className="list-view-button-container">
+                        <Button className="custom-button" variant="primary" onClick={() => props.updateEditView(true)}><div className="custom-edit-button">Edit <i className="fas fa-edit list-edit-icon-small"/></div></Button>
                     </div>
                 </div>
             }

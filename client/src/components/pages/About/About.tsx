@@ -48,8 +48,8 @@ function About() {
             <div className="teammember-about-container-2">
               <div className="teammember1-col-1">
                 <h1 className="teammember-name">Timothy Poehlman</h1>
-                <h3 className="teammember-title"><i>Software Developer</i></h3>
-                <p className="teammember-description">Description</p>
+                <h3 className="teammember-title"><i>Backend Developer</i></h3>
+                <p className="teammember-description">Graduating this coming December 2021 with a Bachelors in Computer Science, Tim is a Software Engineer who loves to try his hands at new technologies and get involved where he can.  Joining Amplyst to help his friend Nicholas with backend code, Tim has had a great time expanding his backend coding experience.</p>
               </div>
               <div className="teammember1-col-2">
                 <img src={timothypoehlman} alt="Timothy Poehlman's Head" className="teammember-headshot" />

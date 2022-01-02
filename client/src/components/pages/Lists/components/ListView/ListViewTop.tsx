@@ -8,12 +8,13 @@ interface ListProps {
     match: any,
     staticContext: any,
     listData: ListType | undefined,
+    updateEditView: any
 }
-const ListView = (props: ListProps) => {
+const ListViewTop = (props: ListProps) => {
 
     const [listData, updateListData] = useState<ListType>();
 
-    console.log(props);
+    // console.log(props);
 
     useEffect(() => {
         if(props.listData) {
@@ -25,13 +26,13 @@ const ListView = (props: ListProps) => {
         <>
             <div className="list-view-meta">
                 <p>{listData && getListType(listData)} LIST</p>
-                <p>Created on: {listData && convertTimeString(listData.date_created)}</p>
+                <p>Created on: {listData && listData.date_created && convertTimeString(listData.date_created)}</p>
             </div>
             <div className="list-view-header">
                 <div className="list-name">
                     <h2>{listData && getListName(listData)}</h2>
                     <div className="list-edit">
-                        <i className="fas fa-edit list-edit-icon" />
+                        <i className="fas fa-edit list-edit-icon" onClick={() => props.updateEditView(true)} />
                     </div>
                 </div>
                 <div className="list-description">
@@ -42,4 +43,4 @@ const ListView = (props: ListProps) => {
     );
 }
 
-export default withRouter(ListView);
+export default withRouter(ListViewTop);

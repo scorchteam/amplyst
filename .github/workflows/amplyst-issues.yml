@@ -1,0 +1,24 @@
+#This workflow is for tracking issues and displaying them to discord when updated
+
+name: amplyst-issues
+
+on:
+  issues:
+    types: [edited, opened, closed, deleted, assigned, unassigned, transferred]
+
+jobs:
+  trigger-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Trigger Discord
+      uses: sarisia/actions-status-discord@v1.8.6
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_ISSUE_TRACKER }}
+        nodetail: true
+        title: "[${{github.event.repository.name}}] Git Issue was ${{github.event.action}}:"
+        description: |
+          Title: ${{github.event.issue.title}}
+          Description: ${{github.event.issue.body}}

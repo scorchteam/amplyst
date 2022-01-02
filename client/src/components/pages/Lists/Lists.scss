@@ -159,7 +159,7 @@
             }
 
             li {
-                background-color: var(--header-color-dark);
+                background-color: var(--header-color-light);
                 padding: 1rem;
                 border-radius: 1rem;
                 p {
@@ -235,19 +235,176 @@
     }
 }
 
+.hover-pointer {
+    cursor: pointer;
+}
+
+.custom-dropdown-menu {
+    background-color: var(--header-color)!important;
+    color: var(--text-accent-color-bright)!important;
+    padding: 0.5rem!important;
+    border-radius: 0.5rem!important;
+}
+
+.dropdown-item {
+    color: var(--text-accent-color-bright)!important;
+    border-radius: 0.5rem;
+    font-weight: bold!important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--header-color-light)!important;
+    text-decoration: none;
+}
+
 .list-edit-button-container {
     padding-top: 1rem;
     display: flex;
     justify-content: flex-end;
 
-    :first-child {
-        margin-left: auto;
-        margin-right: 1rem;
+    :nth-child(2) {
+        margin-left: 1rem;
         background-color: var(--header-text-color)!important;
-        color: var(--text-accent-color)!important;
+        color: var(--text-accent-color-bright)!important;
+    }
+
+    :nth-child(2):hover {
+        background-color: var(--header-color)!important;
     }
 }
 
-.hover-pointer {
-    cursor: pointer;
+.list-view-button-container {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.custom-edit-button {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.list-edit-icon-small {
+    font-size: 0.75rem;
+}
+
+.edit-mode-header {
+    color: var(--header-text-color);
+}
+
+.list-edit-form {
+    padding: 0;
+}
+
+.list-name-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    word-break: break-all;
+    font-weight: bold;
+}
+
+.list-edit-description {
+    font-weight: bold;
+}
+
+.list-view-items-edit {
+    margin-top: 1rem;
+
+    #edit-list-item {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+
+        .list-item-data-container {
+            padding: 1rem;
+        }
+
+        .edit-list-delete-item {
+            height: fit-content;
+            background-color: var(--text-accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+            border-radius: 1rem;
+        }
+
+        .edit-list-delete-item:hover {
+            background-color: var(--header-color);
+            transition: all ease-in-out 0.2s;
+            color: var(--text-accent-color-bright);
+        }
+    }
+}
+
+.edit-list-item-header {
+    display: flex;
+    justify-content: space-between;
+
+    .form-label {
+        font-weight: bold;
+        padding: 0;
+    }
+
+    .form-control {
+        height: 1.75rem;
+    }
+
+    .list-item-title, .list-item-price {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .list-item-header-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+.edit-list-todo-checkbox {
+    padding: 0 0 1rem 1rem;
+    display: flex;
+
+    .form-check {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+
+    .form-check-label {
+        padding: 0;
+    }
+    // display: flex;
+    // justify-content: center;
+    // align-items: baseline;
+    // gap: 0.5rem;
+}
+
+.edit-list-gift-checkbox {
+    display: flex;
+
+    .form-check {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 0.5rem;
+    }
+
+    .form-check-label {
+        padding: 0;
+    }
+}
+
+.price-input-group {
+    .input-group-text {
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
 }

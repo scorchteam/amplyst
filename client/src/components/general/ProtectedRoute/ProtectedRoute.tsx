@@ -19,7 +19,7 @@ import { Route, Redirect } from "react-router-dom";
 function ProtectedRoute(props : any) {
     return (
         props.loggedIn ?
-        <Route path={props.path} component={() => <props.component logout={props.logout} userInfo={props.userInfo} userListData={props.userListData} grabUserListData={props.grabUserListData} token={props.token} />} exact={props.exact}/> :
+        <Route {...props} path={props.path} component={() => <props.component logout={props.logout} userInfo={props.userInfo} userListData={props.userListData} updateUserListData={props.updateUserListData} activeListId={props.activeListId} activeListData={props.activeListData} updateActiveListId={props.updateActiveListId} updateActiveListData={props.updateActiveListData} submitEditedList={props.submitEditedList} token={props.token} />} exact={props.exact}/> :
         <Redirect to={{ pathname: "/login", state: {from: props.location}}} />
     );
 }
