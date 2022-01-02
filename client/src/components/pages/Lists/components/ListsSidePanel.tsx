@@ -83,9 +83,8 @@ const ListsSidePanel = (props: any) => {
   }
 
   return (
-    <div className="list-sub-container-style">
+    <div className="list-sub-container-style my-lists-min-height">
       <h2 className="list-side-panel-title">My Lists</h2>
-      <p className="text-warning text-center">This is a work in progress and only pre-made lists can be added</p>
       <Dropdown as={ButtonGroup}>
         <Dropdown.Toggle id="dropdown-custom-1" className="custom-button">Add a new list</Dropdown.Toggle>
         <Dropdown.Menu className="custom-dropdown-menu">

@@ -75,7 +75,7 @@ class Header extends Component {
                 <Link className={`nav-link ${this.props.location.pathname === "/lists"? 'active': ''}`} data-rb-event-key="#lists" to="/lists">
                     Lists
                 </Link>
-                <Link className={`nav-link ${this.props.location.pathname === "/profile"? 'active': ''}`} data-rb-event-key="#profile" to="/profile">
+                {/* <Link className={`nav-link ${this.props.location.pathname === "/profile"? 'active': ''}`} data-rb-event-key="#profile" to="/profile">
                     Profile
                 </Link>
                 <Link className={`nav-link ${this.props.location.pathname === "/friends"? 'active': ''}`} data-rb-event-key="#friends" to="/friends">
@@ -86,7 +86,7 @@ class Header extends Component {
                 </Link>
                 <Link className={`nav-link ${this.props.location.pathname === "/settings"? 'active': ''}`} data-rb-event-key="#settings" to="/settings">
                     Settings
-                </Link>
+                </Link> */}
             </>
         );
     }
