@@ -41,9 +41,8 @@ jwt = JWTManager(app)
 
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb+srv://testuser:testuser@giftlists-restful.syfrq.mongodb.net/user?authSource=admin&replicaSet=atlas-7x73tj-shard-0&readPreference=primary'
-}
+mongoString = os.environ.get("MONGODB_CONNECTION_STRING")
+app.config['MONGODB_SETTINGS'] = {'host': mongoString}
 
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_payload):
