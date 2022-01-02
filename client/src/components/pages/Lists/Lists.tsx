@@ -61,7 +61,7 @@ const Lists = (props: ListProps) => {
         <div className="lists-container-col2">
           {
             editView &&
-            <ListEditView activeListData={props.activeListData} updateEditView={updateEditView} updateActiveListData={props.updateActiveListData} submitEditedList={props.submitEditedList} />
+            <ListEditView activeListData={props.activeListData} updateEditView={updateEditView} updateActiveListData={props.updateActiveListData} submitEditedList={props.submitEditedList} updateUserListData={props.updateUserListData} token={props.token} />
           }
           {
             !editView &&

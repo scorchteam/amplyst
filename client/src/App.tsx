@@ -52,6 +52,10 @@ const App = () => {
     }
   }, [userListData, activeListId]);
 
+  useEffect(() => {
+    console.log("check new data", activeListData);
+  }, [activeListData]);
+
   const login = (token: string) => {
     updateLoggedIn(true);
     updateUserAuthToken(token);

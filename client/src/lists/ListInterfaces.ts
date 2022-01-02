@@ -5,7 +5,7 @@
 
 //List items interfaces
 export interface GenericListItem {
-    readonly item_id: string;
+    readonly item_id?: string;
     item_name: string;
     item_description?: string;
 }
@@ -136,8 +136,8 @@ export function getListItemsArray (list_items: any[], list_type: string) {
 export function createTodoListItem (item: any) {
     let newTodoListItem : TodoListItem = {
         ...item,
-        item_id: item.item_id.$oid,
-        item_due_date: item.item_due_date.$date
+        id: item.item_id?.$oid,
+        item_due_date: item.item_due_date?.$date
     }
     return newTodoListItem
 }
@@ -145,7 +145,7 @@ export function createTodoListItem (item: any) {
 export function createGiftListItem (item: any) {
     let newGiftListItem : GiftListItem = {
         ...item,
-        item_id: item.item_id.$oid,
+        id: item.item_id?.$oid,
         item_intended_for_id: item.item_intended_for_id?.$oid,
         item_bought_by_id: item.item_bought_by_id?.$oid,
     }
@@ -155,7 +155,7 @@ export function createGiftListItem (item: any) {
 export function createShoppingListItem (item: any) {
     let newShoppingListItem : ShoppingListItem = {
         ...item,
-        item_id: item.item_id.$oid,
+        id: item.item_id?.$oid,
     }
     return newShoppingListItem
 }

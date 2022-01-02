@@ -1,7 +1,7 @@
-import { Form } from "react-bootstrap";
-import { getListType, GiftListItem, isEmpty, ListItemsType, ListType, ShoppingListItem, TodoList, TodoListItem } from "../../../../../lists/ListInterfaces";
+import { Form, InputGroup } from "react-bootstrap";
+import { getListType, GiftList, GiftListItem, isEmpty, ListItemsType, ListType, ShoppingList, ShoppingListItem, TodoList, TodoListItem } from "../../../../../lists/ListInterfaces";
 
-export const iterateTodoListItems = (listItems: ListItemsType[], activeListEdit : ListType, updateActiveListEdit : any) => {
+export const iterateTodoListItems = (listItems: ListItemsType[], activeListEdit: ListType, updateActiveListEdit: any) => {
     if (listItems) {
         return listItems.map((item, index) => (
             <li key={index} id="edit-list-item">
@@ -10,9 +10,9 @@ export const iterateTodoListItems = (listItems: ListItemsType[], activeListEdit 
                         <div className="edit-list-item-title">
                             <Form.Label htmlFor={"todo_item_name_" + index}>Item Name</Form.Label>
                             <Form.Control id={"todo_item_name_" + index} name={"todo_item_name_" + index} onChange={(event) => {
-                                        activeListEdit &&
-                                        handleInputChange(event, activeListEdit, updateActiveListEdit);
-                                    }} type="text" placeholder={item.item_name && item.item_name} />
+                                activeListEdit &&
+                                    handleInputChange(event, activeListEdit, updateActiveListEdit);
+                            }} type="text" placeholder={item.item_name && item.item_name} />
                         </div>
                         {/* <p className="list-item-title">{item.name && item.name}</p> */}
                         <div className="edit-list-delete-item hover-pointer">
@@ -21,15 +21,15 @@ export const iterateTodoListItems = (listItems: ListItemsType[], activeListEdit 
                     </div>
                     <b><Form.Label htmlFor={"todo_item_description_" + index}>Item Description</Form.Label></b>
                     <Form.Control id={"todo_item_description_" + index} name={"todo_item_description_" + index} as="textarea" onChange={(event) => {
-                                        activeListEdit &&
-                                        handleInputChange(event, activeListEdit, updateActiveListEdit);
-                                    }} placeholder={item.item_description && item.item_description} />
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} placeholder={item.item_description && item.item_description} />
                 </div>
                 <div className="edit-list-todo-checkbox">
                     <b><Form.Check id={"todo_item_checkbox_" + index} name={"todo_item_checkbox_" + index} type="checkbox" onChange={(event) => {
-                                        activeListEdit &&
-                                        handleInputChange(event, activeListEdit, updateActiveListEdit);
-                                    }} label="Finished" defaultChecked={(item as TodoListItem).item_is_checked} /></b>
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} label="Finished" defaultChecked={(item as TodoListItem).item_is_checked} /></b>
                 </div>
                 {/* <div className="edit-list-delete-item hover-pointer">
                     <i className="fas fa-trash"></i>Delete Item
@@ -40,63 +40,140 @@ export const iterateTodoListItems = (listItems: ListItemsType[], activeListEdit 
     return <></>;
 }
 
-export const iterateGiftListItems = (listItems: ListItemsType[]) => {
+export const iterateGiftListItems = (listItems: ListItemsType[], activeListEdit: ListType, updateActiveListEdit: any) => {
     if (listItems) {
         return listItems.map((item, index) => (
-            <li key={index}>
-                <div className="list-item-header">
-                    <p className="list-item-title">{item.item_name && item.item_name}</p>
-                    <div className="list-item-header-right">
-                        <p className="list-item-price">${(item as GiftListItem).item_price && (item as GiftListItem).item_price?.toFixed(2)}</p>
-                        <input type="checkbox" defaultChecked={(item as GiftListItem).item_is_bought}></input>
+            <li key={index} id="edit-list-item">
+                <div className="list-item-data-container">
+                    <div className="edit-list-item-header">
+                        <div className="edit-list-item-title">
+                            <Form.Label htmlFor={"gift_item_name_" + index}>Item Name</Form.Label>
+                            <Form.Control id={"gift_item_name_" + index} name={"gift_item_name_" + index} onChange={(event) => {
+                                activeListEdit &&
+                                    handleInputChange(event, activeListEdit, updateActiveListEdit);
+                            }} type="text" placeholder={item.item_name && item.item_name} />
+                        </div>
+                        <div className="edit-list-delete-item hover-pointer">
+                            <i className="fas fa-trash"></i>Delete Item
+                        </div>
+                    </div>
+
+
+                    <b><Form.Label htmlFor={"gift_item_description_" + index}>Item Description</Form.Label></b>
+                    <Form.Control id={"gift_item_description_" + index} name={"gift_item_description_" + index} as="textarea" onChange={(event) => {
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} placeholder={item.item_description && item.item_description} />
+
+
+                    <b><Form.Label htmlFor={"gift_item_link_" + index}>Item Link</Form.Label></b>
+                    <Form.Control id={"gift_item_link_" + index} name={"gift_item_link_" + index} type="text" onChange={(event) => {
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} placeholder={(item as GiftListItem).item_link && (item as GiftListItem).item_link} />
+
+
+                    <b><Form.Label htmlFor={"gift_item_price_" + index}>Item Price</Form.Label></b>
+                    <InputGroup className="mb-3 price-input-group">
+                        <InputGroup.Text>$</InputGroup.Text>
+                        <Form.Control id={"gift_item_price_" + index} name={"gift_item_price_" + index} aria-label="Amount (to the nearest dollar)" onChange={(event) => {
+                            activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                        }} placeholder={(item as GiftListItem).item_price?.toString() && (item as GiftListItem).item_price?.toString()} />
+                    </InputGroup>
+
+                    <div className="edit-list-gift-checkbox">
+                        <b><Form.Check id={"gift_item_checkbox_" + index} name={"gift_item_checkbox_" + index} type="checkbox" onChange={(event) => {
+                            activeListEdit &&
+                                handleInputChange(event, activeListEdit, updateActiveListEdit);
+                        }} label="Finished" defaultChecked={(item as GiftListItem).item_is_bought} /></b>
                     </div>
                 </div>
-                <i><p>{item.item_description && item.item_description}</p></i>
-                <a href={(item as GiftListItem).item_link && (item as GiftListItem).item_link}>{(item as GiftListItem).item_link && (item as GiftListItem).item_link}</a>
             </li>
         ))
     }
     return <></>;
 }
 
-export const iterateShoppingListItems = (listItems: ListItemsType[]) => {
+export const iterateShoppingListItems = (listItems: ListItemsType[], activeListEdit: ListType, updateActiveListEdit: any) => {
     if (listItems) {
         return listItems.map((item, index) => (
-            <li key={index}>
-                <div className="list-item-header">
-                    <p className="list-item-title">{item.item_name && item.item_name}</p>
-                    <div className="list-item-header-right">
-                        <p className="list-item-price">${(item as ShoppingListItem).item_price && (item as ShoppingListItem).item_price?.toFixed(2)}</p>
-                        <input type="checkbox" defaultChecked={(item as ShoppingListItem).item_is_bought}></input>
+            <li key={index} id="edit-list-item">
+                <div className="list-item-data-container">
+                    <div className="edit-list-item-header">
+                        <div className="edit-list-item-title">
+                            <Form.Label htmlFor={"shopping_item_name_" + index}>Item Name</Form.Label>
+                            <Form.Control id={"shopping_item_name_" + index} name={"shopping_item_name_" + index} onChange={(event) => {
+                                activeListEdit &&
+                                    handleInputChange(event, activeListEdit, updateActiveListEdit);
+                            }} type="text" placeholder={item.item_name && item.item_name} />
+                        </div>
+                        <div className="edit-list-delete-item hover-pointer">
+                            <i className="fas fa-trash"></i>Delete Item
+                        </div>
+                    </div>
+
+
+                    <b><Form.Label htmlFor={"shopping_item_description_" + index}>Item Description</Form.Label></b>
+                    <Form.Control id={"shopping_item_description_" + index} name={"shopping_item_description_" + index} as="textarea" onChange={(event) => {
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} placeholder={item.item_description && item.item_description} />
+
+                    <b><Form.Label htmlFor={"shopping_item_location_" + index}>Item Location</Form.Label></b>
+                    <Form.Control id={"shopping_item_location_" + index} name={"shopping_item_location_" + index} type="text" onChange={(event) => {
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} placeholder={(item as ShoppingListItem).item_location && (item as ShoppingListItem).item_location} />
+
+
+                    <b><Form.Label htmlFor={"shopping_item_link_" + index}>Item Link</Form.Label></b>
+                    <Form.Control id={"shopping_item_link_" + index} name={"shopping_item_link_" + index} type="text" onChange={(event) => {
+                        activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                    }} placeholder={(item as ShoppingListItem).item_link && (item as ShoppingListItem).item_link} />
+
+
+                    <b><Form.Label htmlFor={"shopping_item_price_" + index}>Item Price</Form.Label></b>
+                    <InputGroup className="mb-3 price-input-group">
+                        <InputGroup.Text>$</InputGroup.Text>
+                        <Form.Control id={"shopping_item_price_" + index} name={"shopping_item_price_" + index} aria-label="Amount (to the nearest dollar)" onChange={(event) => {
+                            activeListEdit &&
+                            handleInputChange(event, activeListEdit, updateActiveListEdit);
+                        }} placeholder={(item as ShoppingListItem).item_price?.toString() && (item as ShoppingListItem).item_price?.toString()} />
+                    </InputGroup>
+
+                    <div className="edit-list-gift-checkbox">
+                        <b><Form.Check id={"shopping_item_checkbox_" + index} name={"shopping_item_checkbox_" + index} type="checkbox" onChange={(event) => {
+                            activeListEdit &&
+                                handleInputChange(event, activeListEdit, updateActiveListEdit);
+                        }} label="Bought" defaultChecked={(item as ShoppingListItem).item_is_bought} /></b>
                     </div>
                 </div>
-                <i><p>{item.item_description && item.item_description}</p></i>
-                <a href={(item as ShoppingListItem).item_link && (item as ShoppingListItem).item_link} >{(item as ShoppingListItem).item_link && (item as ShoppingListItem).item_link}</a>
-                <p>{(item as ShoppingListItem).item_location && (item as ShoppingListItem).item_location}</p>
             </li>
         ))
     }
     return <></>;
 }
 
-export const iterateListItems = (listData: ListType, activeListEdit : ListType, updateActiveListEdit : any) => {
-    if (listData && isEmpty(listData)) {
+export const iterateListItems = (listData: ListType, activeListEdit: ListType, updateActiveListEdit: any) => {
+    if (activeListEdit && isEmpty(activeListEdit)) {
         return (
             <></>
         );
     }
     var listType: string | undefined = undefined;
-    if (listData) {
-        listType = getListType(listData);
+    if (activeListEdit) {
+        listType = getListType(activeListEdit);
     }
     if (listType) {
         switch (listType) {
             case "GIFT":
-                return iterateGiftListItems(listData.list_items);
+                return iterateGiftListItems(activeListEdit.list_items, activeListEdit, updateActiveListEdit);
             case "SHOPPING":
-                return iterateShoppingListItems(listData.list_items);
+                return iterateShoppingListItems(activeListEdit.list_items, activeListEdit, updateActiveListEdit);
             case "TODO":
-                return iterateTodoListItems(listData.list_items, activeListEdit, updateActiveListEdit);
+                return iterateTodoListItems(activeListEdit.list_items, activeListEdit, updateActiveListEdit);
             default:
                 return <></>;
         }
@@ -104,23 +181,27 @@ export const iterateListItems = (listData: ListType, activeListEdit : ListType, 
     return <></>;
 }
 
-export const handleInputChange = (event: any, activeListEdit : ListType, updateActiveListEdit : any) => {
+export const handleInputChange = (event: any, activeListEdit: ListType, updateActiveListEdit: any) => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
 
-    let copyOfActiveListEdit = {...activeListEdit};
+    let copyOfActiveListEdit = { ...activeListEdit };
 
-    if(name === "list_name") {
+    if (name === "list_name") {
         copyOfActiveListEdit.list_name = value;
     }
-
-    if(name === "list_description") {
+    else if (name === "list_description") {
         copyOfActiveListEdit.list_description = value;
     }
-
-    if(name.includes("todo")) {
+    else if (name.includes("todo")) {
         copyOfActiveListEdit = handleTodoItemInputChange(name, value, target, copyOfActiveListEdit);
+    }
+    else if (name.includes("gift")) {
+        copyOfActiveListEdit = handleGiftItemInputChange(name, value, target, copyOfActiveListEdit);
+    }
+    else if (name.includes("shopping")) {
+        copyOfActiveListEdit = handleShoppingItemInputChange(name, value, target, copyOfActiveListEdit);
     }
 
     updateActiveListEdit(copyOfActiveListEdit);
@@ -128,19 +209,74 @@ export const handleInputChange = (event: any, activeListEdit : ListType, updateA
     // console.log(event, activeListEdit);
 }
 
-function handleTodoItemInputChange(name : string, value : string, target : any, copyOfActiveListEdit : ListType) : ListType {
-    if(name.includes("todo_item_name_")) {
+function handleTodoItemInputChange(name: string, value: string, target: any, copyOfActiveListEdit: ListType): ListType {
+    if (name.includes("todo_item_name_")) {
         var itemIndex = parseInt(name.replace("todo_item_name_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_name = value;
     }
-    if(name.includes("todo_item_description_")) {
+    else if (name.includes("todo_item_description_")) {
         var itemIndex = parseInt(name.replace("todo_item_description_", ""));
         copyOfActiveListEdit.list_items[itemIndex].item_description = value;
         // console.log()
     }
-    if(name.includes("todo_item_checkbox_")) {
+    else if (name.includes("todo_item_checkbox_")) {
         var itemIndex = parseInt(name.replace("todo_item_checkbox_", ""));
         (copyOfActiveListEdit as TodoList).list_items[itemIndex].item_is_checked = target.checked;
+    }
+    return copyOfActiveListEdit;
+}
+
+function handleGiftItemInputChange(name: string, value: string, target: any, copyOfActiveListEdit: ListType): ListType {
+    if (name.includes("gift_item_name_")) {
+        var itemIndex = parseInt(name.replace("gift_item_name_", ""));
+        copyOfActiveListEdit.list_items[itemIndex].item_name = value;
+    }
+    else if (name.includes("gift_item_description_")) {
+        var itemIndex = parseInt(name.replace("gift_item_description_", ""));
+        copyOfActiveListEdit.list_items[itemIndex].item_description = value;
+        // console.log()
+    }
+    else if (name.includes("gift_item_checkbox_")) {
+        var itemIndex = parseInt(name.replace("gift_item_checkbox_", ""));
+        (copyOfActiveListEdit as GiftList).list_items[itemIndex].item_is_bought = target.checked;
+    }
+    else if (name.includes("gift_item_link_")) {
+        var itemIndex = parseInt(name.replace("gift_item_link_", ""));
+        (copyOfActiveListEdit as GiftList).list_items[itemIndex].item_link = value;
+    }
+    else if (name.includes("gift_item_price_")) {
+        var itemIndex = parseInt(name.replace("gift_item_price_", ""));
+        (copyOfActiveListEdit as GiftList).list_items[itemIndex].item_price = parseFloat(value);
+    }
+    return copyOfActiveListEdit;
+}
+
+function handleShoppingItemInputChange(name: string, value: string, target: any, copyOfActiveListEdit: ListType): ListType {
+
+    if (name.includes("shopping_item_name_")) {
+        var itemIndex = parseInt(name.replace("shopping_item_name_", ""));
+        copyOfActiveListEdit.list_items[itemIndex].item_name = value;
+    }
+    else if (name.includes("shopping_item_description_")) {
+        var itemIndex = parseInt(name.replace("shopping_item_description_", ""));
+        copyOfActiveListEdit.list_items[itemIndex].item_description = value;
+        // console.log()
+    }
+    else if (name.includes("shopping_item_checkbox_")) {
+        var itemIndex = parseInt(name.replace("shopping_item_checkbox_", ""));
+        (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_is_bought = target.checked;
+    }
+    else if (name.includes("shopping_item_link_")) {
+        var itemIndex = parseInt(name.replace("shopping_item_link_", ""));
+        (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_link = value;
+    }
+    else if (name.includes("shopping_item_price_")) {
+        var itemIndex = parseInt(name.replace("shopping_item_price_", ""));
+        (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_price = parseFloat(value);
+    }
+    else if (name.includes("shopping_item_location_")) {
+        var itemIndex = parseInt(name.replace("shopping_item_location_", ""));
+        (copyOfActiveListEdit as ShoppingList).list_items[itemIndex].item_location = value;
     }
     return copyOfActiveListEdit;
 }
