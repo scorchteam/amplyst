@@ -80,7 +80,7 @@ jobs:
       working-directory: client
     - name: Run React
       run: |
-        npm init
+        npm init -y
         npm test
     - name: Actions Status Discord
       uses: sarisia/actions-status-discord@v1.8.6
