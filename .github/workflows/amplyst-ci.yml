@@ -70,14 +70,13 @@ jobs:
       run: |
         npm ci
         npm run build --if-present
-        npm init
-        npm install eslint --save-dev
-        npx eslint --init
+        npm install -g eslint
       working-directory: client
     - name: Lint with eslint
       run: |
         ls -a
-        ./node_modules/.bin/eslint ./src
+        eslint --init 
+        eslint ./src
       working-directory: client
     - name: Run React
       run: npm test
