@@ -27,6 +27,22 @@ services:
       - '3000:3000'
     depends_on:
       - api
+  
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    container_name: mongodb
+    volumes:
+      - mongo-volume:/data/db
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      - MONGO_INITDB_DATABASE=amplyst-test-db
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    restart: always
+
 
 volumes:
   node-modules:
+  mongo-volume:

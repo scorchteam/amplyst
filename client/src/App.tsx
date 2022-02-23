@@ -12,8 +12,8 @@ import './App.scss';
 import { getListById, ListArray, ListType } from "./lists/ListInterfaces";
 import { asyncSubmitEditedList } from "./lists/ListHelpers";
 
-export const flask_url = "https://giftlists-api.herokuapp.com";
-// export const flask_url = "http://localhost:5000";
+// export const flask_url = "https://giftlists-api.herokuapp.com";
+export const flask_url = "http://localhost:5000";
 
 const App = () => {
 

@@ -41,8 +41,17 @@ jwt = JWTManager(app)
 
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-mongoString = os.environ.get("MONGODB_CONNECTION_STRING")
-app.config['MONGODB_SETTINGS'] = {'host': mongoString}
+mongoConnectionString = os.environ.get("MONGODB_HOST")
+mongoUsername = os.environ.get("MONGODB_USERNAME")
+mongoPassword = os.environ.get("MONGODB_PASSWORD")
+mongoDb = os.environ.get("MONGODB_DB")
+
+app.config['MONGODB_SETTINGS'] = {
+    'db': mongoDb,
+    'username': mongoUsername,
+    'password': mongoPassword,
+    'host': mongoConnectionString
+}
 
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_payload):
