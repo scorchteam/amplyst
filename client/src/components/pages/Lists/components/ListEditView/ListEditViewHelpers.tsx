@@ -16,7 +16,7 @@ export const iterateTodoListItems = (listItems: ListItemsType[], activeListEdit:
                         </div>
                         {/* <p className="list-item-title">{item.name && item.name}</p> */}
                         <div className="edit-list-delete-item hover-pointer">
-                            <i className="fas fa-trash"></i>Delete Item
+                            <i className="fas fa-trash delete-icon"></i>
                         </div>
                     </div>
                     <b><Form.Label htmlFor={"todo_item_description_" + index}>Item Description</Form.Label></b>

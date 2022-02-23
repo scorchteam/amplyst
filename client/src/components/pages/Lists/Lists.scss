@@ -53,11 +53,12 @@
         // text-decoration: underline;
         text-decoration-color: var(--text-accent-color-bright);
         padding: 0;
-        padding-top: 1rem;
+        margin: 1rem 0 0 0;
         display: flex;
         flex-direction: column-reverse;
         gap: 0.25rem;
-        margin: 0;
+        max-height: 220px;
+        overflow: auto;
         
         .list-side-panel-entry {
             justify-content: space-between;
@@ -324,20 +325,27 @@
 
         .edit-list-delete-item {
             height: fit-content;
-            background-color: var(--text-accent-color);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 1rem;
             padding: 0.5rem;
-            border-radius: 1rem;
         }
 
-        .edit-list-delete-item:hover {
-            background-color: var(--header-color);
-            transition: all ease-in-out 0.2s;
+        .delete-icon {
             color: var(--text-accent-color-bright);
         }
+
+        .delete-icon:hover {
+            color: var(--header-text-color);
+            transition: all ease-in-out 0.2s;
+        }
+
+        // .edit-list-delete-item:hover {
+        //     background-color: var(--header-color);
+        //     transition: all ease-in-out 0.2s;
+        //     color: var(--text-accent-color-bright);
+        // }
     }
 }
 
@@ -411,4 +419,21 @@
 
 .my-lists-min-height {
     min-height: 15rem;
+}
+
+@media (max-width: 880px) {
+    .lists-container {
+        display: grid;
+        gap: 2rem;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr;
+        // grid-template-rows: 1fr;
+    }
+
+    .list-sub-container-style {
+        padding: 0.75rem;
+        .my-lists-list {
+            padding-right: 0.5rem;
+        }
+    }
 }

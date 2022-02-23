@@ -93,7 +93,6 @@ const ListsSidePanel = (props: any) => {
           <Dropdown.Item className="custom-dropdown-item" eventKey="3" onClick={() => addNewEmptyShoppingList()}>Shopping List</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <p></p>
       {/* <Button className="custom-button" variant="primary" onClick={() => addExampleList(flask_url, props.token, props.updateUserListData)}>
         Add an example list
       </Button> */}
